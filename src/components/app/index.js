@@ -1,4 +1,5 @@
-import {Component, createElement} from '../../utils';
+import Component from '../../core/component';
+import {createElement} from '../../utils';
 import MainBox from '../main-box';
 import './index.scss';
 
@@ -7,9 +8,6 @@ class App extends Component {
     super();
     this.mainBox = new MainBox();
     this.element.appendChild(this.mainBox.element);
-    this.mainBox.unmount();
-    this.element.appendChild(this.mainBox.element);
-    this.mainBox.unmount();
   }
 
   __initElement() {
