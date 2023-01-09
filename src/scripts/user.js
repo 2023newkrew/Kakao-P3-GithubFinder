@@ -1,12 +1,20 @@
 export default class User {
   constructor() {
     this.userData = null;
+    this.userRepository = null;
   }
 
   async fetchUserData(username) {
     this.userData = await (await fetch(`https://api.github.com/users/${username}`)).json();
-    console.log(this.userData);
+    this.userRepository = await (await fetch(`https://api.github.com/users/${username}/repos`)).json();
+
+    // 최근 업데이트 순 정렬
+    this.userRepository.sort(function (elementA, elementB) {
+      return new Date(elementB.updated_at).getTime() - new Date(elementA.updated_at).getTime();
+    });
   }
+
+  async;
 
   getProfileAvatarURL() {
     return this.userData.avatar_url;
