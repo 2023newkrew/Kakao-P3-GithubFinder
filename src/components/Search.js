@@ -1,5 +1,6 @@
 import Component from "@/core/Component";
 import UserInfoStore from "@/stores/UserInfo";
+import { get } from "@/utils/api";
 
 export default class Search extends Component {
   template() {
@@ -20,18 +21,8 @@ export default class Search extends Component {
   }
 
   async fetchUserInfo(username) {
-    const userProfileResponse = await fetch(`https://api.github.com/users/${username}`, {
-      headers: { Authorization: `token ${process.env.TOKEN}` },
-    });
-    const userProfile = await userProfileResponse.json();
-
-    const repositoriesResponse = await fetch(
-      `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`,
-      {
-        headers: { Authorization: `token ${process.env.TOKEN}` },
-      }
-    );
-    const repositories = await repositoriesResponse.json();
+    const userProfile = await get(`/users/${username}`);
+    const repositories = await get(`/users/${username}/repos`, { sort: "updated", per_page: "5" });
 
     UserInfoStore.setState({ ...userProfile, repositories });
   }
