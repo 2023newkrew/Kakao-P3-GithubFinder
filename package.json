@@ -1,0 +1,9 @@
+{
+  "name": "Kakao-P3-GithubFinder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/b2bcodestatesOrg/Kakao-P3-GithubFinder.git",
+  "author": "hash.table <hash.table@kakaocorp.com>",
+  "license": "MIT",
+  "packageManager": "yarn@3.3.1"
+}
