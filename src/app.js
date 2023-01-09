@@ -1,5 +1,3 @@
-import { fetchUserInfo } from "./services/user";
-fetchUserInfo('lhsljh123')
-.then(response => {
-    console.log(response)
-});
+import SearchController from "@controller/searchController";
+
+const searchController = new SearchController()

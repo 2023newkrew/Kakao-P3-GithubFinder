@@ -35,10 +35,16 @@ module.exports = (env, options) => {
                 }
             ]
         },
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: '[name].[contenthash].js',
+            assetModuleFilename: '[name][ext]',
+            clean: true
+        },
         plugins: [
             new HtmlWebpackPlugin({
                 filename: 'index.html',
-                template: './index.html',
+                template: './src/index.html',
             }),
             new DefinePlugin({
                 GITHUB_BASEURL: JSON.stringify(GITHUB_BASEURL)
@@ -47,17 +53,19 @@ module.exports = (env, options) => {
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "./src/"),
+                "@controller": path.resolve(__dirname, "./src/controller/"),
                 "@services": path.resolve(__dirname, "./src/services/"),
+                "@styles": path.resolve(__dirname, "./src/styles/")
             },
             extensions:[".js",".jsx",".css"]
         },
         devServer: {
             watchFiles: [
-                "src/**",
-                "index.html"
+                "src/**"
             ],
             port: 3000,
-        }
+        },
+        cache: false,
     }
 
     return config;
