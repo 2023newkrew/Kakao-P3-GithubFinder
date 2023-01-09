@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header {
+  height: 20%;
+  background-color: yellow;
+}
+
+main {
+  height: 70%;
+  background-color: blue;
+}
+
+footer {
+  height: 10%;
+  background-color: purple;
+}
