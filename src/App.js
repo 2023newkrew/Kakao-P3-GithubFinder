@@ -9,7 +9,7 @@ class App extends Component {
     return `
       <header class="header navbar navbar-dark bg-primary"></header>
       <main class="container">
-        <form class="search"></form>
+        <section class="search card"></section>
         <section class="user-profile"></section>
         <section class="repositories"></section>
       </main>
