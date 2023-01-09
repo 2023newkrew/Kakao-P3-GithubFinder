@@ -10,7 +10,7 @@ class App extends Component {
       <header class="header navbar navbar-dark bg-primary"></header>
       <main class="container">
         <section class="search card"></section>
-        <section class="user-profile"></section>
+        <section class="user-profile card"></section>
         <section class="repositories"></section>
       </main>
     `;

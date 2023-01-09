@@ -4,20 +4,42 @@ import UserInfoStore from "@/stores/UserInfo";
 export default class UserProfile extends Component {
   template() {
     return `
-      <img class="user-profile__avatar" src="" alt="avatar" />
-      <a class="user-profile__view-profile" href="">View Profile</a>
-      <div class="user-profile__stats">
-        <div class="stats__public-repos">Public Repos: <span class="public-repos__value"></span></div>
-        <div class="stats__public-gists">Public Gists: <span class="public-gists__value"></span></div>
-        <div class="stats__followers">Followers: <span class="followers__value"></span></div>
-        <div class="stats__following">Following: <span class="following__value"></span></div>
+      <div class="card-body row">
+        <div class="col-3">
+          <img class="user-profile__avatar d-block w-100" src="" alt="avatar" />
+          <a class="user-profile__view-profile btn btn-primary w-100 mt-2" href="">View Profile</a>
+        </div>
+        <div class="col-9">
+          <div class="user-profile__stats">
+            <span class="stats__public-repos badge text-bg-primary fs-6 fw-normal">
+              Public Repos: <span class="public-repos__value"></span>
+            </span>
+            <span class="stats__public-gists badge text-bg-secondary fs-6 fw-normal">
+              Public Gists: <span class="public-gists__value"></span>
+            </span>
+            <span class="stats__followers badge text-bg-success fs-6 fw-normal">
+              Followers: <span class="followers__value"></span>
+            </span>
+            <span class="stats__following badge text-bg-info fs-6 fw-normal">
+              Following: <span class="following__value"></span>
+            </span>
+          </div>
+          <ul class="user-profile__profile list-group mt-4">
+            <li class="profile__company list-group-item">
+              Company: <span class="company__value"></span>
+            </li>
+            <li class="profile__website-blog list-group-item">
+              Website/Blog: <span class="website-blog__value"></span>
+            </li>
+            <li class="profile__location list-group-item">
+              Location: <span class="location__value"></span>
+            </li>
+            <li class="profile__member-since list-group-item">
+              Member Since: <span class="member-since__value"></span>
+            </li>
+          </ul>
+        </div>
       </div>
-      <ul class="user-profile__profile">
-        <li class="profile__company">Company: <span class="company__value"></span></li>
-        <li class="profile__website-blog">Website/Blog: <span class="website-blog__value"></span></li>
-        <li class="profile__location">Location: <span class="location__value"></span></li>
-        <li class="profile__member-since">Member Since: <span class="member-since__value"></span></li>
-      </ul>
     `;
   }
 
