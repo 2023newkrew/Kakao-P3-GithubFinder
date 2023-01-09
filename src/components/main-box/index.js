@@ -1,5 +1,5 @@
-import Component from '../../core/component';
-import {createElement} from '../../utils';
+import Component from '@/core/component';
+import {createElement} from '@/utils';
 
 class MainBox extends Component {
   __initElement() {

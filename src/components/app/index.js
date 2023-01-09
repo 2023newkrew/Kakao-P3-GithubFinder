@@ -1,6 +1,6 @@
-import Component from '../../core/component';
-import {createElement} from '../../utils';
-import MainBox from '../main-box';
+import Component from '@/core/component';
+import {createElement} from '@/utils';
+import MainBox from '@/components/main-box';
 import './index.scss';
 
 class App extends Component {
