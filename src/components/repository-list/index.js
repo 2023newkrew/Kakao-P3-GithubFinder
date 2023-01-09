@@ -2,15 +2,15 @@ import Component from '@/core/component';
 import {createElement} from '@/utils';
 
 class RepositoryList extends Component {
-  __initElement() {
+  _initElement() {
     return createElement('<div class="repository-list">레포지토리 리스트</div>');
   }
 
-  __didMounted() {
+  _didMounted() {
     console.log('RepositoryList 마운트 됌');
   }
 
-  __didUnmounted() {
+  _didUnmounted() {
     console.log('RepositoryList 언마운트 됌');
   }
 }

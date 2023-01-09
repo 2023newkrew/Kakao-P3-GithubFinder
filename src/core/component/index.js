@@ -4,35 +4,35 @@ class Component {
       throw new Error(); // 추상 클래스의 객체를 생성할 수 없음
     }
 
-    this.element = this.__initElement();
+    this.element = this._initElement();
 
     this.element.addEventListener(
         'did-mounted',
-        this.__didMounted.bind(this),
+        this._didMounted.bind(this),
     );
 
     this.element.addEventListener(
         'did-unmounted',
-        this.__didUnmounted.bind(this),
+        this._didUnmounted.bind(this),
     );
   }
 
-  __initElement() {
+  _initElement() {
     throw new Error(); // initElement를 오버라이드 하지 않음
   }
 
-  __didMounted() {}
+  _didMounted() {}
 
-  __didUnmounted() {}
+  _didUnmounted() {}
 
-  __createContext(key, value) {
+  _createContext(key, value) {
     this.element.addEventListener(`context-${key}`, (event) => {
       event.detail.resolve(value);
       event.stopPropagation();
     });
   }
 
-  __useContext(key) {
+  _useContext(key) {
     let result = null;
     const resolve = (value) => {
       result = value;

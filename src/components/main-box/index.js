@@ -14,15 +14,15 @@ class MainBox extends Component {
     this.element.appendChild(this.userInfoBox.element);
   }
 
-  __initElement() {
+  _initElement() {
     return createElement('<main class="main-box">메인 박스</main>');
   }
 
-  __didMounted() {
+  _didMounted() {
     console.log('MainBox 마운트 됌');
   }
 
-  __didUnmounted() {
+  _didUnmounted() {
     console.log('MainBox 언마운트 됌');
   }
 }

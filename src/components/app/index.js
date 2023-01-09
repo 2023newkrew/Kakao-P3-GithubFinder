@@ -11,15 +11,15 @@ class App extends Component {
     this.element.appendChild(this.mainBox.element);
   }
 
-  __initElement() {
+  _initElement() {
     return createElement('<div class="app"></div>');
   }
 
-  __didMounted() {
+  _didMounted() {
     console.log('App 마운트 됌');
   }
 
-  __didUnmounted() {
+  _didUnmounted() {
     console.log('App 언마운트 됌');
   }
 }

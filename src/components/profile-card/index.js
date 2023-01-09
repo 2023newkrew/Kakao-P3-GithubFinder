@@ -2,15 +2,15 @@ import Component from '@/core/component';
 import {createElement} from '@/utils';
 
 class ProfileCard extends Component {
-  __initElement() {
+  _initElement() {
     return createElement('<div class="profile-card">프로필 카드</div>');
   }
 
-  __didMounted() {
+  _didMounted() {
     console.log('ProfileCard 마운트 됌');
   }
 
-  __didUnmounted() {
+  _didUnmounted() {
     console.log('ProfileCard 언마운트 됌');
   }
 }

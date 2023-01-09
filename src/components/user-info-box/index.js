@@ -14,15 +14,15 @@ class UserInfoBox extends Component {
     this.element.appendChild(this.repositoryList.element);
   }
 
-  __initElement() {
+  _initElement() {
     return createElement('<div class="user-info-box">유저 인포 박스</div>');
   }
 
-  __didMounted() {
+  _didMounted() {
     console.log('UserInfoBox 마운트 됌');
   }
 
-  __didUnmounted() {
+  _didUnmounted() {
     console.log('UserInfoBox 언마운트 됌');
   }
 }
