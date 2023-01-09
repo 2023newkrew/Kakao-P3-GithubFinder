@@ -6,6 +6,7 @@ import './index.scss';
 class App extends Component {
   constructor() {
     super();
+
     this.mainBox = new MainBox();
     this.element.appendChild(this.mainBox.element);
   }
