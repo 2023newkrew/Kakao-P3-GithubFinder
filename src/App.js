@@ -7,10 +7,12 @@ import Repositories from "@/components/Repositories";
 class App extends Component {
   template() {
     return `
-      <header class="header"></header>
-      <form class="search"></form>
-      <section class="user-profile"></section>
-      <section class="repositories"></section>
+      <header class="header navbar navbar-dark bg-primary"></header>
+      <main class="container">
+        <form class="search"></form>
+        <section class="user-profile"></section>
+        <section class="repositories"></section>
+      </main>
     `;
   }
 
