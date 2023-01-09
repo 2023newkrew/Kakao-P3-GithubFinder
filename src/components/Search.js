@@ -25,6 +25,14 @@ export default class Search extends Component {
     });
     const userProfile = await userProfileResponse.json();
 
-    UserInfoStore.setState(userProfile);
+    const repositoriesResponse = await fetch(
+      `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`,
+      {
+        headers: { Authorization: `token ${process.env.TOKEN}` },
+      }
+    );
+    const repositories = await repositoriesResponse.json();
+
+    UserInfoStore.setState({ ...userProfile, repositories });
   }
 }
