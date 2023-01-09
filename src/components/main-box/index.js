@@ -22,8 +22,8 @@ class MainBox extends Component {
     console.log('MainBox 마운트 됌');
   }
 
-  __willUnmount() {
-    console.log('MainBox 언마운트 되려 함');
+  __didUnmounted() {
+    console.log('MainBox 언마운트 됌');
   }
 }
 

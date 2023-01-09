@@ -5,15 +5,16 @@ class Component {
     }
 
     this.element = this.__initElement();
-    this.__container = document.createElement('div');
-    this.__container.appendChild(this.element);
 
-    this.__initMutationObserver();
-  }
+    this.element.addEventListener(
+        'did-mounted',
+        this.__didMounted.bind(this),
+    );
 
-  unmount() {
-    this.__willUnmount();
-    this.__container.appendChild(this.element);
+    this.element.addEventListener(
+        'did-unmounted',
+        this.__didUnmounted.bind(this),
+    );
   }
 
   __initElement() {
@@ -22,19 +23,7 @@ class Component {
 
   __didMounted() {}
 
-  __willUnmount() {}
-
-  __initMutationObserver() {
-    const mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach(({removedNodes}) => {
-        if (removedNodes.length) {
-          this.__didMounted();
-        }
-      });
-    });
-
-    mutationObserver.observe(this.__container, {childList: true});
-  }
+  __didUnmounted() {}
 }
 
 export default Component;

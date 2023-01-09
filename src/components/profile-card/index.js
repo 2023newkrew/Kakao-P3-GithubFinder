@@ -10,8 +10,8 @@ class ProfileCard extends Component {
     console.log('ProfileCard 마운트 됌');
   }
 
-  __willUnmount() {
-    console.log('ProfileCard 언마운트 되려 함');
+  __didUnmounted() {
+    console.log('ProfileCard 언마운트 됌');
   }
 }
 
