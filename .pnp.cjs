@@ -29,6 +29,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["css-loader", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:6.7.3"],\
+            ["dotenv", "npm:16.0.3"],\
             ["html-webpack-plugin", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:5.5.0"],\
             ["sass-loader", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:13.2.0"],\
             ["style-loader", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:3.3.1"],\
@@ -654,6 +655,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["Kakao-P3-GithubFinder", "workspace:."],\
             ["css-loader", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:6.7.3"],\
+            ["dotenv", "npm:16.0.3"],\
             ["html-webpack-plugin", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:5.5.0"],\
             ["sass-loader", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:13.2.0"],\
             ["style-loader", "virtual:1571a957bf033b4d40fe512ce3f95469ed9d289e071e48fe70a25bef7d2aae2e82c5e6e63c6c4dcfde3045afabcf5200b893b20614f27f46f7151965da22d4e7#npm:3.3.1"],\
@@ -1562,6 +1564,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["dot-case", "npm:3.0.4"],\
             ["no-case", "npm:3.0.4"],\
             ["tslib", "npm:2.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dotenv", [\
+        ["npm:16.0.3", {\
+          "packageLocation": "./.yarn/cache/dotenv-npm-16.0.3-4cc29121dc-afcf03f373.zip/node_modules/dotenv/",\
+          "packageDependencies": [\
+            ["dotenv", "npm:16.0.3"]\
           ],\
           "linkType": "HARD"\
         }]\
