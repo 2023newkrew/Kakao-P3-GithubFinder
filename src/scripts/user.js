@@ -55,4 +55,9 @@ export default class User {
   getGitHubURL() {
     return this.userData.url;
   }
+
+  // * 최근 5개의 레포지토리를 보냄
+  getFiveLatestRepos() {
+    return this.userRepository.slice(0, 5);
+  }
 }

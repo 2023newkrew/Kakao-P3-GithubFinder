@@ -16,6 +16,7 @@ export default class UI {
     await this.setUserViewImage();
     await this.setUserInfo();
     await this.setUserTag();
+    await this.setUserLatestRepos();
 
     this.mainElement.style.opacity = 0.99;
   }
@@ -57,6 +58,28 @@ export default class UI {
 
     const followingCount = this.user.getFollowingCount();
     tagListElements[3].innerText = "Following : " + followingCount;
+  }
+
+  async setUserLatestRepos() {
+    const latestRepos = this.user.getFiveLatestRepos();
+
+    const latestReposListElement = document.body.querySelector(".latestReposList");
+
+    let elementString = ``;
+    for (let index = 0; index < latestRepos.length; index++) {
+      elementString += `
+      <li class="latestRepo">
+        <div class="title">${latestRepos[index].name}</div>
+        <ul class="tag">
+          <li>Stars : ${latestRepos[index].stargazers_count}</li>
+          <li>Watchers : ${latestRepos[index].watchers}</li>
+          <li>Forks : ${latestRepos[index].forks}</li>
+        </ul>
+      </li>
+      `;
+    }
+
+    latestReposListElement.innerHTML = elementString;
   }
 
   listenInputEvent() {
