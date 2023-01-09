@@ -1,21 +1,21 @@
 import Component from "@/core/Component";
 import Header from "@/components/Header";
 import Search from "@/components/Search";
-import UserInfo from "@/components/UserInfo";
+import UserProfile from "@/components/UserProfile";
 
 class App extends Component {
   template() {
     return `
       <header class="header"></header>
       <form class="search"></form>
-      <section class="user-info"></section>
+      <section class="user-profile"></section>
     `;
   }
 
   onMount() {
     new Header(this.targetEl.querySelector(".header"));
     new Search(this.targetEl.querySelector(".search"));
-    new UserInfo(this.targetEl.querySelector(".user-info"));
+    new UserProfile(this.targetEl.querySelector(".user-profile"));
   }
 }
 

@@ -20,11 +20,11 @@ export default class Search extends Component {
   }
 
   async fetchUserInfo(username) {
-    const response = await fetch(`https://api.github.com/users/${username}`, {
+    const userProfileResponse = await fetch(`https://api.github.com/users/${username}`, {
       headers: { Authorization: `token ${process.env.TOKEN}` },
     });
-    const userInfo = await response.json();
+    const userProfile = await userProfileResponse.json();
 
-    UserInfoStore.setState(userInfo);
+    UserInfoStore.setState(userProfile);
   }
 }

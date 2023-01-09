@@ -1,18 +1,18 @@
 import Component from "@/core/Component";
 import UserInfoStore from "@/stores/UserInfo";
 
-export default class UserInfo extends Component {
+export default class UserProfile extends Component {
   template() {
     return `
-      <img class="user-info__avatar" src="" alt="avatar" />
-      <a class="user-info__view-profile" href="">View Profile</a>
-      <div class="user-info__stats">
+      <img class="user-profile__avatar" src="" alt="avatar" />
+      <a class="user-profile__view-profile" href="">View Profile</a>
+      <div class="user-profile__stats">
         <div class="stats__public-repos">Public Repos: <span class="public-repos__value"></span></div>
         <div class="stats__public-gists">Public Gists: <span class="public-gists__value"></span></div>
         <div class="stats__followers">Followers: <span class="followers__value"></span></div>
         <div class="stats__following">Following: <span class="following__value"></span></div>
       </div>
-      <ul class="user-info__profile">
+      <ul class="user-profile__profile">
         <li class="profile__company">Company: <span class="company__value"></span></li>
         <li class="profile__website-blog">Website/Blog: <span class="website-blog__value"></span></li>
         <li class="profile__location">Location: <span class="location__value"></span></li>
@@ -36,10 +36,10 @@ export default class UserInfo extends Component {
         created_at,
       } = UserInfoStore.state;
 
-      const avatarEl = this.targetEl.querySelector(".user-info__avatar");
+      const avatarEl = this.targetEl.querySelector(".user-profile__avatar");
       avatarEl.src = avatar_url;
 
-      const viewProfileEl = this.targetEl.querySelector(".user-info__view-profile");
+      const viewProfileEl = this.targetEl.querySelector(".user-profile__view-profile");
       viewProfileEl.href = html_url;
 
       const publicReposValueEl = this.targetEl.querySelector(".public-repos__value");
