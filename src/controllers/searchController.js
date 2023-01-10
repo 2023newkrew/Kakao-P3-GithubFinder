@@ -35,7 +35,8 @@ export default class SearchController {
       repoResult.className = "bs-component";
 
       repoResult.innerHTML = `
-            <div class="container">
+            <div class="container px-2">
+              <h5 class="p-0 mb-3">Latest Repos</h5>
               <div class="row">
                 ${repos
                   .slice(0, 5)
@@ -56,7 +57,7 @@ export default class SearchController {
     searchResultContainer.innerHTML = `
       <div class="card my-3">
         <h4 class="card-header">검색결과</h4>
-        <div id="user-result" class="card-body d-flex align-items-center">
+        <div id="user-result" class="card-body d-flex flex-column">
           ${SpinnerTemplate}
         </div>
       </div>

@@ -36,7 +36,7 @@ export default class Repo {
   }
   render() {
     return `
-      <div class="col-12 col-sm-6  mb-4" id="repo-${this.id}">
+      <div class="col-12 col-sm-6 mb-4 px-2" id="repo-${this.id}">
         <div class="card border-secondary h-100" >
           <div class="card-body">
             <div class="d-flex align-items-center flex-wrap" >
