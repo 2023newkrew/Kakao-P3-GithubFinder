@@ -22,7 +22,7 @@ export default class UserProfile extends Component {
         <div class="col-3">
           <img class="user-profile__avatar d-block w-100" src="${avatar_url}" alt="avatar" />
           <a class="user-profile__view-profile btn btn-primary w-100 mt-2 ${
-            html_url || "disabled"
+            html_url ? "" : "disabled"
           }" href="${html_url}">
             View Profile
           </a>
