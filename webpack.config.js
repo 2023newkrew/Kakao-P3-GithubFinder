@@ -12,7 +12,7 @@ module.exports = (env) => {
       clean: true,
       assetModuleFilename: 'assets/[name][ext]',
     },
-    devtool: env.IS_DEV ? 'inline-source-map' : false,
+    devtool: !!env.IS_DEV ? 'inline-source-map' : false,
     devServer: {
       static: {
         directory: path.join(__dirname, 'dist'),
@@ -70,7 +70,7 @@ module.exports = (env) => {
         template: 'src/views/index.html',
       }),
       new CopyPlugin({
-        patterns: [{ from: 'src/assets/', to: 'assets/' }],
+        patterns: [{ from: 'src/assets/', to: 'assets/', noErrorOnMissing: true }],
         options: {
           concurrency: 100,
         },
