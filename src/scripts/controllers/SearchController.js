@@ -1,8 +1,10 @@
 import API from "@/scripts/common/API";
+import UI from "@/scripts/UI";
 
 export default class SearchController {
   constructor() {
     this.githubAPI = new API("https://api.github.com");
+    this.ui = new UI();
     this.bindEvents();
   }
 
@@ -18,7 +20,13 @@ export default class SearchController {
     if (code === "Enter") {
       const userInfo = await this.getUserInfo(target.value);
       if (userInfo) {
-        this.drawUserInfo(userInfo);
+        this.ui.drawUserInfo(userInfo);
+      }
+
+      const userRepos = await this.getUserRepository(target.value);
+      if (userRepos) {
+        console.log(userRepos);
+        this.ui.drawUserRepository(userRepos);
       }
     }
   }
@@ -27,9 +35,11 @@ export default class SearchController {
     return res;
   }
 
-  //UI class로 이동 예정
-  drawUserInfo(userInfo) {
-    const userImageEl = document.getElementById("profile-view__image");
-    userImageEl.setAttribute("src", userInfo.avatar_url);
+  async getUserRepository(username) {
+    const res = await this.githubAPI.get(`/users/${username}/repos`, {
+      sort: "created",
+      per_page: 5,
+    });
+    return res;
   }
 }
