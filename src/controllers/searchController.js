@@ -1,5 +1,6 @@
 import GithubApiController from "@controllers/githubController";
 import User from "@models/User";
+import { SpinnerTemplate } from "@/templates/spinner";
 
 const searchResultContainer = document.body.querySelector(".search-result");
 
@@ -56,9 +57,7 @@ export default class SearchController {
       <div class="card my-3">
         <h4 class="card-header">검색결과</h4>
         <div id="user-result" class="card-body d-flex align-items-center">
-          <p class="text-center container-fluid">
-            검색중
-          </p>
+          ${SpinnerTemplate}
         </div>
       </div>
     `;
@@ -79,7 +78,7 @@ export default class SearchController {
 
     const loadingEl = document.createElement("div");
     loadingEl.className = "card-body d-flex align-items-center";
-    loadingEl.innerHTML = `<p class="text-center container-fluid">불러오는 중</p>`;
+    loadingEl.innerHTML = SpinnerTemplate;
 
     searchResultContainer.appendChild(loadingEl);
     user.setRepos(await this.fetcher.getRepos(user));
