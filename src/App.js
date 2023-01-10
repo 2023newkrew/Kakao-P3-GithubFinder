@@ -8,7 +8,7 @@ class App extends Component {
   template() {
     return `
       <header class="header navbar navbar-dark bg-primary"></header>
-      <main class="container">
+      <main class="container d-flex flex-column gap-3 mt-3">
         <section class="search card"></section>
         <section class="user-profile card"></section>
         <section class="repositories"></section>
