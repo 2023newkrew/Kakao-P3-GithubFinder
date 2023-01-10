@@ -1,9 +1,9 @@
-import Component from "@/core/Component";
-import Header from "@/components/Header";
-import Search from "@/components/Search";
-import UserProfile from "@/components/UserProfile";
-import Repositories from "@/components/Repositories";
-import Footer from "@/components/Footer";
+import Component from "@core/Component";
+import Header from "@components/Header";
+import Search from "@components/Search";
+import UserProfile from "@components/UserProfile";
+import Repositories from "@components/Repositories";
+import Footer from "@components/Footer";
 
 class App extends Component {
   template() {

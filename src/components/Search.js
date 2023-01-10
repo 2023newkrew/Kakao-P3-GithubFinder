@@ -1,6 +1,6 @@
-import Component from "@/core/Component";
-import UserInfoStore from "@/stores/UserInfo";
-import { get } from "@/utils/api";
+import Component from "@core/Component";
+import UserInfoStore from "@stores/UserInfo";
+import { get } from "@utils/api";
 
 export default class Search extends Component {
   template() {

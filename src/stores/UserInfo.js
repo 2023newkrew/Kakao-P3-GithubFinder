@@ -1,4 +1,4 @@
-import Store from "@/core/Store";
+import Store from "@core/Store";
 
 class UserInfo extends Store {}
 

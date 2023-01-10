@@ -6,6 +6,11 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
+      "@assets": path.resolve(__dirname, "src/assets"),
+      "@components": path.resolve(__dirname, "src/components"),
+      "@core": path.resolve(__dirname, "src/core"),
+      "@stores": path.resolve(__dirname, "src/stores"),
+      "@utils": path.resolve(__dirname, "src/utils"),
     },
   },
   entry: path.resolve(__dirname, "src/index.js"),
