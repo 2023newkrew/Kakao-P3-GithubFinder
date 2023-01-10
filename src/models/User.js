@@ -48,7 +48,9 @@ export default class User {
             />
           </div>
           <div>
-            <h5 class="card-title">${this.name} </h5>
+            <a class="text-primary" href="${this.html_url}" target="_blank">
+              <h5 class="card-title">${this.name} </h5>
+            </a>
             <h6 class="card-subtitle text-muted">${this.loginId}</h6>
             <div class="card-body p-0 mt-2">
               <a
