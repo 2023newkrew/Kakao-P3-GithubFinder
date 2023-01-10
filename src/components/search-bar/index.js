@@ -1,3 +1,4 @@
+import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
 
@@ -12,7 +13,11 @@ class SearchBar extends Component {
   }
 
   _initElement() {
-    return createElement('<div class="search-bar">서치 바</div>');
+    return createElement(`<div class="search-bar">
+  <h2 class="title">깃허브 유저 검색</h2>
+  <label class="search-label">저장소와 유저 프로필을 가져오기 위해 username을 검색해주세요.</label>
+  <input class="search-input" type="text">
+</div>`);
   }
 
   _didMounted() {

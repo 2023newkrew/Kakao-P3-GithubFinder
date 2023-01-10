@@ -1,13 +1,22 @@
 .app {
   --primary: rgb(77, 134, 204);
   --secondary: rgb(59, 173, 90);
+  --tertiary: rgb(148, 96, 197);
   --warning: rgb(184, 119, 27);
   --danger: rgb(209, 95, 95);
 
   --text-dark: #262626;
   --text-light: #999999;
 
-  --box-darkish: #DBDBDB;
+  --background-color: #FFFFFF;
+  --box-lighter: #FAFAFA;
+  --box-light: #DBDBDB;
   --box-dark: #C7C7C7;
   --box-darker: #A9A9A9;
+
+  --min-width: 480px;
+  --max-width: 1024px;
+  --border-radius: 8px;
+
+  color: var(--text-dark);
 }

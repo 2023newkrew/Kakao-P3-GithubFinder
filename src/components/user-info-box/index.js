@@ -1,3 +1,4 @@
+import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
 import ProfileCard from '@/components/profile-card';
@@ -15,7 +16,8 @@ class UserInfoBox extends Component {
   }
 
   _initElement() {
-    return createElement('<div class="user-info-box">유저 인포 박스</div>');
+    return createElement(`<div class="user-info-box">
+</div>`);
   }
 
   _didMounted() {

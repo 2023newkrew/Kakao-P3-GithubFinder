@@ -1,3 +1,4 @@
+import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
 import SearchBar from '@/components/search-bar';
@@ -8,18 +9,18 @@ class MainBox extends Component {
   constructor() {
     super();
 
-    this.userInfoStore = createStore(123);
-    this._createContext('user-info-store', this.userInfoStore);
-
     this.searchBar = new SearchBar();
     this.element.appendChild(this.searchBar.element);
 
     this.userInfoBox = new UserInfoBox();
     this.element.appendChild(this.userInfoBox.element);
+
+    this.userInfoStore = createStore(123);
+    this._createContext('user-info-store', this.userInfoStore);
   }
 
   _initElement() {
-    return createElement('<main class="main-box">메인 박스</main>');
+    return createElement('<main class="main-box"></main>');
   }
 
   _didMounted() {

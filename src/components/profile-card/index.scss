@@ -1,0 +1,57 @@
+.profile-card {
+  display: flex;
+  gap: 1rem;
+  margin: auto;
+  padding: 1rem;
+  overflow: hidden;
+  width: 100%;
+  background-color: var(--box-lighter);
+  border: 1px solid var(--box-dark);
+  border-radius: var(--border-radius);
+
+  .profile-image {
+    max-width: 240px;
+    width: 50%;
+    height: 50%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    flex-shrink: 0;
+  }
+
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+
+    .profile-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .chip {
+        border-radius: var(--border-radius);
+        padding: 0.25rem 0.5rem;
+        color: white;
+        font-size: 0.5rem;
+
+        &.primary {
+          background-color: var(--primary);
+        }
+
+        &.secondary {
+          background-color: var(--secondary);
+        }
+
+        &.tertiary {
+          background-color: var(--tertiary);
+        }
+
+        &.quaternary {
+          background-color: var(--text-light);
+        }
+      }
+    }
+  }
+}

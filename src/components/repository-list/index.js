@@ -3,7 +3,9 @@ import {createElement} from '@/utils';
 
 class RepositoryList extends Component {
   _initElement() {
-    return createElement('<div class="repository-list">레포지토리 리스트</div>');
+    return createElement(`<div class="repository-list">
+  여기에 레포지토리 리스트가 노출됩니다.
+</div>`);
   }
 
   _didMounted() {

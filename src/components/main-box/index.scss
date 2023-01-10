@@ -1,0 +1,8 @@
+.main-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-width: var(--min-width);
+  max-width: var(--max-width);
+  padding: 1rem;
+}
