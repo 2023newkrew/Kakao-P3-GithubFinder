@@ -1,4 +1,5 @@
 import User from "./user";
+import sweetAlert from "../lib/sweetAlert";
 
 export default class UI {
   constructor() {
@@ -19,13 +20,15 @@ export default class UI {
   }
 
   async displayON() {
-    await this.setUserViewImage();
-    await this.setUserViewButton();
-    await this.setUserTag();
-    await this.setUserInfo();
-    await this.setUserLatestRepos();
+    sweetAlert.showTimerAlert("해당 유저의 정보를 불러오는 중입니다!", 1000).then(() => {
+      this.mainElement.style.opacity = 0.99;
+    });
 
-    this.mainElement.style.opacity = 0.99;
+    this.setUserViewImage();
+    this.setUserViewButton();
+    this.setUserTag();
+    this.setUserInfo();
+    this.setUserLatestRepos();
   }
 
   async setUserViewImage() {
@@ -39,7 +42,7 @@ export default class UI {
 
     const username = this.user.getUserName();
     viewButton.addEventListener("click", (event) => {
-      window.open(`https://github.com/${username}`, "_blanck");
+      window.open(`https://github.com/${username}`, "_blank");
     });
   }
 
@@ -84,7 +87,6 @@ export default class UI {
     function makeLatestRepoListElement() {
       let elementString = ``;
       for (let index = 0; index < latestRepos.length; index++) {
-        console.log(latestRepos[index]);
         elementString += `
         <li class="latestRepo">
           <div class="title">
@@ -109,7 +111,7 @@ export default class UI {
         if (await this.user.fetchUserData(this.inputElement.value)) {
           await this.displayON();
         } else {
-          alert("해당 유저를 찾을 수 없습니다 !");
+          sweetAlert.showErrorAlert("해당 유저를 찾을 수 없습니다 !");
         }
       }
     });
