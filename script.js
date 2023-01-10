@@ -38,10 +38,13 @@ class GitHubManager {
     }
 }
 class UIManager {
+    static instance = null;
     constructor() {
+        if (UIManager.instance !== null) return UIManager.instance;
         this.searchFrom = document.body.querySelector(".search-form");
         this.userInfo = document.body.querySelector(".user-info");
         this.repoInfo = document.body.querySelector(".repo-info");
+        UIManager.instance = this;
     }
     static _createSpanBadge(text, bgColor) {
         const $badge = Util.createElementWithClassName("span", [
@@ -209,20 +212,24 @@ class UIManager {
         this.repoInfo.append($card);
     }
 }
-
+const renderUserInfoCard = async (userName) => {
+    const uiManager = new UIManager();
+    const res = await GitHubManager.getUserInfoResponse(userName);
+    const json = await res.json();
+    uiManager.renderUserInfo(json);
+};
+const renderRepoInfoCard = async (userName) => {
+    const uiManager = new UIManager();
+    const res = await GitHubManager.getRepoInfoResponse("charon0530");
+    const jsonArray = await res.json();
+    jsonArray.forEach((repoJson) => {
+        uiManager.renderLatestRepos(repoJson);
+        console.log(repoJson);
+    });
+};
 async function main() {
     /* 현재 이벤트 등록 부분을 구현하지 않아 메인에서 테스트 코드를 작성함 */
-    const uiManager = new UIManager();
-    const userRes = await GitHubManager.getUserInfoResponse("charon0530");
-    const userJson = await userRes.json();
-
-    const repoRes = await GitHubManager.getRepoInfoResponse("charon0530");
-    const repoJsonArray = await repoRes.json();
-
-    uiManager.renderUserInfo(userJson);
-
-    repoJsonArray.forEach((repoJson) => {
-        uiManager.renderLatestRepos(repoJson);
-    });
+    renderUserInfoCard("charon0530");
+    renderRepoInfoCard("charon0530");
 }
 main();
