@@ -28,7 +28,7 @@ class Component {
   _createContext(key, value) {
     this.element.addEventListener(`context-${key}`, (event) => {
       event.detail.resolve(value);
-      event.stopPropagation();
+      event.stopImmediatePropagation();
     });
   }
 
