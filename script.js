@@ -88,7 +88,129 @@ class UIManager {
         $li.innerText = text;
         return $li;
     }
+    /* ChatGPT가 만든 코드 */
+    renderUserInfoByChatGPT({
+        avatar_url,
+        public_repos,
+        public_gists,
+        followers,
+        following,
+        company,
+        blog,
+        location,
+        created_at,
+    }) {
+        // Create elements
+        const cardBody = document.createElement("div");
+        const row1 = document.createElement("div");
+        const col1 = document.createElement("div");
+        const col2 = document.createElement("div");
+        const img = document.createElement("img");
+        const userInfoBadges = document.createElement("div");
+        const publicRepoBadge = document.createElement("span");
+        const publicGistBadge = document.createElement("span");
+        const followerBadge = document.createElement("span");
+        const followingBadge = document.createElement("span");
+        const userInfoProfileList = document.createElement("div");
+        const ul = document.createElement("ul");
+        const companyLiElement = document.createElement("li");
+        const webSiteLiElement = document.createElement("li");
+        const locationLiElement = document.createElement("li");
+        const createdAtLiElement = document.createElement("li");
+        const row2 = document.createElement("div");
+        const viewProfileBadge = document.createElement("span");
 
+        // Set classes
+        cardBody.classList.add("card-body", "text-light");
+        row1.classList.add("row");
+        col1.classList.add("col-md-3", "col-xm-12");
+        col2.classList.add("col-md-9", "col-xm-12");
+        img.classList.add(
+            "w-100",
+            "h-100",
+            "object-fit-fill",
+            "m-auto",
+            "align-items-center",
+            "d-block"
+        );
+        userInfoBadges.classList.add("user-info__badges");
+        publicRepoBadge.classList.add("badge", "bg-primary");
+        publicGistBadge.classList.add("badge", "bg-secondary");
+        followerBadge.classList.add("badge", "bg-success");
+        followingBadge.classList.add("badge", "bg-danger");
+        userInfoProfileList.classList.add(
+            "user-info__profile-list",
+            "text-dark"
+        );
+        ul.classList.add("list-group", "mt-3");
+        companyLiElement.classList.add(
+            "list-group-item",
+            "d-flex",
+            "justify-content-between",
+            "align-items-center"
+        );
+        webSiteLiElement.classList.add(
+            "list-group-item",
+            "d-flex",
+            "justify-content-between",
+            "align-items-center"
+        );
+        locationLiElement.classList.add(
+            "list-group-item",
+            "d-flex",
+            "justify-content-between",
+            "align-items-center"
+        );
+        createdAtLiElement.classList.add(
+            "list-group-item",
+            "d-flex",
+            "justify-content-between",
+            "align-items-center"
+        );
+        row2.classList.add("row");
+        viewProfileBadge.classList.add(
+            "badge",
+            "rounded-pill",
+            "bg-primary",
+            "col-3",
+            "mt-3"
+        );
+
+        // Set attributes
+        img.setAttribute("src", avatar_url);
+
+        // Set text content
+        publicRepoBadge.textContent = `Public Repos : ${public_repos}`;
+        publicGistBadge.textContent = `Public Gists : ${public_gists}`;
+        followerBadge.textContent = `Followers : ${followers}`;
+        followingBadge.textContent = `Following : ${following}`;
+        companyLiElement.textContent = `Company : ${company}`;
+        webSiteLiElement.textContent = `Website/Blog : ${blog}`;
+        locationLiElement.textContent = `Location : ${location}`;
+        createdAtLiElement.textContent = `Member Since : ${created_at}`;
+        viewProfileBadge.textContent = "View Profile";
+
+        // Append elements
+        col1.appendChild(img);
+        row1.appendChild(col1);
+        row1.appendChild(col2);
+        col2.appendChild(userInfoBadges);
+        userInfoBadges.appendChild(publicRepoBadge);
+        userInfoBadges.appendChild(publicGistBadge);
+        userInfoBadges.appendChild(followerBadge);
+        userInfoBadges.appendChild(followingBadge);
+        col2.appendChild(userInfoProfileList);
+        userInfoProfileList.appendChild(ul);
+        ul.appendChild(companyLiElement);
+        ul.appendChild(webSiteLiElement);
+        ul.appendChild(locationLiElement);
+        ul.appendChild(createdAtLiElement);
+        row2.appendChild(viewProfileBadge);
+        cardBody.appendChild(row1);
+        cardBody.appendChild(row2);
+
+        this.userInfo.appendChild(cardBody);
+    }
     renderUserInfo({
         avatar_url,
         public_repos,
