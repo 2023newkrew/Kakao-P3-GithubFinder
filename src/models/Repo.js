@@ -40,15 +40,21 @@ export default class Repo {
         <div class="card border-secondary h-100" >
           <div class="card-body">
             <div class="d-flex align-items-center flex-wrap" >
-              <a class="text-info d-flex align-items-center flex-wrap" href="${
+              <a class="text-info d-flex align-items-center flex-wrap mb-2 mr-2" href="${
                 this.html_url
               }" target="_blank">
-                <h5 class="mb-2 mr-2">
+                <h5>
                   ${this.name}
                 </h5>
               </a>
-              <span class="mb-2 badge bg-light">
+              <span class="mb-2 badge bg-light mr-2">
                 ${this.visibility}
+              </span>
+              <span class="mb-2 d-flex align-items-center">
+                <img alt="repo_stars" src="${
+                  this.stargazers_count > 0 ? "star_filled.svg" : "star.svg"
+                }" height="16"/>
+                ${this.stargazers_count}
               </span>
             </div>
             <p class="card-text">${this.description ?? ""}</p>
