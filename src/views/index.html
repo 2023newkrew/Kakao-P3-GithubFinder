@@ -16,12 +16,12 @@
               <span class="input-group-text" id="basic-addon1">@</span>
               <input
                 type="text"
-                class="form-control"
+                class="form-control header__search-input"
                 placeholder="Username"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
               />
-              <button class="btn btn-success" type="submit">Search</button>
+              <button class="btn btn-success header__search-btn" type="submit">Search</button>
             </div>
           </form>
         </div>
@@ -35,20 +35,50 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-4 user__profile-image">
-              <img src="https://via.placeholder.com/350" width="250" height="250" alt="image" />
+              <img
+                class="user__profile-img"
+                src="https://via.placeholder.com/350"
+                width="250"
+                height="250"
+                alt="image"
+              />
             </div>
             <div class="col-md-8 my-auto">
               <div>
-                <span class="badge bg-primary py-2 px-3 user__repo-badge">Public Repos: </span>
-                <span class="badge bg-secondary py-2 px-3 user__gist-badge">Public Gists: </span>
-                <span class="badge bg-success py-2 px-3 user__follower-badge">Followers: </span>
-                <span class="badge bg-info py-2 px-3 user__following-badge">Following: </span>
+                <span class="badge bg-primary py-2 px-3">
+                  Public Repos:
+                  <span class="user__repo-badge"></span>
+                </span>
+                <span class="badge bg-secondary py-2 px-3">
+                  Public Gists:
+                  <span class="user__gist-badge"></span>
+                </span>
+                <span class="badge bg-success py-2 px-3">
+                  Followers:
+                  <span class="user__follower-badge"></span>
+                </span>
+                <span class="badge bg-info py-2 px-3">
+                  Following:
+                  <span class="user__following-badge"></span>
+                </span>
               </div>
               <ul class="list-group mt-3">
-                <li class="list-group-item user__company">Company:</li>
-                <li class="list-group-item user__website">Website:</li>
-                <li class="list-group-item user__location">Location:</li>
-                <li class="list-group-item user__member-since">Member Since:</li>
+                <li class="list-group-item">
+                  Company:
+                  <span class="user__company"></span>
+                </li>
+                <li class="list-group-item">
+                  Website:
+                  <span class="user__website"></span>
+                </li>
+                <li class="list-group-item">
+                  Location:
+                  <span class="user__location"></span>
+                </li>
+                <li class="list-group-item">
+                  Member Since:
+                  <span class="user__member-since"></span>
+                </li>
               </ul>
             </div>
           </div>
