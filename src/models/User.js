@@ -39,42 +39,50 @@ export default class User {
   }
   render() {
     return `
-          <div>
-            <img
-              src="${this.avartar}"
-              alt="${this.name} 프로필사진"
-              width="90"
-              class="mr-3 rounded-circle"
-            />
-          </div>
-          <div>
-            <a class="text-primary" href="${this.html_url}" target="_blank">
-              <h5 class="card-title">${this.name} </h5>
-            </a>
-            <h6 class="card-subtitle text-muted">${this.loginId}</h6>
-            <div class="card-body p-0 mt-2">
-              <a
-                href="https://github.com/dmstmdrbs?tab=followers"
-                target="_blank"
-                class="card-link badge bg-success text-white"
-                >Followers ${this.followers}명</a
-              >
-              <a
-                href="https://github.com/dmstmdrbs?tab=following"
-                target="_blank"
-                class="card-link badge bg-success text-white ml-2"
-                >Following ${this.following}명</a
-              >
-              <a
-                href="https://github.com/dmstmdrbs?tab=repositories"
-                target="_blank"
-                class="card-link badge bg-info text-white ml-2"
-                >Repos ${this.public_repos}개</a
-              >
-              <span class="badge bg-secondary text-white ml-2">Gists ${this.public_gists}개</span>
-            </div>
-          </div>
-        `;
+    <div class="w-100 flex-lg-row flex-column d-flex align-items-center justify-content-center">
+      <div>
+        <img
+          src="${this.avartar}"
+          alt="${this.name} 프로필사진"
+          width="180"
+          class="mr-3 rounded-circle"
+        />
+      </div>
+      <div class="w-100 d-flex flex-column align-items-lg-start align-items-center">
+        <div class="px-4">
+          <a class="text-primary" href="${this.html_url}" target="_blank">
+          <h5 class="card-title">${this.name} </h5>
+          </a>
+          <h6 class="card-subtitle text-muted">${this.loginId}</h6>
+        </div>
+        <div class="card-body py-2">
+          <a
+            href="https://github.com/dmstmdrbs?tab=followers"
+            target="_blank"
+            class="card-link badge bg-success text-white"
+            >Followers ${this.followers}명</a
+          >
+          <a
+            href="https://github.com/dmstmdrbs?tab=following"
+            target="_blank"
+            class="card-link badge bg-success text-white ml-2"
+            >Following ${this.following}명</a
+          >
+          <a
+            href="https://github.com/dmstmdrbs?tab=repositories"
+            target="_blank"
+            class="card-link badge bg-info text-white ml-2"
+            >Repos ${this.public_repos}개
+          </a>
+          <span class="badge bg-secondary text-white ml-2">Gists ${this.public_gists}개</span>
+        </div>
+        <div class="w-100">
+          <img class="w-100" style="max-width: 663px;" src="https://ghchart.rshah.org/${this.loginId}" alt="깃허브잔디"/>
+        </div>
+      </div>
+    </div>
+
+  `;
   }
   setRepos(repos) {
     this.repos = repos
