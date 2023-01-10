@@ -20,15 +20,15 @@ export default class UI {
   }
 
   async displayON() {
-    sweetAlert.showTimerAlert("해당 유저의 정보를 불러오는 중입니다!", 1000).then(() => {
-      this.mainElement.style.opacity = 0.99;
-    });
-
     this.setUserViewImage();
     this.setUserViewButton();
     this.setUserTag();
     this.setUserInfo();
     this.setUserLatestRepos();
+
+    sweetAlert.showTimerAlert("해당 유저의 정보를 불러오는 중입니다!", 1000).then(() => {
+      this.mainElement.style.opacity = 0.99;
+    });
   }
 
   async setUserViewImage() {
