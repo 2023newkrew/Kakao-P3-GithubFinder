@@ -1,18 +1,26 @@
 import { fetchUserInfo } from "../services/user";
-console.log(3);
+import UserInfoController from "./UserInfoController";
+
 export default class SearchController {
-    #inputElement;
+    static #instance; // 싱글톤패턴
+    #userInfoController;
+    #inputElement; // input element
+
     constructor() {
+        if (SearchController.#instance) return SearchController.#instance;
+        
         this.#inputElement = document.querySelector('.search input');
-        this.#inputElement.addEventListener('keyup', this.onSearchID)
+        this.#inputElement.addEventListener('keyup', (event) => this.onSearchID(event))
+        this.#userInfoController = new UserInfoController();
+
+        SearchController.#instance = this;
     }
 
     onSearchID(event) {
         const { key, target: {value: userID} } = event;
-        console.log(key);
         if (key === 'Enter') {
             fetchUserInfo(userID)
-            .then((data) => console.log(data));
+            .then((data) => this.#userInfoController.drawUserInfo(data));
         }
     }
 }
