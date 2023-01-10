@@ -9,6 +9,7 @@ export default class UI {
     this.tagElement = document.getElementById("profile-tag");
     this.infoElement = document.getElementById("profile-info");
     this.userImageElement = document.getElementById("userInfo-image");
+    this.viewButtonElement = document.getElementById("view-button");
     this.latestReposListElement = document.getElementById("latestReposList");
 
     this.user = new User();
@@ -38,12 +39,8 @@ export default class UI {
   }
 
   async setUserViewButton() {
-    const viewButton = document.getElementById("view-button");
-
     const username = this.user.getUserName();
-    viewButton.addEventListener("click", (event) => {
-      window.open(`https://github.com/${username}`, "_blank");
-    });
+    this.viewButtonElement.innerHTML = `<a href="https://github.com/${username}">View Profile</a>`;
   }
 
   async setUserTag() {
