@@ -9,14 +9,19 @@ class UserInfoBox extends Component {
     super();
 
     this.profileCard = new ProfileCard();
-    this.element.appendChild(this.profileCard.element);
+    this.element.prepend(this.profileCard.element);
 
     this.repositoryList = new RepositoryList();
-    this.element.appendChild(this.repositoryList.element);
+    this.repositoryListWrapperElement =
+      this.element.querySelector('.repository-list-wrapper');
+    this.repositoryListWrapperElement.appendChild(this.repositoryList.element);
   }
 
   _initElement() {
     return createElement(`<div class="user-info-box">
+  <div class="repository-list-wrapper">
+    <h4 class="user-info-topic">Repositories</h4>
+  </div>
 </div>`);
   }
 

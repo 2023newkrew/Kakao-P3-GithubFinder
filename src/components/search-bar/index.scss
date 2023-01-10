@@ -6,7 +6,7 @@
   padding: 1rem;
   overflow: hidden;
   width: 100%;
-  background-color: var(--box-lighter);
+  background-color: var(--box-white);
   border: 1px solid var(--box-dark);
   border-radius: var(--border-radius);
 
@@ -20,8 +20,10 @@
   }
 
   .search-input[type=text] {
-    transition: 0.2s;
+    transition: var(--transition);
     font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-dark);
     padding: 0.5rem 1rem;
     border: 1px solid var(--box-dark);
     border-radius: var(--border-radius);
@@ -29,6 +31,11 @@
 
     &:focus {
       border: 1px solid var(--primary);
+    }
+
+    &:disabled {
+      color: var(--text-light);
+      background-color: var(--box-dark);
     }
   }
 }

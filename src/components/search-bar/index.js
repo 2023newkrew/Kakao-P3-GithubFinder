@@ -2,14 +2,19 @@ import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
 
+const KeyCode = {
+  ENTER: 'Enter',
+};
+
 class SearchBar extends Component {
   constructor() {
     super();
 
     this.handleUserInfoChange = this.handleUserInfoChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleKeydown = this.handleKeydown.bind(this);
 
-    this.element.addEventListener('click', this.handleClick);
+    this.searchInputElement = this.element.querySelector('.search-input');
+    this.searchInputElement.addEventListener('keydown', this.handleKeydown);
   }
 
   _initElement() {
@@ -21,6 +26,8 @@ class SearchBar extends Component {
   }
 
   _didMounted() {
+    this.searchInputElement.focus();
+
     this.userInfoStore = this._useContext('user-info-store');
     this.userInfoStore.subscribe(this.handleUserInfoChange);
   }
@@ -33,8 +40,14 @@ class SearchBar extends Component {
     console.log(value);
   }
 
-  handleClick(event) {
-    this.userInfoStore.publish(999);
+  handleKeydown(event) {
+    if (event.code !== KeyCode.ENTER) return;
+    this.searchInputElement.disabled = true;
+
+    setTimeout(() => {
+      this.searchInputElement.disabled = false;
+      this.searchInputElement.focus();
+    }, 1000);
   }
 }
 

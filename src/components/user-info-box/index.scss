@@ -1,5 +1,15 @@
 .user-info-box {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 4rem;
+
+  .user-info-topic {
+    margin: 0;
+  }
+
+  .repository-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

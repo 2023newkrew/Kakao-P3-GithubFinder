@@ -1,4 +1,4 @@
-.app {
+:root {
   --primary: rgb(77, 134, 204);
   --secondary: rgb(59, 173, 90);
   --tertiary: rgb(148, 96, 197);
@@ -8,7 +8,7 @@
   --text-dark: #262626;
   --text-light: #999999;
 
-  --background-color: #FFFFFF;
+  --box-white: #FFFFFF;
   --box-lighter: #FAFAFA;
   --box-light: #DBDBDB;
   --box-dark: #C7C7C7;
@@ -16,7 +16,33 @@
 
   --min-width: 480px;
   --max-width: 1024px;
-  --border-radius: 8px;
+  --border-radius: 2px;
 
+  --transition: 0.2s;
+
+  background-color: var(--box-lighter);
   color: var(--text-dark);
+
+  .chip {
+    border-radius: var(--border-radius);
+    padding: 0.25rem 0.5rem;
+    color: white;
+    font-size: 0.5rem;
+
+    &.primary {
+      background-color: var(--primary);
+    }
+
+    &.secondary {
+      background-color: var(--secondary);
+    }
+
+    &.tertiary {
+      background-color: var(--tertiary);
+    }
+
+    &.quaternary {
+      background-color: var(--text-light);
+    }
+  }
 }

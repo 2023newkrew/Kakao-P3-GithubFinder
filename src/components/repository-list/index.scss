@@ -1,0 +1,39 @@
+.repository-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .repository-list-item {
+    display: flex;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      width: calc(50% - 0.5rem);
+    }
+
+    .repository {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background-color: var(--box-white);
+      border: 1px solid var(--box-dark);
+      border-radius: var(--border-radius);
+
+      .repository-name {
+        font-weight: bold;
+      }
+
+      .repostiory-chips {
+        flex-shrink: 0;
+        max-width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+    }
+  }
+}
