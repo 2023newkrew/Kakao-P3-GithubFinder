@@ -8,7 +8,7 @@ export default class UserProfile extends Component {
       <div class="card-body row">
         <div class="col-3">
           <img class="user-profile__avatar d-block w-100" src="${NoAvatar}" alt="avatar" />
-          <a class="user-profile__view-profile btn btn-primary w-100 mt-2" href="">View Profile</a>
+          <a class="user-profile__view-profile btn btn-primary w-100 mt-2 disabled" href="">View Profile</a>
         </div>
         <div class="col-9">
           <div class="user-profile__stats">
@@ -63,6 +63,7 @@ export default class UserProfile extends Component {
       avatarEl.src = avatar_url;
 
       const viewProfileEl = this.targetEl.querySelector(".user-profile__view-profile");
+      viewProfileEl.classList.remove("disabled");
       viewProfileEl.href = html_url;
 
       const publicReposValueEl = this.targetEl.querySelector(".public-repos__value");
