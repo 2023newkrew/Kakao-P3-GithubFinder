@@ -2,7 +2,13 @@ import User from "./user";
 
 export default class UI {
   constructor() {
+    this.inputElement = document.getElementById("usernameInput");
+
     this.mainElement = document.body.querySelector("main");
+    this.tagElement = document.getElementById("profile-tag");
+    this.infoElement = document.getElementById("profile-info");
+    this.userImageElement = document.getElementById("userInfo-image");
+    this.latestReposListElement = document.getElementById("latestReposList");
 
     this.user = new User();
     this.listenInputEvent();
@@ -14,81 +20,97 @@ export default class UI {
 
   async displayON() {
     await this.setUserViewImage();
-    await this.setUserInfo();
+    await this.setUserViewButton();
     await this.setUserTag();
+    await this.setUserInfo();
     await this.setUserLatestRepos();
 
     this.mainElement.style.opacity = 0.99;
   }
 
   async setUserViewImage() {
-    const userImageElement = document.body.querySelector(".view img");
-
+    this.userImageElement.src = "";
     const URL = await this.user.getProfileAvatarURL();
-    userImageElement.src = URL;
+    this.userImageElement.src = URL;
   }
 
-  async setUserInfo() {
-    const infoListElements = document.body.querySelectorAll(".profile .info li");
+  async setUserViewButton() {
+    const viewButton = document.getElementById("view-button");
 
-    const company = await this.user.getCompany();
-    infoListElements[0].innerText = "Company : " + company;
-
-    const website = await this.user.getEmail();
-    infoListElements[1].innerText = "Website / Blog : " + website;
-
-    const location = await this.user.getLocation();
-    infoListElements[2].innerText = "Location : " + location;
-
-    const memberSince = await this.user.getMemberSince();
-    infoListElements[3].innerText = "Member Since : " + memberSince;
+    const username = this.user.getUserName();
+    viewButton.addEventListener("click", (event) => {
+      window.open(`https://github.com/${username}`, "_blanck");
+    });
   }
 
   async setUserTag() {
-    const tagListElements = document.body.querySelectorAll(".profile .tag li");
+    const publicReposCount = await this.user.getPublicRepoCount();
+    const publicGistsCount = await this.user.getPublicGistCount();
+    const followerCount = await this.user.getFollowerCount();
+    const followingCount = await this.user.getFollowingCount();
 
-    const publicReposCount = this.user.getPublicRepoCount();
-    tagListElements[0].innerText = "Public Repos : " + publicReposCount;
+    const elementString = `
+    <li>Public Repos : ${publicReposCount}</li>
+    <li>Public Gists : ${publicGistsCount}</li>
+    <li>Followers : ${followerCount}</li>
+    <li>Following : ${followingCount}</li>
+    `;
 
-    const publicGistsCount = this.user.getPublicGistCount();
-    tagListElements[1].innerText = "Public Gists : " + publicGistsCount;
+    this.tagElement.innerHTML = elementString;
+  }
 
-    const followerCount = this.user.getFollowerCount();
-    tagListElements[2].innerText = "Followers : " + followerCount;
+  async setUserInfo() {
+    const company = await this.user.getCompany();
+    const website = await this.user.getEmail();
+    const location = await this.user.getLocation();
+    const memberSince = await this.user.getMemberSince();
 
-    const followingCount = this.user.getFollowingCount();
-    tagListElements[3].innerText = "Following : " + followingCount;
+    const elementString = `
+    <li>Company : ${company}</li>
+    <li>Website / Blog : ${website}</li>
+    <li>Location : ${location}</li>
+    <li>Member Since : ${memberSince}</li>
+    `;
+
+    this.infoElement.innerHTML = elementString;
   }
 
   async setUserLatestRepos() {
     const latestRepos = this.user.getFiveLatestRepos();
 
-    const latestReposListElement = document.body.querySelector(".latestReposList");
+    const elementString = makeLatestRepoListElement();
+    this.latestReposListElement.innerHTML = elementString;
 
-    let elementString = ``;
-    for (let index = 0; index < latestRepos.length; index++) {
-      elementString += `
-      <li class="latestRepo">
-        <div class="title">${latestRepos[index].name}</div>
-        <ul class="tag">
-          <li>Stars : ${latestRepos[index].stargazers_count}</li>
-          <li>Watchers : ${latestRepos[index].watchers}</li>
-          <li>Forks : ${latestRepos[index].forks}</li>
-        </ul>
-      </li>
-      `;
+    function makeLatestRepoListElement() {
+      let elementString = ``;
+      for (let index = 0; index < latestRepos.length; index++) {
+        console.log(latestRepos[index]);
+        elementString += `
+        <li class="latestRepo">
+          <div class="title">
+            <a href="${latestRepos[index].html_url}" target="_blank">${latestRepos[index].name}</a>
+          </div>
+          <ul class="tag">
+            <li>Stars : ${latestRepos[index].stargazers_count}</li>
+            <li>Watchers : ${latestRepos[index].watchers}</li>
+            <li>Forks : ${latestRepos[index].forks}</li>
+          </ul>
+        </li>
+        `;
+      }
+      return elementString;
     }
-
-    latestReposListElement.innerHTML = elementString;
   }
 
   listenInputEvent() {
-    const inputElement = document.getElementById("usernameInput");
-    inputElement.addEventListener("keydown", async (event) => {
+    this.inputElement.addEventListener("keydown", async (event) => {
       if (event.key === "Enter") {
         await this.displayOFF();
-        await this.user.fetchUserData(inputElement.value);
-        await this.displayON();
+        if (await this.user.fetchUserData(this.inputElement.value)) {
+          await this.displayON();
+        } else {
+          alert("해당 유저를 찾을 수 없습니다 !");
+        }
       }
     });
   }
