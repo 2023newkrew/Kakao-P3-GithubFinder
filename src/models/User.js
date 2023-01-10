@@ -1,3 +1,5 @@
+import Repo from "@models/Repo";
+
 export default class User {
   constructor({
     id,
@@ -12,6 +14,7 @@ export default class User {
     public_gists,
     html_url,
     organizations_url,
+    repos_url,
     starred_url,
     subscriptions_url,
     updated_at,
@@ -30,7 +33,9 @@ export default class User {
     this.organizations_url = organizations_url;
     this.starred_url = starred_url;
     this.subscriptions_url = subscriptions_url;
+    this.repos_url = repos_url;
     this.updated_at = updated_at;
+    this.repos = [];
   }
   render() {
     return `
@@ -68,5 +73,13 @@ export default class User {
             </div>
           </div>
         `;
+  }
+  setRepos(repos) {
+    this.repos = repos
+      .map((repo) => new Repo(repo))
+      .sort(
+        (repo1, repo2) =>
+          new Date(repo2.updated_at) - new Date(repo1.updated_at)
+      );
   }
 }
