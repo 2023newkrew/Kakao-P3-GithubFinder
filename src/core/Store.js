@@ -10,7 +10,7 @@ export default class Store {
   }
 
   notify() {
-    this.subsrcibers.forEach((callback) => callback(this.state));
+    this.subsrcibers.forEach((callback) => callback());
   }
 
   subscribe(callback) {
