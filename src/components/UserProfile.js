@@ -1,12 +1,13 @@
 import Component from "@/core/Component";
 import UserInfoStore from "@/stores/UserInfo";
+import NoAvatar from "@/assets/no-avatar.svg";
 
 export default class UserProfile extends Component {
   template() {
     return `
       <div class="card-body row">
         <div class="col-3">
-          <img class="user-profile__avatar d-block w-100" src="" alt="avatar" />
+          <img class="user-profile__avatar d-block w-100" src="${NoAvatar}" alt="avatar" />
           <a class="user-profile__view-profile btn btn-primary w-100 mt-2" href="">View Profile</a>
         </div>
         <div class="col-9">
