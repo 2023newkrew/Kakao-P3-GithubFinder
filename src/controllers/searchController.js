@@ -77,7 +77,14 @@ export default class SearchController {
     const user = new User(userInfo);
     renderUser(user);
 
+    const loadingEl = document.createElement("div");
+    loadingEl.className = "card-body d-flex align-items-center";
+    loadingEl.innerHTML = `<p class="text-center container-fluid">불러오는 중</p>`;
+
+    searchResultContainer.appendChild(loadingEl);
     user.setRepos(await this.fetcher.getRepos(user));
+    searchResultContainer.removeChild(loadingEl);
+
     renderRepos(user.repos);
   }
 }
