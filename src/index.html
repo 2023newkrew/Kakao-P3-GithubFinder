@@ -7,24 +7,28 @@
     <title>GitHub Finder</title>
   </head>
   <body>
-    <header id="header">
-      <section id="search">
-        <h1 id="search__title">깃허브 유저 검색</h1>
-        <p id="search__comment">
+    <header class="header">
+      <section class="search">
+        <h1 class="search__title">깃허브 유저 검색</h1>
+        <p class="search__comment">
           저장소와 유저 프로필을 가져오기 위해 username을 검색해주세요.
         </p>
-        <input id="search__input" placeholder="username" />
+        <input
+          id="search__input"
+          class="search__input"
+          placeholder="username"
+        />
       </section>
     </header>
-    <main id="main">
-      <section id="profile"></section>
-      <section id="repository">
+    <main class="main">
+      <section id="profile" class="profile hidden"></section>
+      <section id="repository" class="repository hidden">
         <h1>Latest Repos</h1>
-        <div id="repository__warapper"></div>
+        <div class="repository__warapper"></div>
       </section>
     </main>
-    <footer id="footer">
-      <section id="footer__comment">GitHub Finder ©</section>
+    <footer class="footer">
+      <section class="footer__comment">GitHub Finder ©</section>
     </footer>
   </body>
 </html>

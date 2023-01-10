@@ -28,6 +28,8 @@ export default class SearchController {
         console.log(userRepos);
         this.ui.drawUserRepository(userRepos);
       }
+
+      target.value = "";
     }
   }
   async getUserInfo(username) {

@@ -11,21 +11,21 @@ body {
   width: 100%;
   height: 100vh;
   max-width: 960px;
-  margin: 20px auto;
+  margin: 0 auto;
 }
 
-#header,
-#profile,
-#repository,
-#footer {
+.header,
+.profile,
+.repository,
+.footer {
   margin: 30px 0;
 }
 
-#header {
+.header {
   @include default-border;
   padding: 20px;
 
-  #search {
+  .search {
     &__comment {
       margin-top: 14px;
       font-size: 16px;
@@ -41,13 +41,18 @@ body {
   }
 }
 
-#profile {
+.main {
+  min-height: 68vh;
+}
+
+.profile {
   @include default-border;
   display: flex;
+  gap: 20px;
   padding: 20px;
 }
 
-#profile-view {
+.profile-view {
   &__warapper {
     display: flex;
     flex-direction: column;
@@ -65,23 +70,24 @@ body {
   &__button {
     display: flex;
     align-items: center;
+    width: 240px;
     height: 30px;
     padding: 6px 8px;
     margin-top: 16px;
-    text-align: center;
-    border-radius: 4px;
+    justify-content: center;
+    border-radius: 8px;
     background-color: $color--blue;
     color: $color--white;
     font-size: 14px;
   }
 }
 
-#profile-info {
+.profile-info {
   &__warapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    justify-content: space-evenly;
     width: 70%;
   }
 
@@ -108,7 +114,7 @@ body {
   }
 }
 
-#repository {
+.repository {
   &__repos {
     margin-top: 10px;
     & > li {
@@ -156,11 +162,15 @@ body {
   }
 }
 
-#footer {
+.footer {
   @include default-border;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 50px;
   background-color: $color--light-gray;
+}
+
+.hidden {
+  display: none;
 }
