@@ -1,7 +1,7 @@
 // 테스트를 위한 토큰 (아무런 권한이 없음. 나중에 따로 파일을 빼서 .gitignore에 추가하거나 환경 변수로 설정할 듯)
 const MY_TOKEN = "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";
 
-class Util {
+class Dom {
     static createElementWithClassName(tagName, classNameArray) {
         const node = document.createElement(tagName);
         node.classList.add(...classNameArray);
@@ -11,43 +11,66 @@ class Util {
         return this.createElementWithClassName("div", classNameArray);
     }
 }
+
 class GitHubManager {
+    static gitHubApiHeaders = {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${MY_TOKEN}`,
+    };
+
     static async getUserInfoResponse(userName) {
-        const userInfoRes = await fetch(
-            `https://api.github.com/users/${userName}`,
-            {
-                headers: {
-                    Accept: "application/vnd.github+json",
-                    Authorization: `Bearer ${MY_TOKEN}`,
-                },
+        let userInfoRes = null;
+        try {
+            userInfoRes = await fetch(
+                `https://api.github.com/users/${userName}`,
+                {
+                    headers: GitHubManager.gitHubApiHeaders,
+                }
+            );
+            if (!userInfoRes.ok) {
+                throw new Error(
+                    `user data 요청 응답에 실패하였습니다. ${userInfoRes.status}`
+                );
             }
-        );
+        } catch (error) {
+            throw error;
+        }
         return userInfoRes;
     }
+
     static async getRepoInfoResponse(userName) {
-        const userInfoRes = await fetch(
-            `https://api.github.com/users/${userName}/repos`,
-            {
-                headers: {
-                    Accept: "application/vnd.github+json",
-                    Authorization: `Bearer ${MY_TOKEN}`,
-                },
+        let repoInfoRes = null;
+        try {
+            repoInfoRes = await fetch(
+                `https://api.github.com/users/${userName}/repos`,
+                {
+                    headers: GitHubManager.gitHubApiHeaders,
+                }
+            );
+            if (!repoInfoRes.ok) {
+                throw new Error(
+                    `repo data 요청 응답에 실패하였습니다. ${repoInfoRes.status}`
+                );
             }
-        );
-        return userInfoRes;
+        } catch (error) {
+            throw error;
+        }
+        return repoInfoRes;
     }
 }
 class UIManager {
     static instance = null;
+    static toastTime = 1000;
     constructor() {
         if (UIManager.instance !== null) return UIManager.instance;
         this.searchFrom = document.body.querySelector(".search-form");
         this.userInfo = document.body.querySelector(".user-info");
         this.repoInfo = document.body.querySelector(".repo-info");
+        this.toastBox = document.body.querySelector(".toast-box");
         UIManager.instance = this;
     }
     static _createSpanBadge(text, bgColor) {
-        const $badge = Util.createElementWithClassName("span", [
+        const $badge = Dom.createElementWithClassName("span", [
             "badge",
             "mr-1",
             bgColor,
@@ -56,7 +79,7 @@ class UIManager {
         return $badge;
     }
     static _createUserProfileLiElement(text) {
-        const $li = Util.createElementWithClassName("li", [
+        const $li = Dom.createElementWithClassName("li", [
             "list-group-item",
             "d-flex",
             "justify-content-between",
@@ -65,6 +88,7 @@ class UIManager {
         $li.innerText = text;
         return $li;
     }
+
     renderUserInfo({
         avatar_url,
         public_repos,
@@ -77,17 +101,16 @@ class UIManager {
         created_at,
     }) {
         /* 엘리멘트 생성 */
-        const $cardBody = Util.createDivWithClassName([
+        const $cardBody = Dom.createDivWithClassName([
             "card-body",
             "text-light",
         ]);
-
-        const $cardBodyRow = Util.createDivWithClassName(["row"]);
-        const $cardBodyRowImgGrid = Util.createDivWithClassName([
+        const $cardBodyRow = Dom.createDivWithClassName(["row"]);
+        const $cardBodyRowImgGrid = Dom.createDivWithClassName([
             "col-md-3",
             "col-xm-12",
         ]);
-        const $img = Util.createElementWithClassName("img", [
+        const $img = Dom.createElementWithClassName("img", [
             "w-100",
             "h-100",
             "object-fit-fill",
@@ -96,11 +119,11 @@ class UIManager {
             "d-block",
         ]);
         $img.src = avatar_url;
-        const $cardBodyRowInfoGrid = Util.createDivWithClassName([
+        const $cardBodyRowInfoGrid = Dom.createDivWithClassName([
             "col-md-9",
             "col-xm-12",
         ]);
-        const $userInfoBadges = Util.createDivWithClassName([
+        const $userInfoBadges = Dom.createDivWithClassName([
             "user-info__badges",
         ]);
 
@@ -121,12 +144,12 @@ class UIManager {
             "bg-danger"
         );
 
-        const $userInfoProfileList = Util.createDivWithClassName([
+        const $userInfoProfileList = Dom.createDivWithClassName([
             "user-info__profile-list",
             "text-dark",
         ]);
 
-        const $ul = Util.createElementWithClassName("ul", [
+        const $ul = Dom.createElementWithClassName("ul", [
             "list-group",
             "mt-3",
         ]);
@@ -143,9 +166,8 @@ class UIManager {
         const $liMemberSince = UIManager._createUserProfileLiElement(
             `Member Since : ${created_at}`
         );
-
-        const $viewProfileRow = Util.createDivWithClassName(["row"]);
-        const $viewProfile = Util.createElementWithClassName("span", [
+        const $viewProfileRow = Dom.createDivWithClassName(["row"]);
+        const $viewProfile = Dom.createElementWithClassName("span", [
             "badge",
             "rounded-pill",
             "bg-primary",
@@ -165,27 +187,24 @@ class UIManager {
         );
         $cardBodyRowInfoGrid.append($userInfoBadges, $userInfoProfileList);
         $cardBodyRowImgGrid.append($img);
-
         $cardBodyRow.append($cardBodyRowImgGrid, $cardBodyRowInfoGrid);
-
         $viewProfileRow.append($viewProfile);
         $cardBody.append($cardBodyRow, $viewProfileRow);
-
         this.userInfo.append($cardBody);
     }
     renderLatestRepos({ name, stargazers_count, watchers_count, forks_count }) {
-        const $card = Util.createDivWithClassName([
+        const $card = Dom.createDivWithClassName([
             "card",
             "border-secondary",
             "m-3",
         ]);
         /* 엘리멘트 생성 */
-        const $row = Util.createDivWithClassName(["row", "p-3"]);
-        const $colRepoName = Util.createDivWithClassName(["col-6"]);
-        const $aRepoName = Util.createElementWithClassName("a", []);
+        const $row = Dom.createDivWithClassName(["row", "p-3"]);
+        const $colRepoName = Dom.createDivWithClassName(["col-6"]);
+        const $aRepoName = Dom.createElementWithClassName("a", []);
         $aRepoName.innerText = name;
-        const $colRepoInfo = Util.createDivWithClassName(["col-6"]);
-        const $repoInfoBadges = Util.createDivWithClassName([
+        const $colRepoInfo = Dom.createDivWithClassName(["col-6"]);
+        const $repoInfoBadges = Dom.createDivWithClassName([
             "repo-info__badges",
             "text-light",
         ]);
@@ -211,25 +230,113 @@ class UIManager {
         $card.append($row);
         this.repoInfo.append($card);
     }
+    clearUserInfo() {
+        this.userInfo.innerHTML = "";
+    }
+    clearRepoInfo() {
+        this.repoInfo.innerHTML = "";
+    }
+    async renderUserInfoAsync(userName) {
+        const uiManager = new UIManager();
+        try {
+            const res = await GitHubManager.getUserInfoResponse(userName);
+            const json = await res.json();
+
+            uiManager.clearUserInfo();
+            uiManager.renderUserInfo(json);
+            uiManager.renderToast(
+                "User Data를 가져오는데 성공했습니다.",
+                "green"
+            );
+        } catch (error) {
+            console.log(error);
+            uiManager.renderToast(
+                "User Data를 가져오는데 실패했습니다.",
+                "red"
+            );
+        }
+    }
+    async renderRepoInfoAsync(userName) {
+        const uiManager = new UIManager();
+        try {
+            const res = await GitHubManager.getRepoInfoResponse(userName);
+            const jsonArray = await res.json();
+
+            uiManager.clearRepoInfo();
+            jsonArray.forEach((repoJson) => {
+                uiManager.renderLatestRepos(repoJson);
+            });
+            uiManager.renderToast(
+                "Repo Data를 가져오는데 성공했습니다.",
+                "green"
+            );
+        } catch (error) {
+            uiManager.renderToast(
+                "Repo Data를 가져오는데 실패했습니다.",
+                "red"
+            );
+        }
+    }
+
+    renderToast(message, color) {
+        // Create elements
+        const toast = document.createElement("div");
+        const header = document.createElement("div");
+        const strong = document.createElement("strong");
+        const button = document.createElement("button");
+        const span = document.createElement("span");
+        const body = document.createElement("div");
+
+        // Set classes
+        toast.classList.add("toast");
+        header.classList.add("toast-header");
+        strong.classList.add("mr-auto");
+        button.classList.add("ml-2", "mb-1", "close");
+        body.classList.add("toast-body");
+
+        // Set text content
+        strong.textContent = "GitHub Finder";
+        span.textContent = "×";
+        body.textContent = message;
+
+        // Set attributes
+        toast.setAttribute("role", "alert");
+        toast.setAttribute("aria-live", "assertive");
+        toast.setAttribute("aria-atomic", "true");
+        toast.setAttribute("data-autohide", "false");
+        button.setAttribute("type", "button");
+        button.setAttribute("data-dismiss", "toast");
+        button.setAttribute("aria-label", "Close");
+        span.setAttribute("aria-hidden", "true");
+
+        // Append elements
+        header.appendChild(strong);
+        button.appendChild(span);
+        header.appendChild(button);
+        toast.appendChild(header);
+        toast.appendChild(body);
+        toast.style.backgroundColor = color;
+        this.toastBox.appendChild(toast);
+        $(toast).toast("show");
+        setTimeout(() => {
+            $(toast).toast("hide");
+        }, UIManager.toastTime);
+    }
 }
-const renderUserInfoCard = async (userName) => {
-    const uiManager = new UIManager();
-    const res = await GitHubManager.getUserInfoResponse(userName);
-    const json = await res.json();
-    uiManager.renderUserInfo(json);
+
+const handleKeyDownSearchForm = (event) => {
+    if (event.key === "Enter") {
+        if (event.target.value === "") return;
+
+        const uiManager = new UIManager();
+        const userName = event.target.value.trim();
+        uiManager.renderUserInfoAsync(userName);
+        uiManager.renderRepoInfoAsync(userName);
+    }
 };
-const renderRepoInfoCard = async (userName) => {
+function main() {
     const uiManager = new UIManager();
-    const res = await GitHubManager.getRepoInfoResponse("charon0530");
-    const jsonArray = await res.json();
-    jsonArray.forEach((repoJson) => {
-        uiManager.renderLatestRepos(repoJson);
-        console.log(repoJson);
-    });
-};
-async function main() {
-    /* 현재 이벤트 등록 부분을 구현하지 않아 메인에서 테스트 코드를 작성함 */
-    renderUserInfoCard("charon0530");
-    renderRepoInfoCard("charon0530");
+
+    uiManager.searchFrom.addEventListener("keydown", handleKeyDownSearchForm);
 }
 main();
