@@ -87,7 +87,7 @@ export default class UserProfile extends Component {
       locationValueEl.innerText = location;
 
       const memberSinceValueEl = this.targetEl.querySelector(".member-since__value");
-      memberSinceValueEl.innerText = created_at;
+      memberSinceValueEl.innerText = new Date(created_at).toDateString();
     });
   }
 }
