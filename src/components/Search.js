@@ -1,6 +1,5 @@
 import Component from "@core/Component";
 import UserInfoStore from "@stores/UserInfo";
-import { get } from "@utils/api";
 
 export default class Search extends Component {
   template() {
@@ -18,14 +17,7 @@ export default class Search extends Component {
       event.preventDefault();
       const username = this.targetEl.querySelector(".search__input").value;
 
-      this.fetchUserInfo(username);
+      UserInfoStore.fetchUserInfo(username);
     });
-  }
-
-  async fetchUserInfo(username) {
-    const userProfile = await get(`/users/${username}`);
-    const repositories = await get(`/users/${username}/repos`, { sort: "updated", per_page: "5" });
-
-    UserInfoStore.setState({ ...userProfile, repositories });
   }
 }
