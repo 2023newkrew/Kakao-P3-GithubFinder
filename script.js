@@ -61,7 +61,9 @@ class GitHubManager {
 }
 class UIManager {
     static instance = null;
-    static toastTime = 3000;
+    static toastTime = 2000;
+    static historyList = [];
+    static historyMaxCount = 5;
 
     constructor() {
         if (UIManager.instance !== null) return UIManager.instance;
@@ -69,7 +71,33 @@ class UIManager {
         this.userInfo = document.body.querySelector(".user-info");
         this.repoInfo = document.body.querySelector(".repo-info");
         this.toastBox = document.body.querySelector(".toast-box");
+        this.historyBox = document.body.querySelector(".history-box");
+        UIManager.historyList = this._getHistoryListInLocalStorage();
         UIManager.instance = this;
+    }
+
+    _getHistoryListInLocalStorage() {
+        return JSON.parse(localStorage.getItem("historyList")) || [];
+    }
+
+    _setHistoryListInLocalStorage() {
+        localStorage.setItem(
+            "historyList",
+            JSON.stringify(UIManager.historyList)
+        );
+    }
+
+    _addHistory(name) {
+        const historyList = UIManager.historyList;
+        for (let i = historyList.length - 1; i >= 0; i--) {
+            if (historyList[i] === name) {
+                historyList.splice(i, 1);
+            }
+        }
+        if (historyList.length >= UIManager.historyMaxCount) {
+            historyList.shift();
+        }
+        historyList.push(name);
     }
 
     _getUserInfoHTML({
@@ -166,6 +194,9 @@ class UIManager {
             this.clearUserInfo();
             this.renderUserInfo(json);
 
+            this._addHistory(userName);
+            this.renderHistory();
+
             this.renderToast(
                 "User Data를 가져오는데 성공했습니다.",
                 "green",
@@ -238,6 +269,14 @@ class UIManager {
             $($toast).toast("hide");
         }, UIManager.toastTime);
     }
+
+    renderHistory() {
+        this.historyBox.innerHTML = "";
+        UIManager.historyList.forEach((name) => {
+            this.historyBox.innerHTML += `<button class="btn btn-primary btn-sm m-1">${name}</button>`;
+        });
+        this._setHistoryListInLocalStorage();
+    }
 }
 
 const handleKeyDownSearchForm = (event) => {
@@ -250,9 +289,22 @@ const handleKeyDownSearchForm = (event) => {
         uiManager.renderRepoInfoAsync(userName);
     }
 };
+
+const handleClickSearchForm = (event) => {
+    if (event.target.tagName === "BUTTON") {
+        const uiManager = new UIManager();
+        const userName = event.target.innerText;
+        uiManager.searchFrom.querySelector("input").value = userName;
+
+        uiManager.renderUserInfoAsync(userName);
+        uiManager.renderRepoInfoAsync(userName);
+    }
+};
 function main() {
     const uiManager = new UIManager();
 
     uiManager.searchFrom.addEventListener("keydown", handleKeyDownSearchForm);
+    uiManager.searchFrom.addEventListener("click", handleClickSearchForm);
+    uiManager.renderHistory();
 }
 main();

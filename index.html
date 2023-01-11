@@ -16,11 +16,19 @@
     </nav>
     <main>
       <div class="search-form card border-secondary m-3">
-        <div class="card-body">
-          <h4 class="card-title">Search GitHub Users</h4>
-          <p class="card-text text-secondary">Enter a username to fetch pfofile and repos</p>
-          <input type="text" class="form-control" placeholder="Username" />
+        <div class="row">
+          <div class="col-7">
+            <div class="card-body">
+              <h4 class="card-title">Search GitHub Users</h4>
+              <p class="card-text text-secondary">Enter a username to fetch pfofile and repos</p>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="ml-1 mt-1 font-weight-bold">history</div>
+            <div class="history-box"></div>
+          </div>
         </div>
+        <input type="text" class="form-control" placeholder="Username" />
       </div>
       <div class="user-info card border-secondary m-3">
         <!-- <div class="card-body text-light">
