@@ -6,7 +6,7 @@ export default class GithubApiController {
   fetchData(url) {
     return api.get(url, {
       headers: {
-        Authorization: "token" + process.env.GITHUB_AUTH_TOKEN,
+        Authorization: `token ${process.env.GITHUB_AUTH_TOKEN}`,
       },
     });
   }
