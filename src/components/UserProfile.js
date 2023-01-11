@@ -1,5 +1,5 @@
 import Component from "@core/Component";
-import UserInfoStore from "@stores/UserInfo";
+import UserInfoStore from "@stores/UserInfoStore";
 import NoAvatar from "@assets/no-avatar.svg";
 
 export default class UserProfile extends Component {

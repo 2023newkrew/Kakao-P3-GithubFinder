@@ -1,5 +1,5 @@
 import Component from "@core/Component";
-import UserInfoStore from "@stores/UserInfo";
+import UserInfoStore from "@stores/UserInfoStore";
 
 export default class Repositories extends Component {
   template() {
