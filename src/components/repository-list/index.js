@@ -4,8 +4,8 @@ import {createElement} from '@/utils';
 
 class RepositoryList extends Component {
   _initElement() {
-    return createElement(`<div class="repository-list">
-  <div class="repository-list-item">
+    return createElement(`<ul class="repository-list">
+  <li class="repository-list-item">
     <div class="repository">
       <div class="repository-name">gogo</div>
       <div class="repostiory-chips">
@@ -14,8 +14,8 @@ class RepositoryList extends Component {
         <div class="chip secondary">Forks: 0</div>
       </div>
     </div>
-  </div>
-  <div class="repository-list-item">
+  </li>
+  <li class="repository-list-item">
     <div class="repository">
       <div class="repository-name">gogo</div>
       <div class="repostiory-chips">
@@ -24,8 +24,8 @@ class RepositoryList extends Component {
         <div class="chip secondary">Forks: 0</div>
       </div>
     </div>
-  </div>
-  <div class="repository-list-item">
+  </li>
+  <li class="repository-list-item">
     <div class="repository">
       <div class="repository-name">gogo</div>
       <div class="repostiory-chips">
@@ -34,8 +34,8 @@ class RepositoryList extends Component {
         <div class="chip secondary">Forks: 0</div>
       </div>
     </div>
-  </div>
-</div>`);
+  </li>
+</ul>`);
   }
 
   _didMounted() {
