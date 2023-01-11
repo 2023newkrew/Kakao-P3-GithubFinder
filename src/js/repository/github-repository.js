@@ -1,7 +1,12 @@
+import {
+  FETCH_PROFILE_FINISHED_PROGRESS,
+  FETCH_REPOS_FINISHED_PROGRESS,
+} from '../constant/progress';
 import { BASE_GITHUB_URL, GITHUB_REPOS_PATH, GITHUB_USER_PATH } from '../constant/url';
 import Github from '../model/github';
 import Repo from '../model/repo';
 import Client from '../util/client';
+import ProgressBar from '../util/progress-bar';
 
 export default class GithubRepository {
   #userName;
@@ -38,6 +43,8 @@ export default class GithubRepository {
       html_url: profileLink,
     } = response;
 
+    ProgressBar.setProgress((prev) => prev + FETCH_PROFILE_FINISHED_PROGRESS);
+
     return new Github({
       name,
       profileImage,
@@ -69,6 +76,8 @@ export default class GithubRepository {
 
       return new Repo({ title, link, starCount, watcherCount, forkCount });
     });
+
+    ProgressBar.setProgress((prev) => prev + FETCH_REPOS_FINISHED_PROGRESS);
 
     return repos;
   }
