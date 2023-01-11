@@ -43,21 +43,22 @@ export default class User {
     const today = new Date();
     const createdDate = new Date(this.created_at);
     const monthDiff = getDateDiff(today, createdDate, "month");
-    if (monthDiff > 0) {
-      const year = Math.floor(monthDiff / 12);
-      const month = monthDiff % 12;
-      if (year === 0) {
-        return `${month}개월 전`;
-      }
-      if (month === 0) {
-        return `${year}년 전`;
-      }
 
-      return `${year}년 ${month}개월 전`;
+    if (monthDiff === 0) {
+      const dayDiff = getDateDiff(today, createdDate, "day");
+      return `${dayDiff}일 전`;
     }
 
-    const dayDiff = getDateDiff(today, createdDate, "day");
-    return `${dayDiff}일 전`;
+    const year = Math.floor(monthDiff / 12);
+    const month = monthDiff % 12;
+    if (year === 0) {
+      return `${month}개월 전`;
+    }
+    if (month === 0) {
+      return `${year}년 전`;
+    }
+
+    return `${year}년 ${month}개월 전`;
   }
   render() {
     return `
