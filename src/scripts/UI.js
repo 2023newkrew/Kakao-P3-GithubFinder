@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export default class UI {
   drawUserInfo(userInfo) {
     const tagKeyList = [
@@ -64,5 +66,13 @@ export default class UI {
       </ul>
     </div>
     `;
+  }
+
+  alertError(message) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: message,
+    });
   }
 }

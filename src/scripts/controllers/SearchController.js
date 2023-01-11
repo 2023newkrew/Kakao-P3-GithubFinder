@@ -21,27 +21,41 @@ export default class SearchController {
       const userInfo = await this.getUserInfo(target.value);
       if (userInfo) {
         this.ui.drawUserInfo(userInfo);
-      }
+      } else return;
 
       const userRepos = await this.getUserRepository(target.value);
       if (userRepos) {
-        console.log(userRepos);
         this.ui.drawUserRepository(userRepos);
-      }
+      } else return;
 
       target.value = "";
     }
   }
+
   async getUserInfo(username) {
-    const res = await this.githubAPI.get(`/users/${username}`);
-    return res;
+    const { status, data } = await this.githubAPI.get(`/users/${username}`);
+    // 상수 처리하기!
+    if (status === 404) {
+      this.ui.alertError("유저 정보를 찾을 수 없어요!");
+      return;
+    } else if (status === 200) {
+      return data;
+    }
   }
 
   async getUserRepository(username) {
-    const res = await this.githubAPI.get(`/users/${username}/repos`, {
-      sort: "created",
-      per_page: 5,
-    });
-    return res;
+    const { status = 0, data } = await this.githubAPI.get(
+      `/users/${username}/repos`,
+      {
+        sort: "created",
+        per_page: 5,
+      }
+    );
+    if (status === 404) {
+      this.ui.alertError("유저 정보를 찾을 수 없어요!");
+      return;
+    } else if (status === 200) {
+      return data;
+    }
   }
 }
