@@ -4,6 +4,7 @@ import {
   NO_SEARCH_RESULT_TEMPLATE,
   SEARCH_LOADING_TEMPLATE,
   getReposTemplate,
+  NO_REPOS_TEMPLATE,
 } from "@templates/search";
 import { SPINNER_TEMPLATE } from "@templates/spinner";
 
@@ -33,15 +34,28 @@ export default class SearchController {
       userResult.id = user.id;
       userResult.innerHTML = user.render();
     };
-
-    const renderRepos = (repos) => {
+    const renderNoUserInfo = () => {
+      const userResult = searchResultContainer.querySelector("#user-result");
+      userResult.innerHTML = NO_SEARCH_RESULT_TEMPLATE;
+    };
+    const getRepoResultContainerEl = () => {
       const repoResult = document.createElement("div");
-      repoResult.id = "#repos-result";
+      repoResult.id = "repo-result";
       repoResult.className = "bs-component";
+      return repoResult;
+    };
+    const renderRepos = (repos) => {
+      const repoResult = getRepoResultContainerEl();
       repoResult.innerHTML = getReposTemplate(repos);
+
       searchResultContainer.appendChild(repoResult);
     };
+    const renderNoRepos = () => {
+      const repoResult = getRepoResultContainerEl();
+      repoResult.innerHTML = NO_REPOS_TEMPLATE;
 
+      searchResultContainer.appendChild(repoResult);
+    };
     const getLoadingElement = () => {
       const element = document.createElement("div");
       element.className = "card-body d-flex align-items-center";
@@ -59,8 +73,7 @@ export default class SearchController {
 
     const userInfo = await this.fetcher.getUser(trimmedValue);
     if (!userInfo) {
-      const userResult = searchResultContainer.querySelector("#user-result");
-      userResult.innerHTML = NO_SEARCH_RESULT_TEMPLATE;
+      renderNoUserInfo();
       return;
     }
 
@@ -70,9 +83,15 @@ export default class SearchController {
     const loadingEl = getLoadingElement();
 
     searchResultContainer.appendChild(loadingEl);
-    user.setRepos(await this.fetcher.getRepos(user));
+    const repos = await this.fetcher.getRepos(user);
     searchResultContainer.removeChild(loadingEl);
 
+    if (repos.length === 0) {
+      renderNoRepos();
+      return;
+    }
+
+    user.setRepos(repos);
     renderRepos(user.repos);
   }
 }
