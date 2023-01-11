@@ -1,5 +1,7 @@
 import sweetAlert from "../lib/sweetAlert";
 
+import env from "../../env.json";
+
 export default class User {
   constructor() {
     this.userData = null;
@@ -10,9 +12,9 @@ export default class User {
   async fetchUserData(username) {
     // TODO : Bearer Token .env 파일로 빼내기
     this.userData = await (
-      await fetch(`https://api.github.com/users/${username}`, {
+      await fetch(`https://${env.API_SERVER}/${username}`, {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `${env.API_TOKEN}`,
         },
       })
     ).json();
@@ -23,9 +25,9 @@ export default class User {
     this.username = username;
 
     this.userRepository = await (
-      await fetch(`https://api.github.com/users/${username}/repos`, {
+      await fetch(`https://${env.API_SERVER}/${username}/repos`, {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: `${env.API_TOKEN}`,
         },
       })
     ).json();

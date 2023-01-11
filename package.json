@@ -4,7 +4,7 @@
   "description": "<h2>실행 안내</h2>",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --config webpack.dev.config.js",
+    "dev": "webpack serve --config webpack.dev.config.js --env client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production"
   },
@@ -20,7 +20,10 @@
   "homepage": "https://github.com/b2bcodestatesOrg/Kakao-P3-GithubFinder#readme",
   "devDependencies": {
     "css-loader": "^6.7.3",
+    "dotenv": "^16.0.3",
+    "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.5.0",
+    "os-browserify": "^0.3.0",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
@@ -28,5 +31,8 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "node-polyfill-webpack-plugin": "^2.0.1"
   }
 }

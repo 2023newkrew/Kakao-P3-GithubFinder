@@ -11,6 +11,7 @@ export default class UI {
     this.mainElement = document.body.querySelector("main");
 
     this.user = new User();
+
     this.userInfoView = new UserInfoView(this.user);
     this.userInfoProfile = new UserInfoProfile(this.user);
     this.userLatestRepos = new UserLatestRepos(this.user);

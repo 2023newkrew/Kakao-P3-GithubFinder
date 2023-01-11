@@ -1,4 +1,4 @@
-export default class userLatestRepos {
+export default class UserLatestRepos {
   constructor(user) {
     this.latestReposListElement = document.getElementById("latestReposList");
     this.user = user;
