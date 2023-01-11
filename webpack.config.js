@@ -45,7 +45,10 @@ module.exports = (_, argv) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({ template: "./index.html" }), //
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        template: "index.html",
+      }), //
       new MiniCssExtractPlugin(),
       new webpack.DefinePlugin({
         "process.env": JSON.stringify(process.env),
