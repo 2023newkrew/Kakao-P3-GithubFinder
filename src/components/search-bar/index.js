@@ -28,15 +28,6 @@ class SearchBar extends Component {
     this.searchInputElement.focus();
 
     this.userInfoStore = useContext(this.element, 'user-info-store');
-    this.userInfoStore.subscribe(this.handleUserInfoChange);
-  }
-
-  _didUnmounted() {
-    this.userInfoStore.unsubscribe(this.handleUserInfoChange);
-  }
-
-  handleUserInfoChange(value) {
-    console.log(value);
   }
 
   handleKeydown(event) {
@@ -52,7 +43,7 @@ class SearchBar extends Component {
     Promise.all([userPromise, repositoriesPromise])
         .then((results) => Promise.all(results.map((res) => res.json())))
         .then(([user, repositories]) => {
-          this.userInfoStore.publish([user, repositories]);
+          this.userInfoStore.publish({user, repositories});
           this.searchInputElement.disabled = false;
           this.searchInputElement.focus();
         });

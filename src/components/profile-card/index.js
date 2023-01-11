@@ -1,7 +1,7 @@
 import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
-import {useContext} from '../../core/context';
+import {useContext} from '@/core/context';
 
 class ProfileCard extends Component {
   constructor() {
@@ -52,7 +52,7 @@ class ProfileCard extends Component {
     this.userInfoStore.unsubscribe(this.render);
   }
 
-  render([{
+  render({user: {
     company,
     blog,
     login: name,
@@ -63,7 +63,7 @@ class ProfileCard extends Component {
     created_at: createdAt,
     public_repos: publicRepos,
     public_gists: publicGists,
-  }]) {
+  }}) {
     const getNotFalsyOrElseHyphen = (value) => !!value ? value : '-';
 
     this.element.querySelector('.profile-image').src = avatarUrl;

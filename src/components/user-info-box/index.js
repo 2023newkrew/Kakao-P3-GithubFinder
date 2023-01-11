@@ -3,10 +3,13 @@ import Component from '@/core/component';
 import {createElement} from '@/utils';
 import ProfileCard from '@/components/profile-card';
 import RepositoryList from '@/components/repository-list';
+import {useContext} from '@/core/context';
 
 class UserInfoBox extends Component {
   constructor() {
     super();
+
+    this.render = this.render.bind(this);
 
     this.profileCard = new ProfileCard();
     this.element.prepend(this.profileCard.element);
@@ -18,11 +21,28 @@ class UserInfoBox extends Component {
   }
 
   _initElement() {
-    return createElement(`<div class="user-info-box">
+    return createElement(`<div class="user-info-box" style="height: 0;">
   <div class="repository-list-wrapper">
     <h4 class="user-info-topic">Repositories</h4>
   </div>
 </div>`);
+  }
+
+  _didMounted() {
+    this.userInfoStore = useContext(this.element, 'user-info-store');
+    this.userInfoStore.subscribe(this.render);
+  }
+
+  _didUnmounted() {
+    this.userInfoStore.unsubscribe(this.render);
+  }
+
+  render(userInfo) {
+    if (userInfo === null) {
+      this.element.style.height = 0;
+    } else {
+      this.element.style.height = `${this.element.scrollHeight}px`;
+    }
   }
 }
 

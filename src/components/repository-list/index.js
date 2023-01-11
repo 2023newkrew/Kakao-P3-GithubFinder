@@ -1,7 +1,7 @@
 import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
-import {useContext} from '../../core/context';
+import {useContext} from '@/core/context';
 
 class RepositoryList extends Component {
   constructor() {
@@ -54,7 +54,7 @@ class RepositoryList extends Component {
     this.userInfoStore.unsubscribe(this.render);
   }
 
-  render([_, repositories]) {
+  render({repositories}) {
     this.element.innerHTML = repositories.map(({
       name,
       forks,

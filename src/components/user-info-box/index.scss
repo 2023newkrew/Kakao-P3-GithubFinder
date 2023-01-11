@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  transition: var(--transition-slow);
+  overflow: hidden;
 
   .user-info-topic {
     margin: 0;

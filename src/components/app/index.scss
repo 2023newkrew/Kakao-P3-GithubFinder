@@ -19,9 +19,11 @@
   --border-radius: 2px;
 
   --transition: 0.2s;
+  --transition-slow: 1s ease-in-out;
 
   background-color: var(--box-lighter);
   color: var(--text-dark);
+  overflow: overlay;
 
   .chip {
     border-radius: var(--border-radius);
