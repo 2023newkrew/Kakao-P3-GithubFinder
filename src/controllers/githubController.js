@@ -3,15 +3,15 @@ import { GITHUB_API_BASE_URL } from "@constants/github";
 
 export default class GithubApiController {
   constructor() {}
-  GET(url) {
+  fetchData(url) {
     return api.get(url, {
       headers: {
-        Authorization: process.env.GITHUB_AUTH_TOKEN,
+        Authorization: "token" + process.env.GITHUB_AUTH_TOKEN,
       },
     });
   }
   getUser(username) {
-    return this.GET(`${GITHUB_API_BASE_URL}/users/${username}`).catch(
+    return this.fetchData(`${GITHUB_API_BASE_URL}/users/${username}`).catch(
       (error) => {
         if (error === "Not Found") {
           return null;
@@ -20,6 +20,6 @@ export default class GithubApiController {
     );
   }
   getRepos(user) {
-    return this.GET(user.repos_url);
+    return this.fetchData(user.repos_url);
   }
 }
