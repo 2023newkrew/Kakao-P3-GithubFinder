@@ -10,4 +10,4 @@ class UserInfoStore extends Store {
   }
 }
 
-export default new UserInfoStore();
+export default new UserInfoStore({});

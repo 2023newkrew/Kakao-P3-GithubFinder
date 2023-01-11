@@ -1,5 +1,5 @@
 export default class Store {
-  constructor(initialState = {}) {
+  constructor(initialState) {
     this.state = initialState;
     this.subsrcibers = [];
   }
