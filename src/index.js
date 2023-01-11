@@ -1,3 +1,5 @@
+import "@styles/general.scss";
+
 import SearchController from "@controllers/searchController";
 
 const onLoadScript = () => {

@@ -1,5 +1,5 @@
 import Repo from "@models/Repo";
-
+import { getDateDiff } from "@utils/dateUtils";
 export default class User {
   constructor({
     id,
@@ -39,6 +39,26 @@ export default class User {
     this.updated_at = updated_at;
     this.repos = [];
   }
+  _getCreatedDateInfo() {
+    const today = new Date();
+    const createdDate = new Date(this.created_at);
+    const monthDiff = getDateDiff(today, createdDate, "month");
+    if (monthDiff > 0) {
+      const year = Math.floor(monthDiff / 12);
+      const month = monthDiff % 12;
+      if (year === 0) {
+        return `${month}개월 전`;
+      }
+      if (month === 0) {
+        return `${year}년 전`;
+      }
+
+      return `${year}년 ${month}개월 전`;
+    }
+
+    const dayDiff = getDateDiff(today, createdDate, "day");
+    return `${dayDiff}일 전`;
+  }
   render() {
     return `
     <div class="w-100 flex-lg-row flex-column d-flex align-items-center justify-content-center">
@@ -46,19 +66,22 @@ export default class User {
         <img
           src="${this.avartar}"
           alt="${this.name} 프로필사진"
-          width="180"
+          width="200"
           class="mr-xl-3 mb-3 mb-xl-0 rounded-circle"
         />
       </div>
       <div class="w-100 d-flex flex-column align-items-lg-start align-items-center">
         <div class="px-4 text-lg-left text-center">
           <a class="text-primary" href="${this.html_url}" target="_blank">
-          <h5 class="card-title">${this.loginId} </h5>
+            <h5 class="card-title">${this.loginId} </h5>
           </a>
-          <h6 class="card-subtitle">${this.name ?? ""}</h6>
-          <p class="mt-2 cart-text">${this.bio ?? ""}</p>
+          <div class="d-flex align-items-end">
+            <h6 class="card-subtitle m-0">${this.name ?? ""}</h6>
+            <span class="card-text text-muted ml-2 font-size-xs">${this._getCreatedDateInfo()}</span>
+          </div>
+          <p class="m-0 mt-2">${this.bio ?? ""}</p>
         </div>
-        <div class="card-body py-2">
+        <div class="card-body py-1 ml-1 mb-2">
           <a
             href="https://github.com/dmstmdrbs?tab=followers"
             target="_blank"
