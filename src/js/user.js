@@ -1,3 +1,5 @@
+import sweetAlert from "../lib/sweetAlert";
+
 export default class User {
   constructor() {
     this.userData = null;
@@ -6,23 +8,31 @@ export default class User {
   }
 
   async fetchUserData(username) {
-    this.username = username;
-
+    // TODO : Bearer Token .env 파일로 빼내기
     this.userData = await (
-      await fetch(`https://api.github.com/users/${username}`)
+      await fetch(`https://api.github.com/users/${username}`, {
+        headers: {
+          Authorization: "Bearer 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",
+        },
+      })
     ).json();
+
+    // ! 유저의 정보가 확인되지 않았을 경우
     if (this.userData.message === "Not Found") return false;
 
+    this.username = username;
+
     this.userRepository = await (
-      await fetch(`https://api.github.com/users/${username}/repos`)
+      await fetch(`https://api.github.com/users/${username}/repos`, {
+        headers: {
+          Authorization: "Bearer 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",
+        },
+      })
     ).json();
 
     // 최근 업데이트 순 정렬
-    this.userRepository.sort(function (elementA, elementB) {
-      return (
-        new Date(elementB.updated_at).getTime() -
-        new Date(elementA.updated_at).getTime()
-      );
+    this.userRepository.sort((elementA, elementB) => {
+      return new Date(elementB.updated_at).getTime() - new Date(elementA.updated_at).getTime();
     });
 
     return true;
@@ -72,8 +82,8 @@ export default class User {
     return this.userData.url;
   }
 
-  // * 최근 5개의 레포지토리를 보냄
-  getFiveLatestRepos() {
-    return this.userRepository.slice(0, 5);
+  // TODO : 적절한 함수명 짓기
+  getLatestRepos(number) {
+    return this.userRepository.slice(0, number);
   }
 }

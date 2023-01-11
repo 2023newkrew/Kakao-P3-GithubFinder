@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 class sweetAlert {
   showTimerAlert(title, timer) {
     let timerInterval;
-    return Swal.fire({
+    Swal.fire({
       title: `${title}`,
       html: "I will close in <b></b> milliseconds.",
       timer: timer,

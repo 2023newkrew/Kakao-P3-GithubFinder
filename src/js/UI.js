@@ -16,8 +16,8 @@ export default class UI {
     this.listenInputEvent();
   }
 
-  async displayOFF() {
-    this.mainElement.style.opacity = 0;
+  async displayAlert() {
+    sweetAlert.showTimerAlert("유저의 정보를 가져오는 중입니다.", 1000);
   }
 
   async displayON() {
@@ -27,25 +27,21 @@ export default class UI {
     this.setUserInfo();
     this.setUserLatestRepos();
 
-    sweetAlert
-      .showTimerAlert("해당 유저의 정보를 불러오는 중입니다!", 1000)
-      .then(() => {
-        this.mainElement.style.opacity = 0.99;
-      });
+    this.mainElement.style.opacity = 0.99;
   }
 
-  async setUserViewImage() {
+  setUserViewImage() {
     this.userImageElement.src = "";
-    const URL = await this.user.getProfileAvatarURL();
+    const URL = this.user.getProfileAvatarURL();
     this.userImageElement.src = URL;
   }
 
-  async setUserViewButton() {
+  setUserViewButton() {
     const username = this.user.getUserName();
     this.viewButtonElement.innerHTML = `<a href="https://github.com/${username}">View Profile</a>`;
   }
 
-  async setUserTag() {
+  setUserTag() {
     const publicReposCount = this.user.getPublicRepoCount();
     const publicGistsCount = this.user.getPublicGistCount();
     const followerCount = this.user.getFollowerCount();
@@ -61,7 +57,7 @@ export default class UI {
     this.tagElement.innerHTML = elementString;
   }
 
-  async setUserInfo() {
+  setUserInfo() {
     const company = this.user.getCompany();
     const website = this.user.getEmail();
     const location = this.user.getLocation();
@@ -77,8 +73,8 @@ export default class UI {
     this.infoElement.innerHTML = elementString;
   }
 
-  async setUserLatestRepos() {
-    const latestRepos = this.user.getFiveLatestRepos();
+  setUserLatestRepos() {
+    const latestRepos = this.user.getLatestRepos(5);
 
     const elementString = makeLatestRepoListElement();
     this.latestReposListElement.innerHTML = elementString;
@@ -106,9 +102,13 @@ export default class UI {
   listenInputEvent() {
     this.inputElement.addEventListener("keydown", async (event) => {
       if (event.key === "Enter") {
-        await this.displayOFF();
+        event.preventDefault();
+        this.displayAlert();
+
         if (await this.user.fetchUserData(this.inputElement.value)) {
-          await this.displayON();
+          console.time("label");
+          this.displayON();
+          console.timeEnd("label");
         } else {
           sweetAlert.showErrorAlert("해당 유저를 찾을 수 없습니다 !");
         }
