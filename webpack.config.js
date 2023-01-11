@@ -69,6 +69,7 @@ module.exports = (_, argv) => {
         "@constants": path.resolve(__dirname, "src/constants/"),
         "@models": path.resolve(__dirname, "src/models/"),
         "@utils": path.resolve(__dirname, "src/utils/"),
+        "@templates": path.resolve(__dirname, "src/templates/"),
       },
     },
   };

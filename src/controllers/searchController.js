@@ -1,6 +1,11 @@
 import GithubApiController from "@controllers/githubController";
 import User from "@models/User";
-import { SpinnerTemplate } from "@/templates/spinner";
+import {
+  NO_SEARCH_RESULT_TEMPLATE,
+  SEARCH_LOADING_TEMPLATE,
+  getReposTemplate,
+} from "@templates/search";
+import { SPINNER_TEMPLATE } from "@templates/spinner";
 
 const searchResultContainer = document.body.querySelector(".search-result");
 
@@ -13,7 +18,7 @@ export default class SearchController {
   }
   init() {
     this.inputEl.addEventListener("keypress", (event) => {
-      if (event.code === 'Enter') {
+      if (event.code === "Enter") {
         this.search(this.inputEl.value);
       }
     });
@@ -33,19 +38,15 @@ export default class SearchController {
       const repoResult = document.createElement("div");
       repoResult.id = "#repos-result";
       repoResult.className = "bs-component";
-
-      repoResult.innerHTML = `
-            <div class="container px-2">
-              <h5 class="p-0 mb-3">Latest Repos</h5>
-              <div class="row">
-                ${repos
-                  .slice(0, 5)
-                  .map((repo) => repo.render())
-                  .join("\n")}
-              </div>
-            </div>
-          `;
+      repoResult.innerHTML = getReposTemplate(repos);
       searchResultContainer.appendChild(repoResult);
+    };
+
+    const getLoadingElement = () => {
+      const element = document.createElement("div");
+      element.className = "card-body d-flex align-items-center";
+      element.innerHTML = SPINNER_TEMPLATE;
+      return element;
     };
 
     const trimmedValue = searchValue.trim();
@@ -54,32 +55,19 @@ export default class SearchController {
       return;
     }
 
-    searchResultContainer.innerHTML = `
-      <div class="card my-3">
-        <h4 class="card-header">검색결과</h4>
-        <div id="user-result" class="card-body d-flex flex-column">
-          ${SpinnerTemplate}
-        </div>
-      </div>
-    `;
+    searchResultContainer.innerHTML = SEARCH_LOADING_TEMPLATE;
 
     const userInfo = await this.fetcher.getUser(trimmedValue);
     if (!userInfo) {
       const userResult = searchResultContainer.querySelector("#user-result");
-      userResult.innerHTML = `
-        <p class="text-center container-fluid">
-          검색 결과가 없습니다.
-        </p>
-      `;
+      userResult.innerHTML = NO_SEARCH_RESULT_TEMPLATE;
       return;
     }
 
     const user = new User(userInfo);
     renderUser(user);
 
-    const loadingEl = document.createElement("div");
-    loadingEl.className = "card-body d-flex align-items-center";
-    loadingEl.innerHTML = SpinnerTemplate;
+    const loadingEl = getLoadingElement();
 
     searchResultContainer.appendChild(loadingEl);
     user.setRepos(await this.fetcher.getRepos(user));
