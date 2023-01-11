@@ -24,14 +24,6 @@ class UserInfoBox extends Component {
   </div>
 </div>`);
   }
-
-  _didMounted() {
-    console.log('UserInfoBox 마운트 됌');
-  }
-
-  _didUnmounted() {
-    console.log('UserInfoBox 언마운트 됌');
-  }
 }
 
 export default UserInfoBox;

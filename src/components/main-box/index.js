@@ -4,6 +4,7 @@ import {createElement} from '@/utils';
 import SearchBar from '@/components/search-bar';
 import UserInfoBox from '@/components/user-info-box';
 import createStore from '@/core/store';
+import {createContext} from '@/core/context';
 
 class MainBox extends Component {
   constructor() {
@@ -15,20 +16,12 @@ class MainBox extends Component {
     this.userInfoBox = new UserInfoBox();
     this.element.appendChild(this.userInfoBox.element);
 
-    this.userInfoStore = createStore(123);
-    this._createContext('user-info-store', this.userInfoStore);
+    this.userInfoStore = createStore(null);
+    createContext(this.element, 'user-info-store', this.userInfoStore);
   }
 
   _initElement() {
     return createElement('<main class="main-box"></main>');
-  }
-
-  _didMounted() {
-    console.log('MainBox 마운트 됌');
-  }
-
-  _didUnmounted() {
-    console.log('MainBox 언마운트 됌');
   }
 }
 

@@ -14,14 +14,6 @@ class App extends Component {
   _initElement() {
     return createElement('<div class="app"></div>');
   }
-
-  _didMounted() {
-    console.log('App 마운트 됌');
-  }
-
-  _didUnmounted() {
-    console.log('App 언마운트 됌');
-  }
 }
 
 export default App;

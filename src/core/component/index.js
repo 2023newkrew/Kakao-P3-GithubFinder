@@ -24,27 +24,6 @@ class Component {
   _didMounted() {}
 
   _didUnmounted() {}
-
-  _createContext(key, value) {
-    this.element.addEventListener(`context-${key}`, (event) => {
-      event.detail.resolve(value);
-      event.stopImmediatePropagation();
-    });
-  }
-
-  _useContext(key) {
-    let result = null;
-    const resolve = (value) => {
-      result = value;
-    };
-
-    this.element.dispatchEvent(new CustomEvent(`context-${key}`, {
-      detail: {resolve},
-      bubbles: true,
-    }));
-
-    return result;
-  }
 }
 
 export default Component;

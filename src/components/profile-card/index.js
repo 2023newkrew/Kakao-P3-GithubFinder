@@ -35,14 +35,6 @@ class ProfileCard extends Component {
   </div>
 </div>`);
   }
-
-  _didMounted() {
-    console.log('ProfileCard 마운트 됌');
-  }
-
-  _didUnmounted() {
-    console.log('ProfileCard 언마운트 됌');
-  }
 }
 
 export default ProfileCard;

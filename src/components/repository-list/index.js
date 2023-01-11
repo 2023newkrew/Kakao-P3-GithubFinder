@@ -37,14 +37,6 @@ class RepositoryList extends Component {
   </li>
 </ul>`);
   }
-
-  _didMounted() {
-    console.log('RepositoryList 마운트 됌');
-  }
-
-  _didUnmounted() {
-    console.log('RepositoryList 언마운트 됌');
-  }
 }
 
 export default RepositoryList;

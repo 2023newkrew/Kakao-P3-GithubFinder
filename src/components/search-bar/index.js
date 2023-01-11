@@ -1,6 +1,7 @@
 import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
+import {useContext} from '@/core/context';
 
 const KeyCode = {
   ENTER: 'Enter',
@@ -28,7 +29,7 @@ class SearchBar extends Component {
   _didMounted() {
     this.searchInputElement.focus();
 
-    this.userInfoStore = this._useContext('user-info-store');
+    this.userInfoStore = useContext(this.element, 'user-info-store');
     this.userInfoStore.subscribe(this.handleUserInfoChange);
   }
 
