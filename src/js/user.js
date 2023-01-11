@@ -8,14 +8,21 @@ export default class User {
   async fetchUserData(username) {
     this.username = username;
 
-    this.userData = await (await fetch(`https://api.github.com/users/${username}`)).json();
+    this.userData = await (
+      await fetch(`https://api.github.com/users/${username}`)
+    ).json();
     if (this.userData.message === "Not Found") return false;
 
-    this.userRepository = await (await fetch(`https://api.github.com/users/${username}/repos`)).json();
+    this.userRepository = await (
+      await fetch(`https://api.github.com/users/${username}/repos`)
+    ).json();
 
     // 최근 업데이트 순 정렬
     this.userRepository.sort(function (elementA, elementB) {
-      return new Date(elementB.updated_at).getTime() - new Date(elementA.updated_at).getTime();
+      return (
+        new Date(elementB.updated_at).getTime() -
+        new Date(elementA.updated_at).getTime()
+      );
     });
 
     return true;

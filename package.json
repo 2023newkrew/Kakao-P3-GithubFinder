@@ -1,7 +1,7 @@
 {
   "name": "kakao-p3-githubfinder",
   "version": "1.0.0",
-  "description": "",
+  "description": "<h2>실행 안내</h2>",
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve --config webpack.dev.config.js",

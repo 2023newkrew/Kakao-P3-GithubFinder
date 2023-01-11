@@ -46,10 +46,10 @@ export default class UI {
   }
 
   async setUserTag() {
-    const publicReposCount = await this.user.getPublicRepoCount();
-    const publicGistsCount = await this.user.getPublicGistCount();
-    const followerCount = await this.user.getFollowerCount();
-    const followingCount = await this.user.getFollowingCount();
+    const publicReposCount = this.user.getPublicRepoCount();
+    const publicGistsCount = this.user.getPublicGistCount();
+    const followerCount = this.user.getFollowerCount();
+    const followingCount = this.user.getFollowingCount();
 
     const elementString = `
     <li>Public Repos : ${publicReposCount}</li>
@@ -62,10 +62,10 @@ export default class UI {
   }
 
   async setUserInfo() {
-    const company = await this.user.getCompany();
-    const website = await this.user.getEmail();
-    const location = await this.user.getLocation();
-    const memberSince = await this.user.getMemberSince();
+    const company = this.user.getCompany();
+    const website = this.user.getEmail();
+    const location = this.user.getLocation();
+    const memberSince = this.user.getMemberSince();
 
     const elementString = `
     <li>Company : ${company}</li>
