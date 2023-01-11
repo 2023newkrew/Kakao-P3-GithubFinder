@@ -6,6 +6,7 @@ export default class User {
     avatar_url,
     created_at,
     email,
+    bio,
     followers,
     following,
     login,
@@ -22,6 +23,7 @@ export default class User {
     this.id = id;
     this.avartar = avatar_url;
     this.name = name;
+    this.bio = bio;
     this.followers = followers;
     this.following = following;
     this.loginId = login;
@@ -53,7 +55,8 @@ export default class User {
           <a class="text-primary" href="${this.html_url}" target="_blank">
           <h5 class="card-title">${this.loginId} </h5>
           </a>
-          <h6 class="card-subtitle text-muted">${this.name ?? ""}</h6>
+          <h6 class="card-subtitle">${this.name ?? ""}</h6>
+          <p class="mt-2 cart-text">${this.bio ?? ""}</p>
         </div>
         <div class="card-body py-2">
           <a
