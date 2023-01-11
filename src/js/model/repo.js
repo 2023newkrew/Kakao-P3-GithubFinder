@@ -1,4 +1,6 @@
-export default class Repo {
+import Model from '../abstract/model';
+
+export default class Repo extends Model {
   #title;
 
   #link;
@@ -10,6 +12,7 @@ export default class Repo {
   #forkCount;
 
   constructor({ title, link, starCount, watcherCount, forkCount }) {
+    super();
     this.#title = title;
     this.#link = link;
     this.#starCount = starCount;

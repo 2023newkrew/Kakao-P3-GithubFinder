@@ -4,8 +4,25 @@ import Repo from '../model/repo';
 import Client from '../util/client';
 
 export default class GithubRepository {
-  async getUserInfo(userName) {
-    const response = await Client.of(BASE_GITHUB_URL).get(`${GITHUB_USER_PATH}/${userName}`);
+  #userName;
+
+  constructor(userName) {
+    this.#userName = userName;
+  }
+
+  async getUser() {
+    const [profileInfo, userRepositories] = await Promise.all([
+      this.#getProfileInfo(),
+      this.#getUserRepositories(),
+    ]);
+
+    profileInfo.setData({ repos: userRepositories });
+
+    return profileInfo;
+  }
+
+  async #getProfileInfo() {
+    const response = await Client.of(BASE_GITHUB_URL).get(`${GITHUB_USER_PATH}/${this.#userName}`);
 
     const {
       name,
@@ -36,9 +53,9 @@ export default class GithubRepository {
     });
   }
 
-  async getUserRepositories(userName) {
+  async #getUserRepositories() {
     const response = await Client.of(BASE_GITHUB_URL).get(
-      `${GITHUB_USER_PATH}/${userName}${GITHUB_REPOS_PATH}`,
+      `${GITHUB_USER_PATH}/${this.#userName}${GITHUB_REPOS_PATH}`,
     );
 
     const repos = response.map((repo) => {

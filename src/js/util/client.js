@@ -1,16 +1,19 @@
-export default class Client {
+/* eslint-disable max-classes-per-file */
+class _Client {
   #baseUrl;
 
   constructor(baseUrl) {
     this.#baseUrl = baseUrl;
   }
 
-  static of(baseUrl) {
-    return new Client(baseUrl);
-  }
-
-  async get(path, body = {}) {
-    const response = await fetch(`${this.#baseUrl}${path}`, body);
+  async get(path, init = null) {
+    const response = await fetch(`${this.#baseUrl}${path}`, init);
     return response.json();
+  }
+}
+
+export default class Client {
+  static of(baseUrl) {
+    return new _Client(baseUrl);
   }
 }

@@ -8,14 +8,10 @@ export default class GithubViewModel {
   }
 
   async searchGithub(userName) {
-    const repository = new GithubRepository();
+    const repository = new GithubRepository(userName);
 
-    const github = await repository.getUserInfo(userName);
+    const userInfo = await repository.getUser();
 
-    const repos = await repository.getUserRepositories(userName);
-
-    github.setData({ repos });
-
-    this.#github = github;
+    this.#github = userInfo;
   }
 }
