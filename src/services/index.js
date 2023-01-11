@@ -3,7 +3,8 @@ import axios from "axios";
 const instance = axios.create({
     baseURL: GITHUB_BASEURL,
     headers: {
-        "Accept": "application/vnd.github+json"
+        "Accept": "application/vnd.github+json",
+        "Authorization": GITHUB_TOKEN ? `token ${GITHUB_TOKEN}` : ''
     }
 })
 

@@ -1,6 +1,7 @@
 # Kakao-P3-GithubFinder
 (안내) 공부를 위한 프로젝트로 .env 파일은 .gitignore에 포함하지 않았습니다.<br>
-(안내) 해당 프로젝트는 yarn berry(yarn2)를 이용해서 zero installs로 구성되었습니다.
+(안내) 해당 프로젝트는 yarn berry(yarn2)를 이용해서 zero installs로 구성되었습니다.<br>
+(안내) 403 권한 오류가 발생한다면 .env 파일 내에 GITHUB_TOKEN을 통해 github access token을 등록해주세요.
 
 ---
 <h2>프로젝트 개요</h2>

@@ -8,7 +8,7 @@ module.exports = (env, options) => {
     } else {
         dotenv.config({path: path.resolve(__dirname, '.env.production')});
     }
-    const { GITHUB_BASEURL } = process.env;
+    const { GITHUB_BASEURL, GITHUB_TOKEN } = process.env;
 
     const config = {
         entry: path.resolve(__dirname, 'src/app.js'),
@@ -47,7 +47,8 @@ module.exports = (env, options) => {
                 template: './src/index.html',
             }),
             new DefinePlugin({
-                GITHUB_BASEURL: JSON.stringify(GITHUB_BASEURL)
+                GITHUB_BASEURL: JSON.stringify(GITHUB_BASEURL),
+                GITHUB_TOKEN: JSON.stringify(GITHUB_TOKEN)
             })
         ],
         resolve: {
