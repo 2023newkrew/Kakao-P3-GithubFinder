@@ -3,9 +3,10 @@ const createStore = (initialValue) => {
 
   const callbacks = [];
 
+  const get = () => currentValue;
+
   const subscribe = (callback) => {
     callbacks.push(callback);
-    callback(currentValue);
   };
 
   const unsubscribe = (callback) => {
@@ -18,7 +19,7 @@ const createStore = (initialValue) => {
     callbacks.forEach((callback) => callback(currentValue, previousValue));
   };
 
-  return {subscribe, unsubscribe, publish};
+  return {subscribe, unsubscribe, publish, get};
 };
 
 export default createStore;

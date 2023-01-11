@@ -11,9 +11,7 @@ class SearchBar extends Component {
   constructor() {
     super();
 
-    this.handleUserInfoChange = this.handleUserInfoChange.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
-
     this.searchInputElement = this.element.querySelector('.search-input');
     this.searchInputElement.addEventListener('keydown', this.handleKeydown);
   }
@@ -45,10 +43,19 @@ class SearchBar extends Component {
     if (event.code !== KeyCode.ENTER) return;
     this.searchInputElement.disabled = true;
 
-    setTimeout(() => {
-      this.searchInputElement.disabled = false;
-      this.searchInputElement.focus();
-    }, 1000);
+    // eslint-disable-next-line max-len
+    const accessToken = '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';
+    const headers = {'Authorization': `Bearer ${accessToken}`};
+
+    const userPromise = fetch(`https://api.github.com/users/${event.target.value}`, {headers});
+    const repositoriesPromise = fetch(`https://api.github.com/users/${event.target.value}/repos`, {headers});
+    Promise.all([userPromise, repositoriesPromise])
+        .then((results) => Promise.all(results.map((res) => res.json())))
+        .then(([user, repositories]) => {
+          this.userInfoStore.publish([user, repositories]);
+          this.searchInputElement.disabled = false;
+          this.searchInputElement.focus();
+        });
   }
 }
 

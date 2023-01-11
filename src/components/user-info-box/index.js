@@ -13,7 +13,7 @@ class UserInfoBox extends Component {
 
     this.repositoryList = new RepositoryList();
     this.repositoryListWrapperElement =
-      this.element.querySelector('.repository-list-wrapper');
+        this.element.querySelector('.repository-list-wrapper');
     this.repositoryListWrapperElement.appendChild(this.repositoryList.element);
   }
 
