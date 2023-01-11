@@ -18,7 +18,10 @@ export default class UI {
       <img class="profile-view__image" 
            src="${userInfo.avatar_url}" 
            alt="profile image" />
-      <button class="profile-view__button">View Profile</button>
+      <div class="profile-view__button-wrapper">
+        <button class="profile-view__button">View Profile</button>
+        <button class="profile-view__button">Follow</button>
+      </div>
     </div>
     <div class="profile-info__warapper">
       <h2 class="profile-info__name">${userInfo.login}</h2>
@@ -36,7 +39,11 @@ export default class UI {
         })
         .join("")}
       </ul>
-    </div>`;
+      <img class="profile-info__activity-chart" src="https://ghchart.rshah.org/${
+        userInfo.login
+      }" />
+    </div>
+    `;
   }
 
   drawUserRepository(userRepos) {
