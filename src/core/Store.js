@@ -6,10 +6,10 @@ export default class Store {
 
   setState(state) {
     this.state = state;
-    this.notify();
+    this._notify();
   }
 
-  notify() {
+  _notify() {
     this.subsrcibers.forEach((callback) => callback());
   }
 
