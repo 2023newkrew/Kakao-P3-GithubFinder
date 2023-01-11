@@ -14,7 +14,7 @@ export const NO_REPOS_TEMPLATE = `
     <p class="text-center w-100 p-4 mt-4">레포지토리 정보가 없습니다.</p>
   </div>
 `;
-export const getReposTemplate = (repos) => {
+export const getReposTemplate = (repos, numberOfRepos) => {
   return `
     <div class="container px-2">
       <div class="py-2 mb-3 d-flex align-items-center justify-content-between">
@@ -22,7 +22,7 @@ export const getReposTemplate = (repos) => {
       </div>
       <div class="row">
       ${repos
-        .slice(0, 5)
+        .slice(0, numberOfRepos)
         .map((repo) => repo.render())
         .join("\n")}
       </div>

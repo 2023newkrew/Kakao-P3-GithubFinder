@@ -38,7 +38,7 @@ export default class Repo {
     return `
       <div class="col-12 col-sm-6 mb-4 px-2" id="repo-${this.id}">
         <div class="card border-secondary h-100" >
-          <div class="card-body">
+          <div class="card-body d-flex flex-column justify-content-between">
             <div class="d-flex align-items-center flex-wrap" >
               <a class="text-info d-flex align-items-center flex-wrap mb-2 mr-2" href="${
                 this.html_url
@@ -64,7 +64,7 @@ export default class Repo {
               </span>
               <span class="text-secondary mr-2">
                 <img src="fork.svg" alt="fork icon" height="18"/>
-                ${this.forks > 0 ? this.forks : ""}
+                ${this.forks}
               </span>
               <span class="text-secondary">
                 <img src="watch.svg" alt="watch icon" height="18"/>

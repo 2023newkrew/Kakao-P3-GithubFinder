@@ -7,6 +7,7 @@ import {
   NO_REPOS_TEMPLATE,
 } from "@templates/search";
 import { SPINNER_TEMPLATE } from "@templates/spinner";
+import { NUMBER_OF_REPOS } from "@constants/search";
 
 const searchResultContainer = document.body.querySelector(".search-result");
 
@@ -44,9 +45,9 @@ export default class SearchController {
       repoResult.className = "bs-component";
       return repoResult;
     };
-    const renderRepos = (repos) => {
+    const renderRepos = (repos, numberOfRepos) => {
       const repoResult = getRepoResultContainerEl();
-      repoResult.innerHTML = getReposTemplate(repos);
+      repoResult.innerHTML = getReposTemplate(repos, numberOfRepos);
 
       searchResultContainer.appendChild(repoResult);
     };
@@ -92,6 +93,6 @@ export default class SearchController {
     }
 
     user.setRepos(repos);
-    renderRepos(user.repos);
+    renderRepos(user.repos, NUMBER_OF_REPOS);
   }
 }
