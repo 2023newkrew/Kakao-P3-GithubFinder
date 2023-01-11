@@ -59,11 +59,16 @@ export default class Repo {
             </div>
             <p class="card-text">${this.description ?? ""}</p>
             <div>
-              <span class="text-secondary">
+              <span class="text-secondary mr-2">
                 ${this.language ?? ""}
               </span>
-              <span class="text-secondary">
+              <span class="text-secondary mr-2">
+                <img src="fork.svg" alt="fork icon" height="18"/>
                 ${this.forks > 0 ? this.forks : ""}
+              </span>
+              <span class="text-secondary">
+                <img src="watch.svg" alt="watch icon" height="18"/>
+                ${this.watchers_count}
               </span>
             </div>
           </div>
