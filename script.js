@@ -147,12 +147,13 @@ class UIManager {
         stargazers_count,
         watchers_count,
         forks_count,
+        svn_url,
     }) {
         return `
         <div class="card border-secondary m-3">
           <div class="row p-3">
             <div class="col-6">
-              <a href="#">${name}</a>
+              <a href="${svn_url}">${name}</a>
             </div>
             <div class="col-6">
               <div class="repo-info__badges text-light">
