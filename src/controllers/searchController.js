@@ -12,7 +12,7 @@ export default class SearchController {
   }
   init() {
     this.inputEl.addEventListener("keypress", (event) => {
-      if (event.keyCode === 13) {
+      if (event.code === 'Enter') {
         this.search(this.inputEl.value);
       }
     });
