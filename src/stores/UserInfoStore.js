@@ -1,5 +1,7 @@
 import Store from "@core/Store";
 import { get } from "@utils/api";
+import { filterExistingKeys } from "@utils/object";
+import NoAvatar from "@assets/no-avatar.svg";
 
 class UserInfoStore extends Store {
   setIsLoading(isLoading) {
@@ -14,13 +16,36 @@ class UserInfoStore extends Store {
         per_page: "5",
       });
 
-      this.setState({ ...this.state, isLoading: false, userProfile, repositories });
+      this.setState({
+        ...this.state,
+        isLoading: false,
+        userProfile: filterExistingKeys(this.state.userProfile, userProfile),
+        repositories,
+      });
     } catch (error) {
-      this.setState({ ...this.state, isLoading: false });
+      this.setState({
+        ...this.state,
+        isLoading: false,
+      });
 
       throw error;
     }
   }
 }
 
-export default new UserInfoStore({ isLoading: false, userProfile: {}, repositories: [] });
+export default new UserInfoStore({
+  isLoading: false,
+  userProfile: {
+    avatar_url: NoAvatar,
+    html_url: "",
+    public_repos: "-",
+    public_gists: "-",
+    followers: "-",
+    following: "-",
+    company: "-",
+    blog: "-",
+    location: "-",
+    created_at: "-",
+  },
+  repositories: [],
+});

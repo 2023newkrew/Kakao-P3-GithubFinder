@@ -1,20 +1,19 @@
 import Component from "@core/Component";
 import UserInfoStore from "@stores/UserInfoStore";
-import NoAvatar from "@assets/no-avatar.svg";
 
 export default class UserProfile extends Component {
   template() {
     const {
-      avatar_url = NoAvatar,
-      html_url = "",
-      public_repos = "-",
-      public_gists = "-",
-      followers = "-",
-      following = "-",
-      company = "-",
-      blog = "-",
-      location = "-",
-      created_at = "-",
+      avatar_url,
+      html_url,
+      public_repos,
+      public_gists,
+      followers,
+      following,
+      company,
+      blog,
+      location,
+      created_at,
     } = UserInfoStore.state.userProfile;
 
     return `
