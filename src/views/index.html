@@ -8,6 +8,16 @@
   </head>
   <body>
     <header>
+      <div
+        class="progress header__search-progress"
+        role="progressbar"
+        aria-label="fetch loading"
+        aria-valuemin="0"
+        aira-valuemax="100"
+        style="height: 1px"
+      >
+        <div class="progress-bar header__search-progress-bar"></div>
+      </div>
       <nav class="navbar bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
           <span class="navbar-brand mb-0 h1 text-white">Github Finder</span>
@@ -84,7 +94,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <button type="button" class="btn btn-primary user__profile-button">View Profile</button>
+          <a type="button" class="btn btn-primary user__profile-button">View Profile</a>
         </div>
       </section>
       <section class="card mt-4">
