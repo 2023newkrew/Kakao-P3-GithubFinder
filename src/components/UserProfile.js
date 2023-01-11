@@ -15,10 +15,13 @@ export default class UserProfile extends Component {
       blog = "-",
       location = "-",
       created_at = "-",
-    } = UserInfoStore.state;
+    } = UserInfoStore.state.userProfile;
 
     return `
       <div class="card-body row">
+        <div class="card-img-overlay d-flex justify-content-center align-items-center bg-dark bg-opacity-10 z-1 d-none">
+          <div class="spinner-border"></div>
+        </div>
         <div class="col-3">
           <img class="user-profile__avatar d-block w-100" src="${avatar_url}" alt="avatar" />
           <a class="user-profile__view-profile btn btn-primary w-100 mt-2 ${
@@ -63,7 +66,17 @@ export default class UserProfile extends Component {
 
   onMount() {
     UserInfoStore.subscribe(() => {
+      if (UserInfoStore.state.isLoading) return;
+
       this.render();
+    });
+
+    UserInfoStore.subscribe(() => {
+      if (!UserInfoStore.state.isLoading) return;
+
+      const overlayEl = this.targetEl.querySelector(".card-img-overlay");
+
+      overlayEl.classList.remove("d-none");
     });
   }
 }

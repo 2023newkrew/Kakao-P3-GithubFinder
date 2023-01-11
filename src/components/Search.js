@@ -19,6 +19,7 @@ export default class Search extends Component {
       const username = this.targetEl.querySelector(".search__input").value;
 
       try {
+        UserInfoStore.setIsLoading(true);
         await UserInfoStore.fetchUserInfo(username);
       } catch ({ message }) {
         const inputEl = this.targetEl.querySelector(".search__input");
