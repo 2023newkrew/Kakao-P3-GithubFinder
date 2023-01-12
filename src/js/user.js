@@ -105,7 +105,6 @@ export default class User {
     return this.userData.url;
   }
 
-  // TODO : 적절한 함수명 짓기
   getLatestRepos(number) {
     return this.userRepository.slice(0, number);
   }

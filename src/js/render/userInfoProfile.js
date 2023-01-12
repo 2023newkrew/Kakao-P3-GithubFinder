@@ -36,7 +36,7 @@ export default class UserInfoProfile {
       const publicReposList = await this.user.getPublicReposList();
       let publicReposName = `<ul>`;
       for (let index = 0; index < publicReposList.length; index++) {
-        publicReposName += `<li>${publicReposList[index].name}</li>`;
+        publicReposName += `<li><a href="${publicReposList[index].html_url}" target="_blank">${publicReposList[index].name}</a></li>`;
       }
       publicReposName += "</ul>";
 
@@ -60,7 +60,7 @@ export default class UserInfoProfile {
       const followList = await this.user.getFollowList();
       let followName = `<ul>`;
       for (let index = 0; index < followList.length; index++) {
-        followName += `<li>${followList[index].login}</li>`;
+        followName += `<li><a href="${followList[index].html_url}" target="_blank">${followList[index].login}</a></li>`;
       }
       followName += "</ul>";
 
@@ -72,7 +72,7 @@ export default class UserInfoProfile {
       const followingList = await this.user.getFollowingList();
       let followingName = `<ul>`;
       for (let index = 0; index < followingList.length; index++) {
-        followingName += `<li>${followingList[index].login}</li>`;
+        followingName += `<li><a href="${followingList[index].html_url}" target="_blank">${followingList[index].login}</a></li>`;
       }
       followingName += "</ul>";
 
