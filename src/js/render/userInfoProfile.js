@@ -26,14 +26,18 @@ export default class UserInfoProfile {
     this.listenUserTag();
   }
 
-  listenUserTag() {
+  async listenUserTag() {
     const publicReposElement = document.body.querySelector(".publicRepos");
     const publicGistsElement = document.body.querySelector(".publicGists");
     const followersElement = document.body.querySelector(".followers");
     const followingElement = document.body.querySelector(".following");
 
-    publicReposElement.onclick = async () => {
-      const publicReposList = await this.user.getPublicReposList();
+    const publicReposList = await this.user.getPublicReposList();
+    const publicGistsList = await this.user.getPublicGistsList();
+    const followList = await this.user.getFollowList();
+    const followingList = await this.user.getFollowingList();
+
+    publicReposElement.onclick = () => {
       let publicReposName = `<ul>`;
       for (let index = 0; index < publicReposList.length; index++) {
         publicReposName += `<li><a href="${publicReposList[index].html_url}" target="_blank">${publicReposList[index].name}</a></li>`;
@@ -44,8 +48,7 @@ export default class UserInfoProfile {
       this.modal.onModal();
     };
 
-    publicGistsElement.onclick = async () => {
-      const publicGistsList = await this.user.getPublicGistsList();
+    publicGistsElement.onclick = () => {
       let publicGistsName = `<ul>`;
       for (let index = 0; index < publicGistsList.length; index++) {
         publicGistsName += `<li>${publicGistsList[index].name}</li>`;
@@ -56,8 +59,7 @@ export default class UserInfoProfile {
       this.modal.onModal();
     };
 
-    followersElement.onclick = async () => {
-      const followList = await this.user.getFollowList();
+    followersElement.onclick = () => {
       let followName = `<ul>`;
       for (let index = 0; index < followList.length; index++) {
         followName += `<li><a href="${followList[index].html_url}" target="_blank">${followList[index].login}</a></li>`;
@@ -68,8 +70,7 @@ export default class UserInfoProfile {
       this.modal.onModal();
     };
 
-    followingElement.onclick = async () => {
-      const followingList = await this.user.getFollowingList();
+    followingElement.onclick = () => {
       let followingName = `<ul>`;
       for (let index = 0; index < followingList.length; index++) {
         followingName += `<li><a href="${followingList[index].html_url}" target="_blank">${followingList[index].login}</a></li>`;
