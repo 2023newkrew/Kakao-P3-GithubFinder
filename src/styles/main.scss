@@ -1,11 +1,13 @@
 @use "@styles/colors" as c;
 main {
+    display: flex;
+    flex-direction: column;
     padding: 24px;
-
-    section {
+    gap: 40px;
+    .user-info {
         display: flex;
-        
-        .user-profile {
+
+        & > .user-profile {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -20,19 +22,12 @@ main {
                 font-size: 24px;
                 font-weight: 700;  
             }
-            ul { 
-                li {
-                    color: c.$gray;
-                    border: 1px solid c.$gray;
-                    border-radius: 4px;
-                    padding: 8px;
-                    margin: 8px;
-                }
-            }
+            
         }
-        .git-profile {
-            ul {
-                margin: 0px 40px;
+
+        & > .git-profile {
+            margin: 0px 40px;
+            ul:nth-child(1) {
                 display: flex;
 
                 width: 100%;
@@ -51,7 +46,35 @@ main {
                     }
                 }
             }
+            ul:nth-child(2) { 
+                li {
+                    color: c.$gray-light;
+                    border: 1px solid c.$gray-light;
+                    border-radius: 4px;
+                    padding: 8px;
+                    margin: 4px;
+                }
+            }
         }
-        
+    }
+    .git-chart {
+        & > img {
+            width: 100%;
+        }   
+    }
+    .user-repos {
+        & > ul {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            & > li {
+                width: 100%;
+                border: 1px solid c.$gray-light;
+                padding: 24px;
+                & > a {
+                    font-size: 24px;
+                }
+            }
+        }
     }
 }

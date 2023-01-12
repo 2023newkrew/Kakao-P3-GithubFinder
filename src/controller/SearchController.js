@@ -19,18 +19,22 @@ export default class SearchController {
     async onSearchID(event) {
         const { key, target: {value: userID} } = event;
         if (key === 'Enter') {
-            const userData = await this.getUserInfo(userID);
-            this.#userInfoController.drawUserInfo(userData);
-
-            const reposData = await this.getUserRepos(userID);
-            console.log(reposData);
-            this.#userInfoController.drawUserRepos(reposData);
+            this.getGitChart(userID);
+            await Promise.all([
+                this.getUserInfo(userID),
+                this.getUserRepos(userID)    
+            ])
         }
     }
     async getUserInfo(userID) {
-        return await fetchUserInfo(userID);
+        const userData = await fetchUserInfo(userID);
+        this.#userInfoController.drawUserInfo(userData);
     }
     async getUserRepos(userID) {
-        return await fetchUserRepos(userID);
+        const reposData = await fetchUserRepos(userID);
+        this.#userInfoController.drawUserRepos(reposData);
+    }
+    getGitChart(userID) {
+        this.#userInfoController.drawGitChart(userID);
     }
 }
