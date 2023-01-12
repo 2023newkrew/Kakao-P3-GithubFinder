@@ -14,6 +14,8 @@ export default class GithubView extends View {
   render() {
     const github = this.#githubViewModel.getGithub();
 
+    if (github === undefined) return;
+
     this.#renderUserInfo(github);
     this.#renderRepositories(github);
   }

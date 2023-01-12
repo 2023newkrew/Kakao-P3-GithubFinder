@@ -8,6 +8,11 @@ import ProgressBar from '@util/progress-bar';
 export default class GithubRepository {
   #userName;
 
+  static #githubApiHeaders = {
+    Accept: 'application/vnd.github.v3+json',
+    Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+  };
+
   constructor(userName) {
     this.#userName = userName;
   }
@@ -24,7 +29,9 @@ export default class GithubRepository {
   }
 
   async #getProfileInfo() {
-    const response = await Client.of(BASE_GITHUB_URL).get(`${GITHUB_USER_PATH}/${this.#userName}`);
+    const response = await Client.of(BASE_GITHUB_URL).get(`${GITHUB_USER_PATH}/${this.#userName}`, {
+      headers: GithubRepository.#githubApiHeaders,
+    });
 
     const {
       name,
@@ -60,6 +67,9 @@ export default class GithubRepository {
   async #getUserRepositories() {
     const response = await Client.of(BASE_GITHUB_URL).get(
       `${GITHUB_USER_PATH}/${this.#userName}${GITHUB_REPOS_PATH}`,
+      {
+        headers: GithubRepository.#githubApiHeaders,
+      },
     );
 
     const repos = response.map((repo) => {
