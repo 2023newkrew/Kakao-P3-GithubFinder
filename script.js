@@ -13,6 +13,18 @@ class Dom {
     }
 }
 
+class BoredManager {
+    static async getActivityResponse() {
+        let activityRes = null;
+        try {
+            activityRes = await fetch("http://www.boredapi.com/api/activity/");
+        } catch (error) {
+            throw error;
+        }
+        return activityRes;
+    }
+}
+
 class GitHubManager {
     static gitHubApiHeaders = {
         Accept: "application/vnd.github+json",
@@ -66,6 +78,9 @@ class UIManager {
     static repoInfo = document.body.querySelector(".repo-info");
     static toastBox = document.body.querySelector(".toast-box");
     static historyBox = document.body.querySelector(".history-box");
+    static boredButton = document.getElementById("bored-button");
+    static activityModal = document.getElementById("activityModal");
+
     static toastTime = 2000;
     static historyList = UIManager._getHistoryListInLocalStorage();
     static historyMaxCount = 5;
@@ -183,7 +198,7 @@ class UIManager {
 
     static async renderUserInfoAsync(userName) {
         try {
-            const loadingHTML = UIManager.getLoadingHTML();
+            const loadingHTML = UIManager.getLoadingHTML(100);
             UIManager.userInfo.innerHTML = loadingHTML;
 
             const res = await GitHubManager.getUserInfoResponse(userName);
@@ -214,7 +229,7 @@ class UIManager {
 
     static async renderRepoInfoAsync(userName) {
         try {
-            const loadingHTML = UIManager.getLoadingHTML();
+            const loadingHTML = UIManager.getLoadingHTML(100);
             UIManager.repoInfo.innerHTML = loadingHTML;
 
             const res = await GitHubManager.getRepoInfoResponse(userName);
@@ -281,8 +296,15 @@ class UIManager {
         UIManager._setHistoryListInLocalStorage();
     }
 
-    static getLoadingHTML() {
-        return `<img class="p-3 mx-auto" src="./asset/loading.gif" alt="loading-spinner" style="width: 100px" />`;
+    static getLoadingHTML(size) {
+        return `<img class="p-3 mx-auto" src="./asset/loading.gif" alt="loading-spinner" style="width: ${size}px" />`;
+    }
+
+    static async renderBoredModalAsync() {
+        //TODO
+        const activityRes = await BoredManager.getActivityResponse();
+        const activityJson = await activityRes.json();
+        console.log(activityJson);
     }
 }
 
@@ -305,9 +327,22 @@ const handleClickSearchForm = (event) => {
         UIManager.renderRepoInfoAsync(userName);
     }
 };
+const handleShowModal = async (event) => {
+    UIManager.activityModal.querySelector(".modal-body").innerHTML =
+        UIManager.getLoadingHTML(50);
+};
+
+const handleShownModal = async (event) => {
+    const activityRes = await BoredManager.getActivityResponse();
+    const activityJson = await activityRes.json();
+    const activity = activityJson.activity;
+    UIManager.activityModal.querySelector(".modal-body").innerHTML = activity;
+};
 function main() {
     UIManager.searchFrom.addEventListener("keydown", handleKeyDownSearchForm);
     UIManager.searchFrom.addEventListener("click", handleClickSearchForm);
+    $(document).on("show.bs.modal", handleShowModal);
+    $(document).on("shown.bs.modal", handleShownModal);
     UIManager.renderHistory();
 }
 main();
