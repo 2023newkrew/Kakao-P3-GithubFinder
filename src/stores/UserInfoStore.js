@@ -37,6 +37,8 @@ export default new UserInfoStore({
   isLoading: false,
   userProfile: {
     avatar_url: NoAvatar,
+    name: "Name",
+    login: "username",
     html_url: "",
     public_repos: "-",
     public_gists: "-",

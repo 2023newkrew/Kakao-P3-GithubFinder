@@ -5,6 +5,8 @@ export default class UserProfile extends Component {
   template() {
     const {
       avatar_url,
+      name,
+      login,
       html_url,
       public_repos,
       public_gists,
@@ -29,8 +31,12 @@ export default class UserProfile extends Component {
             View Profile
           </a>
         </div>
-        <div class="col-9">
-          <div class="user-profile__stats">
+        <div class="pt-3 col-9">
+          <div class="d-flex align-items-end gap-2">
+            ${name ? `<div class="fs-3 lh-1">${name}</div>` : ""}
+            <div class="fs-5 lh-1">${login}</div>
+          </div>
+          <div class="user-profile__stats mt-3">
             <span class="stats__public-repos badge text-bg-primary fs-6 fw-normal">
               Public Repos: ${public_repos}
             </span>
@@ -44,7 +50,7 @@ export default class UserProfile extends Component {
               Following: ${following}
             </span>
           </div>
-          <ul class="user-profile__profile list-group mt-4">
+          <ul class="user-profile__profile list-group mt-3">
             <li class="profile__company list-group-item">
               Company: ${company || "-"}
             </li>
