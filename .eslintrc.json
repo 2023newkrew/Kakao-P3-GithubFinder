@@ -10,6 +10,24 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "./src"],
+          ["@abstract", "./src/js/abstract"],
+          ["@binder", "./src/js/binder"],
+          ["@constant", "./src/js/constant"],
+          ["@error", "./src/js/error"],
+          ["@model", "./src/js/model"],
+          ["@repository", "./src/js/repository"],
+          ["@util", "./src/js/util"],
+          ["@view", "./src/js/view"],
+          ["@viewmodel", "./src/js/viewmodel"]
+        ]
+      }
+    }
+  },
   "rules": {
     "no-underscore-dangle": "off",
     "no-unused-vars": [
