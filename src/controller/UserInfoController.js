@@ -6,7 +6,7 @@ export default class UserInfoController {
     constructor() {
         if (UserInfoController.#instance) return UserInfoController.#instance;
         UserInfoController.#instance = this;
-        
+
         this.#userInfoElement = document.querySelector('.user-info');
         this.#userReposElement = document.querySelector('.user-repos');
         this.#gitChartElement = document.querySelector('.git-chart');
@@ -106,7 +106,7 @@ export default class UserInfoController {
         gitChartImgElement.setAttribute('src', `https://ghchart.rshah.org/${userID}`);
         gitChartImgElement.setAttribute('alt', '깃헙 활동 차트')
         
-        // this.#gitChartElement.replaceChildren();
+        this.#gitChartElement.replaceChildren();
         this.#gitChartElement.appendChild(gitChartImgElement);
     }
 
