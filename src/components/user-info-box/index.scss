@@ -4,6 +4,10 @@
   gap: 4rem;
   overflow: hidden;
 
+  &.hidden {
+    display: none;
+  }
+
   .user-info-topic {
     margin: 0;
   }

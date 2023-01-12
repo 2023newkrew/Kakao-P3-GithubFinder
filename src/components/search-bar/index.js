@@ -1,8 +1,8 @@
-/* eslint-disable max-len */
 import './index.scss';
 import Component from '@/core/component';
 import {createElement} from '@/utils';
 import {useContext} from '@/core/context';
+import {requestUserInfo} from '@/apis';
 
 const KeyCode = {
   ENTER: 'Enter',
@@ -14,6 +14,7 @@ class SearchBar extends Component {
 
     this.handleKeydown = this.handleKeydown.bind(this);
     this.searchInputElement = this.element.querySelector('.search-input');
+    this.searchErrorElement = this.element.querySelector('.search-error');
     this.searchInputElement.addEventListener('keydown', this.handleKeydown);
   }
 
@@ -35,35 +36,31 @@ class SearchBar extends Component {
   }
 
   handleKeydown(event) {
-    const searchInputElement = this.element.querySelector('.search-input');
-    const searchErrorElement = this.element.querySelector('.search-error');
-
-    searchInputElement.classList.remove('error');
-    searchErrorElement.style.height = '0px';
+    this.clearSearchError();
 
     if (event.code !== KeyCode.ENTER) return;
     this.searchInputElement.disabled = true;
 
-    const accessToken = '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';
-    const headers = {'Authorization': `Bearer ${accessToken}`};
-
-    const userPromise = fetch(`https://api.github.com/users/${event.target.value}`, {headers});
-    const repositoriesPromise = fetch(`https://api.github.com/users/${event.target.value}/repos`, {headers});
-
-    Promise.all([userPromise, repositoriesPromise])
-        .then((results) => Promise.all(results.map((res) => res.ok ? Promise.resolve(res) : Promise.reject(new Error('HTTP 응답 상태가 성공적이지 않습니다.')))))
-        .then((results) => Promise.all(results.map((res) => res.json())))
+    requestUserInfo(this.searchInputElement.value)
         .then(([user, repositories]) => {
           this.userInfoStore.publish({user, repositories});
-        }, (error) => {
-          searchInputElement.classList.add('error');
-          searchErrorElement.innerHTML = error;
-          searchErrorElement.style.height = `${searchErrorElement.scrollHeight}px`;
-        })
+        }, this.setSearchError.bind(this))
         .then(() => {
           this.searchInputElement.disabled = false;
           this.searchInputElement.focus();
         });
+  }
+
+  clearSearchError() {
+    this.searchInputElement.classList.remove('error');
+    this.searchErrorElement.style.height = '0px';
+  }
+
+  setSearchError(error) {
+    this.searchInputElement.classList.add('error');
+    this.searchErrorElement.innerHTML = error;
+    this.searchErrorElement.style.height =
+        `${this.searchErrorElement.scrollHeight}px`;
   }
 }
 
