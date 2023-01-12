@@ -33,6 +33,7 @@ export default class GithubView extends View {
       location,
       memberSince,
       profileLink,
+      heatmapEl,
     } = github.getData();
 
     const userNameEl = document.querySelector('.user__nickname');
@@ -46,6 +47,7 @@ export default class GithubView extends View {
     const userLocationEl = document.querySelector('.user__location');
     const userMemberSinceEl = document.querySelector('.user__member-since');
     const userProfileBtnEl = document.querySelector('.user__profile-button');
+    const userHeatmapContainerEl = document.querySelector('.user__heatmap-container');
 
     userNameEl.textContent = name;
     userProfileImgEl.src = profileImage;
@@ -58,6 +60,9 @@ export default class GithubView extends View {
     userLocationEl.textContent = location;
     userMemberSinceEl.textContent = memberSince;
     userProfileBtnEl.href = profileLink;
+
+    userHeatmapContainerEl.innerHTML = '';
+    userHeatmapContainerEl.appendChild(heatmapEl);
   }
 
   #renderRepositories(github, _ = typeCheck(github, Github)) {

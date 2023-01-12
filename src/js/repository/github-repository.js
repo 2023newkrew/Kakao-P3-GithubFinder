@@ -1,5 +1,14 @@
-import { FETCH_PROFILE_FINISHED_PROGRESS, FETCH_REPOS_FINISHED_PROGRESS } from '@constant/progress';
-import { BASE_GITHUB_URL, GITHUB_REPOS_PATH, GITHUB_USER_PATH } from '@constant/url';
+import {
+  FETCH_PROFILE_FINISHED_PROGRESS,
+  FETCH_REPOS_FINISHED_PROGRESS,
+  LOAD_HEATMAP_FINISHED_PROGRESS,
+} from '@constant/progress';
+import {
+  BASE_GITHUB_URL,
+  GITHUB_REPOS_PATH,
+  GITHUB_USER_PATH,
+  BASE_HEATMAP_URL,
+} from '@constant/url';
 import Github from '@model/github';
 import Repo from '@model/repo';
 import Client from '@util/client';
@@ -18,14 +27,37 @@ export default class GithubRepository {
   }
 
   async getUser() {
-    const [profileInfo, userRepositories] = await Promise.all([
+    const [profileInfo, userRepositories, heatmapEl] = await Promise.all([
       this.#getProfileInfo(),
       this.#getUserRepositories(),
+      this.#getHeatmapElement(),
     ]);
 
-    profileInfo.setData({ repos: userRepositories });
+    profileInfo.setData({ repos: userRepositories, heatmapEl });
 
     return profileInfo;
+  }
+
+  async #getHeatmapElement() {
+    const heatmapEl = await new Promise((resolve, reject) => {
+      const heatmap = new Image();
+
+      heatmap.src = `${BASE_HEATMAP_URL}/${this.#userName}`;
+
+      heatmap.onload = () => resolve(heatmap);
+
+      heatmap.onerror = reject;
+    }).catch(() => {
+      const noHeatmapEl = document.createElement('div');
+      noHeatmapEl.classList.add('d-flex', 'justify-content-center');
+      noHeatmapEl.innerHTML = `<h6 class="my-5">Contribution chart is not available</h6>`;
+
+      return noHeatmapEl;
+    });
+
+    ProgressBar.setProgress((prev) => prev + LOAD_HEATMAP_FINISHED_PROGRESS);
+
+    return heatmapEl;
   }
 
   async #getProfileInfo() {

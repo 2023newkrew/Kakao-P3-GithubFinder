@@ -25,6 +25,8 @@ export default class Github extends Model {
 
   #repos;
 
+  #heatmapEl;
+
   constructor({
     name,
     profileImage,
@@ -37,6 +39,7 @@ export default class Github extends Model {
     location,
     memberSince,
     profileLink,
+    heatmapEl,
   }) {
     super();
     this.#name = name;
@@ -51,6 +54,7 @@ export default class Github extends Model {
     this.#memberSince = memberSince;
     this.#profileLink = profileLink;
     this.#repos = [];
+    this.#heatmapEl = heatmapEl;
   }
 
   setData({
@@ -66,6 +70,7 @@ export default class Github extends Model {
     memberSince,
     profileLink,
     repos,
+    heatmapEl,
   }) {
     if (name) this.#name = name;
 
@@ -90,6 +95,8 @@ export default class Github extends Model {
     if (profileLink) this.#profileLink = profileLink;
 
     if (repos) this.#repos = repos;
+
+    if (heatmapEl) this.#heatmapEl = heatmapEl;
   }
 
   getData() {
@@ -106,6 +113,7 @@ export default class Github extends Model {
       memberSince: this.#memberSince,
       profileLink: this.#profileLink,
       repos: this.#repos,
+      heatmapEl: this.#heatmapEl,
     };
   }
 }
