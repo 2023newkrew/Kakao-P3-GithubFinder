@@ -3,8 +3,8 @@ export default class UserLatestRepos {
     this.latestReposListElement = document.getElementById("latestReposList");
     this.user = user;
   }
-  renderUserLatestRepos() {
-    const latestRepos = this.user.getLatestRepos(5);
+  renderUserLatestRepos(number) {
+    const latestRepos = this.user.getLatestRepos(number);
 
     const elementString = this.makeLatestRepoListElement(latestRepos);
     this.latestReposListElement.innerHTML = elementString;

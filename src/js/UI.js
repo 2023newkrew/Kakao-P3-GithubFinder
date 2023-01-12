@@ -1,9 +1,9 @@
 import User from "./user";
 import sweetAlert from "../lib/sweetAlert";
 
-import UserInfoView from "./userInfoView";
-import UserInfoProfile from "./userInfoProfile";
-import UserLatestRepos from "./userLatestRepos";
+import UserInfoView from "./render/userInfoView";
+import UserInfoProfile from "./render/userInfoProfile";
+import UserLatestRepos from "./render/userLatestRepos";
 
 export default class UI {
   constructor() {
@@ -34,8 +34,9 @@ export default class UI {
 
     this.userInfoProfile.renderUserTag();
     this.userInfoProfile.renderUserInfo();
+    this.userInfoProfile.renderUserGitHubChart();
 
-    this.userLatestRepos.renderUserLatestRepos();
+    this.userLatestRepos.renderUserLatestRepos(5);
   }
 
   listenInputEvent() {

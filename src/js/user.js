@@ -10,7 +10,6 @@ export default class User {
   }
 
   async fetchUserData(username) {
-    // TODO : Bearer Token .env 파일로 빼내기
     this.userData = await (
       await fetch(`https://${env.API_SERVER}/${username}`, {
         headers: {
@@ -42,6 +41,28 @@ export default class User {
 
   getUserName() {
     return this.username;
+  }
+
+  async getFollowList() {
+    const followList = await (await fetch(`${this.userData.followers_url}`)).json();
+    return followList;
+  }
+
+  async getPublicReposList() {
+    const publicReposList = await (await fetch(`${this.userData.repos_url}`)).json();
+    return publicReposList;
+  }
+
+  async getFollowingList() {
+    const following_url = this.userData.following_url.replace("{/other_user}", "");
+    const followingList = await (await fetch(following_url)).json();
+    return followingList;
+  }
+
+  async getPublicGistsList() {
+    const gists_url = this.userData.gists_url.replace("{/gist_id}", "");
+    const gistList = await (await fetch(gists_url)).json();
+    return gistList;
   }
 
   getProfileAvatarURL() {

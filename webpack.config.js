@@ -39,6 +39,7 @@ module.exports = {
       "@scripts": path.resolve(__dirname, "./src/js/"),
       "@styles": path.resolve(__dirname, "./src/styles/"),
       "@view": path.resolve(__dirname, "./src/views/"),
+      "@lib": path.resolve(__dirname, "./src/lib/"),
     },
   },
 };
