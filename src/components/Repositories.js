@@ -3,16 +3,12 @@ import UserInfoStore from "@stores/UserInfoStore";
 
 export default class Repositories extends Component {
   template() {
+    if (!UserInfoStore.state.repositories.length) return "";
+
     return `
       <div class="fs-3 fw-bold">Latest Repos</div>
-      <ul class="repositories__repository-list list-unstyled d-flex flex-column gap-2 mt-2"></ul>
-    `;
-  }
-
-  onMount() {
-    UserInfoStore.subscribe(() => {
-      this.targetEl.querySelector(".repositories__repository-list").innerHTML =
-        UserInfoStore.state.repositories
+      <ul class="repositories__repository-list list-unstyled d-flex flex-column gap-2 mt-2">
+        ${UserInfoStore.state.repositories
           .map(
             ({ html_url, name, stargazers_count, watchers_count, forks_count }) => `
               <li class="repository card">
@@ -29,7 +25,16 @@ export default class Repositories extends Component {
               </li>
             `
           )
-          .join("");
+          .join("")}
+      </ul>
+    `;
+  }
+
+  onMount() {
+    UserInfoStore.subscribe(() => {
+      if (UserInfoStore.state.isLoading) return;
+
+      this.render();
     });
   }
 }
