@@ -33,8 +33,7 @@ export default class SearchController {
       "click",
       (event) => {
         if (
-          event.target &&
-          event.target.closest(".list-group-item") &&
+          event.target.classList.contains("list-group-item") &&
           !event.target.classList.contains("button__delete")
         ) {
           const [searchValue] = event.target.textContent.trim().split("\n");

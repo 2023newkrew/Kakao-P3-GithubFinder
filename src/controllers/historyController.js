@@ -16,7 +16,7 @@ export default class HistoryController {
   }
   _initEvent() {
     this.historyContainer.addEventListener("click", (event) => {
-      if (event.target && event.target.classList.contains("button__delete")) {
+      if (event.target.classList.contains("button__delete")) {
         const toDeleteEl = event.target.parentElement;
         this.deleteHistory(toDeleteEl);
       }
