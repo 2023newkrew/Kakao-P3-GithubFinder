@@ -12,11 +12,12 @@ import { NUMBER_OF_REPOS } from "@constants/search";
 const searchResultContainer = document.body.querySelector(".search-result");
 
 export default class SearchController {
-  constructor(inputEl, submitEl) {
+  constructor(inputEl, submitEl, historyController) {
     this.inputEl = inputEl;
     this.submitEl = submitEl;
     this.fetcher = new GithubApiController();
     this.init();
+    this.historyController = historyController;
   }
   init() {
     this.inputEl.addEventListener("keypress", (event) => {
@@ -69,7 +70,7 @@ export default class SearchController {
       alert("검색어를 입력해주세요");
       return;
     }
-
+    this.historyController.addHistory(trimmedValue);
     searchResultContainer.innerHTML = SEARCH_LOADING_TEMPLATE;
 
     const userInfo = await this.fetcher.getUser(trimmedValue);
