@@ -5,8 +5,3 @@
 
 # Output folder
 /dist
-
-# Environment variables
-.env
-.env.dev
-.env.prod
