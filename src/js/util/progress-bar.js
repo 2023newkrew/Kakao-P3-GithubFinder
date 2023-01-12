@@ -1,5 +1,5 @@
 import { PROGRESS_MAX_TO_ZERO_DELAY } from '../constant/progress';
-import { InvalidTypeError } from '../error/invalid-error';
+import typeCheck from './type-check';
 
 export default class ProgressBar {
   static #progressBar = document.querySelector('.header__search-progress-bar');
@@ -10,16 +10,10 @@ export default class ProgressBar {
     }, PROGRESS_MAX_TO_ZERO_DELAY);
   }
 
-  static setProgress(progress) {
-    let progressValue;
+  static setProgress(progress, _ = typeCheck(progress, 'function', 'number')) {
+    const isFunction = typeof progress === 'function';
 
-    if (typeof progress === 'function') {
-      progressValue = progress(this.getProgress());
-    } else if (typeof progress === 'number') {
-      progressValue = progress;
-    } else {
-      throw new InvalidTypeError(progress, 'function or number');
-    }
+    const progressValue = isFunction ? progress(this.getProgress()) : progress;
 
     this.#progressBar.style.width = `${progressValue}%`;
   }

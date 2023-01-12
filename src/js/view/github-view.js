@@ -1,4 +1,5 @@
 import View from '../abstract/view';
+import Github from '../model/github';
 import typeCheck from '../util/type-check';
 import GithubViewModel from '../viewmodel/github-view-model';
 
@@ -10,7 +11,14 @@ export default class GithubView extends View {
     this.#githubViewModel = githubViewModel;
   }
 
-  #renderUserInfo(github) {
+  render() {
+    const github = this.#githubViewModel.getGithub();
+
+    this.#renderUserInfo(github);
+    this.#renderRepositories(github);
+  }
+
+  #renderUserInfo(github, _ = typeCheck(github, Github)) {
     const {
       name,
       profileImage,
@@ -22,6 +30,7 @@ export default class GithubView extends View {
       website,
       location,
       memberSince,
+      profileLink,
     } = github.getData();
 
     const userNameEl = document.querySelector('.user__nickname');
@@ -34,6 +43,7 @@ export default class GithubView extends View {
     const userWebsiteEl = document.querySelector('.user__website');
     const userLocationEl = document.querySelector('.user__location');
     const userMemberSinceEl = document.querySelector('.user__member-since');
+    const userProfileBtnEl = document.querySelector('.user__profile-button');
 
     userNameEl.textContent = name;
     userProfileImgEl.src = profileImage;
@@ -45,9 +55,10 @@ export default class GithubView extends View {
     userWebsiteEl.textContent = website;
     userLocationEl.textContent = location;
     userMemberSinceEl.textContent = memberSince;
+    userProfileBtnEl.href = profileLink;
   }
 
-  #renderRepositories(github) {
+  #renderRepositories(github, _ = typeCheck(github, Github)) {
     const { repos } = github.getData();
 
     const repoListEl = document.querySelector('.repo__list');
@@ -82,12 +93,5 @@ export default class GithubView extends View {
     });
 
     repoListEl.append(...repoElArray);
-  }
-
-  render() {
-    const github = this.#githubViewModel.getGithub();
-
-    this.#renderUserInfo(github);
-    this.#renderRepositories(github);
   }
 }
