@@ -1,5 +1,6 @@
 import Component from "@core/Component";
 import UserInfoStore from "@stores/UserInfoStore";
+import { testUsername } from "@utils/github";
 
 export default class Search extends Component {
   template() {
@@ -14,9 +15,26 @@ export default class Search extends Component {
   }
 
   onMount() {
+    this.targetEl.addEventListener("input", (event) => {
+      const username = event.target.value;
+
+      if (!username || testUsername(username)) return;
+
+      const inputEl = this.targetEl.querySelector(".search__input");
+      const errorEl = this.targetEl.querySelector(".search__error");
+
+      inputEl.classList.add("is-invalid");
+      errorEl.innerText = "Invalid Username";
+      inputEl.addEventListener("input", (event) => event.target.classList.remove("is-invalid"), {
+        once: true,
+      });
+    });
+
     this.targetEl.addEventListener("submit", async (event) => {
       event.preventDefault();
       const username = this.targetEl.querySelector(".search__input").value;
+
+      if (!username || !testUsername(username)) return;
 
       try {
         UserInfoStore.setIsLoading(true);
