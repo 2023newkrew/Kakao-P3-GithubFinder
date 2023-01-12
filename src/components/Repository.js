@@ -8,7 +8,7 @@ export default class Repository extends Component {
       <li class="repository card">
         <div class="card-body row align-items-center">
           <div class="col-6">
-            <a class="reposirory__name fs-5 text-decoration-none" href="${html_url}">${name}</a>
+            <a class="repository__name fs-5 text-decoration-none" href="${html_url}">${name}</a>
           </div>
           <div class="repository__stats col-6">
             <span class="stats__stars badge text-bg-primary fs-6 fw-normal">Stars: ${stargazers_count}</span>
