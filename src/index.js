@@ -6,10 +6,14 @@ import HistoryController from "@controllers/historyController";
 const onLoadScript = () => {
   const searchInputEl = document.body.querySelector("#search-input");
   const searchSubmitButton = document.body.querySelector("#search-button");
-  const historyController = new HistoryController(
+
+  const searchHistoryController = new HistoryController(
     document.body.querySelector("#search-history ul.list-group")
   );
-
-  new SearchController(searchInputEl, searchSubmitButton, historyController);
+  new SearchController(
+    searchInputEl,
+    searchSubmitButton,
+    searchHistoryController
+  );
 };
 onLoadScript();

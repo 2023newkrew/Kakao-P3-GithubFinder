@@ -5,8 +5,8 @@ import {
 } from "@templates/history";
 
 export default class HistoryController {
-  constructor(listContainer) {
-    this.listContainer = listContainer;
+  constructor(historyContainer) {
+    this.historyContainer = historyContainer;
     this.numberOfHistory = 0;
     this._init();
   }
@@ -15,7 +15,7 @@ export default class HistoryController {
     this._initHistory();
   }
   _initEvent() {
-    this.listContainer.addEventListener("click", (event) => {
+    this.historyContainer.addEventListener("click", (event) => {
       if (event.target && event.target.classList.contains("button__delete")) {
         const toDeleteEl = event.target.parentElement;
         this.deleteHistory(toDeleteEl);
@@ -27,35 +27,39 @@ export default class HistoryController {
     this.numberOfHistory = history.length;
 
     if (this.numberOfHistory === 0) {
-      this.listContainer.innerHTML = NO_HISTORY_TEMPLATE;
+      this.historyContainer.innerHTML = NO_HISTORY_TEMPLATE;
       return;
     }
 
     const historyTemplates = history
       .map(({ value, id }) => getHistoryItemTemplate(value, id))
       .join("");
-    this.listContainer.innerHTML = historyTemplates;
+    this.historyContainer.innerHTML = historyTemplates;
   }
   addHistory(searchValue) {
     const historyId = History.add(searchValue);
+    if (!historyId) {
+      return;
+    }
+
     const listItemEl = getHistoryItemTemplate(searchValue, historyId);
 
     this.numberOfHistory++;
     if (this.numberOfHistory === 1) {
-      this.listContainer.innerHTML = listItemEl;
+      this.historyContainer.innerHTML = listItemEl;
       return;
     }
 
-    this.listContainer.insertAdjacentHTML("beforeend", listItemEl);
+    this.historyContainer.insertAdjacentHTML("beforeend", listItemEl);
   }
   deleteHistory(historyEl) {
     const id = historyEl.id;
-    this.listContainer.removeChild(historyEl);
+    this.historyContainer.removeChild(historyEl);
     History.delete(id);
     this.numberOfHistory--;
 
     if (this.numberOfHistory === 0) {
-      this.listContainer.innerHTML = NO_HISTORY_TEMPLATE;
+      this.historyContainer.innerHTML = NO_HISTORY_TEMPLATE;
     }
   }
 }

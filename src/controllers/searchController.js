@@ -16,8 +16,8 @@ export default class SearchController {
     this.inputEl = inputEl;
     this.submitEl = submitEl;
     this.fetcher = new GithubApiController();
-    this.init();
     this.historyController = historyController;
+    this.init();
   }
   init() {
     this.inputEl.addEventListener("keypress", (event) => {
@@ -28,6 +28,20 @@ export default class SearchController {
     this.submitEl.addEventListener("click", () => {
       this.search(this.inputEl.value);
     });
+    console.log(this.historyController.historyContainer);
+    this.historyController.historyContainer.addEventListener(
+      "click",
+      (event) => {
+        if (
+          event.target &&
+          event.target.closest(".list-group-item") &&
+          !event.target.classList.contains("button__delete")
+        ) {
+          const [searchValue] = event.target.textContent.trim().split("\n");
+          this.search(searchValue);
+        }
+      }
+    );
   }
 
   async search(searchValue) {

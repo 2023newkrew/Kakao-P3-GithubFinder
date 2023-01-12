@@ -9,7 +9,7 @@ export default class History {
 
     const alreadyExists = history.find(({ value }) => value === searchValue);
     if (alreadyExists) {
-      return;
+      return null;
     }
 
     const id = nanoid();
