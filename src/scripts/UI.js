@@ -1,10 +1,17 @@
+import DataModel from "@/scripts/DataModel";
+
 import Swal from "sweetalert2";
 
 import defaultProfileImage from "@/assets/profile_default.png";
 import defaultActivityImage from "@/assets/activity_default.png";
 
 export default class UI {
-  drawUserInfo(userInfo) {
+  constructor() {
+    this.dataModel = new DataModel();
+  }
+  drawUserInfo() {
+    const userInfo = this.dataModel.getData("target_user_info");
+
     const tagKeyList = ["public_repos", "public_gists", "followers", "following"];
     const detailKeyList = ["company", "blog", "location", "created_at"];
 
@@ -20,7 +27,7 @@ export default class UI {
       </div>
     </div>
     <div class="profile-info__wrapper">
-      <h2 class="profile-info__name">${userInfo.login}</h2>
+      <h2 class="profile-info__name">${userInfo.username}</h2>
       <ul class="profile-info__tags tag-buttons">
         ${this.makeTagElList(tagKeyList, userInfo)}
       </ul>
@@ -28,7 +35,7 @@ export default class UI {
         ${this.makeTagElList(detailKeyList, userInfo)}
       </ul>
       ${this.makeImageEl(
-        `https://ghchart.rshah.org/${userInfo.login}`,
+        `https://ghchart.rshah.org/${userInfo.username}`,
         "activity chart",
         defaultActivityImage
       )}
@@ -36,7 +43,9 @@ export default class UI {
     `;
   }
 
-  drawUserRepository(userRepos) {
+  drawUserRepository() {
+    const userRepos = this.dataModel.getData("target_user_repos");
+
     const tagKeyList = ["stargazers_count", "watchers", "forks"];
     const repositoryEl = document.getElementById("repository");
     repositoryEl.classList.remove("hidden");
