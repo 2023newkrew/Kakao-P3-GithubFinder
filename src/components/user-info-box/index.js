@@ -21,7 +21,7 @@ class UserInfoBox extends Component {
   }
 
   _initElement() {
-    return createElement(`<div class="user-info-box" style="height: 0;">
+    return createElement(`<div class="user-info-box" style="height: 0px;">
   <div class="repository-list-wrapper">
     <h4 class="user-info-topic">Repositories</h4>
   </div>
@@ -38,11 +38,11 @@ class UserInfoBox extends Component {
   }
 
   render(userInfo) {
-    if (userInfo === null) {
-      this.element.style.height = 0;
-    } else {
-      this.element.style.height = `${this.element.scrollHeight}px`;
-    }
+    this.element.style.height = '0px';
+
+    if (userInfo === null) return;
+
+    this.element.style.height = `${this.element.scrollHeight}px`;
   }
 }
 

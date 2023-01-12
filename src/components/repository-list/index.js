@@ -11,38 +11,7 @@ class RepositoryList extends Component {
   }
 
   _initElement() {
-    return createElement(`<ul class="repository-list">
-  <li class="repository-list-item">
-    <div class="repository">
-      <div class="repository-name">gogo</div>
-      <div class="repostiory-chips">
-        <div class="chip primary">Stars: 0</div>
-        <div class="chip quaternary">Watchers: 0</div>
-        <div class="chip secondary">Forks: 0</div>
-      </div>
-    </div>
-  </li>
-  <li class="repository-list-item">
-    <div class="repository">
-      <div class="repository-name">gogo</div>
-      <div class="repostiory-chips">
-        <div class="chip primary">Stars: 0</div>
-        <div class="chip quaternary">Watchers: 0</div>
-        <div class="chip secondary">Forks: 0</div>
-      </div>
-    </div>
-  </li>
-  <li class="repository-list-item">
-    <div class="repository">
-      <div class="repository-name">gogo</div>
-      <div class="repostiory-chips">
-        <div class="chip primary">Stars: 0</div>
-        <div class="chip quaternary">Watchers: 0</div>
-        <div class="chip secondary">Forks: 0</div>
-      </div>
-    </div>
-  </li>
-</ul>`);
+    return createElement('<ul class="repository-list"></ul>');
   }
 
   _didMounted() {
@@ -55,6 +24,11 @@ class RepositoryList extends Component {
   }
 
   render({repositories}) {
+    if (repositories.length === 0) {
+      this.element.innerHTML = '조회 가능한 저장소가 존재하지 않습니다.';
+      return;
+    }
+
     this.element.innerHTML = repositories.map(({
       name,
       forks,
