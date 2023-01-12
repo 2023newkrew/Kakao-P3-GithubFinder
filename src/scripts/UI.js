@@ -1,47 +1,37 @@
 import Swal from "sweetalert2";
 
+import defaultProfileImage from "@/assets/profile_default.png";
+import defaultActivityImage from "@/assets/activity_default.png";
+
 export default class UI {
   drawUserInfo(userInfo) {
-    const tagKeyList = [
-      "public_repos",
-      "public_gists",
-      "followers",
-      "following",
-    ];
+    const tagKeyList = ["public_repos", "public_gists", "followers", "following"];
     const detailKeyList = ["company", "blog", "location", "created_at"];
 
     const profileEl = document.getElementById("profile");
     profileEl.classList.remove("hidden");
 
     profileEl.innerHTML = `
-    <div class="profile-view__warapper">
-      <img class="profile-view__image" 
-           src="${userInfo.avatar_url}" 
-           alt="profile image" />
+    <div class="profile-view__wrapper">
+      ${this.makeImageEl(userInfo.avatar_url, "profile image", defaultProfileImage)}
       <div class="profile-view__button-wrapper">
         <button class="profile-view__button">View Profile</button>
         <button class="profile-view__button">Follow</button>
       </div>
     </div>
-    <div class="profile-info__warapper">
+    <div class="profile-info__wrapper">
       <h2 class="profile-info__name">${userInfo.login}</h2>
       <ul class="profile-info__tags tag-buttons">
-        ${tagKeyList
-          .map((tagKey) => {
-            return `<li class="profile-info__tag tag-button">${tagKey}: ${userInfo[tagKey]}</li>`;
-          })
-          .join("")}
+        ${this.makeTagElList(tagKeyList, userInfo)}
       </ul>
       <ul class="profile-info__details">
-      ${detailKeyList
-        .map((detailKey) => {
-          return `<li class="profile-info__detail">${detailKey}: ${userInfo[detailKey]}</li>`;
-        })
-        .join("")}
+        ${this.makeTagElList(detailKeyList, userInfo)}
       </ul>
-      <img class="profile-info__activity-chart" src="https://ghchart.rshah.org/${
-        userInfo.login
-      }" />
+      ${this.makeImageEl(
+        `https://ghchart.rshah.org/${userInfo.login}`,
+        "activity chart",
+        defaultActivityImage
+      )}
     </div>
     `;
   }
@@ -53,7 +43,7 @@ export default class UI {
 
     repositoryEl.innerHTML = `
     <h1>Lastest Repos</h1>
-    <div class="repository__warapper">
+    <div class="repository__wrapper">
       <ul class="repository__repos">
         ${userRepos
           .map((userRepo) => {
@@ -61,11 +51,7 @@ export default class UI {
             <li class="repository__repo">
               <div class="repo__name">${userRepo.name}</div>
               <ul class="repo__tags tag-buttons">
-                ${tagKeyList
-                  .map((tagKey) => {
-                    return `<li class="repo__tag tag-button">${tagKey}: ${userRepo[tagKey]}</li>`;
-                  })
-                  .join("")}
+                ${this.makeTagElList(tagKeyList, userRepo)}
               </ul>
             </li>`;
           })
@@ -81,5 +67,22 @@ export default class UI {
       title: "Oops...",
       text: message,
     });
+  }
+
+  makeTagElList(keyList, valueObj) {
+    return keyList
+      ?.map((key) => {
+        return `<li>${key}: ${valueObj[key]}</li>`;
+      })
+      .join("");
+  }
+
+  makeImageEl(src, alt, errorImage) {
+    return `
+    <img class="image--unload" 
+      src="${src}"
+      onload="this.classList.remove('image--unload')"
+      onerror="this.src='${errorImage}'"
+      alt="${alt}" />`;
   }
 }
