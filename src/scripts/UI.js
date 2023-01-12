@@ -15,7 +15,7 @@ export default class UI {
     <div class="profile-view__wrapper">
       ${this.makeImageEl(userInfo.avatar_url, "profile image", defaultProfileImage)}
       <div class="profile-view__button-wrapper">
-        <button class="profile-view__button">View Profile</button>
+        <a class="profile-view__button" href="${userInfo.html_url}">View Profile</a>
         <button class="profile-view__button">Follow</button>
       </div>
     </div>
@@ -49,7 +49,7 @@ export default class UI {
           .map((userRepo) => {
             return `
             <li class="repository__repo">
-              <div class="repo__name">${userRepo.name}</div>
+              <a class="repo__name" href=${userRepo.html_url}>${userRepo.name}</a>
               <ul class="repo__tags tag-buttons">
                 ${this.makeTagElList(tagKeyList, userRepo)}
               </ul>
