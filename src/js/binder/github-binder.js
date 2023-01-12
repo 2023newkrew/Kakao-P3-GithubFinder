@@ -18,6 +18,8 @@ export default class GithubBinder {
 
       await githubViewModel.searchGithub(userName);
       githubView.render();
+
+      searchInput.value = '';
     });
   }
 }
