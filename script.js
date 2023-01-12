@@ -109,7 +109,7 @@ class UIManager {
         <div class="card-body text-light">
           <div class="row">
             <div class="col-md-3 col-xm-12">
-              <img class="w-100 h-100 object-fit-fill m-auto align-items-center d-block" src="${avatar_url}" />
+              <img class="w-100 h-100 object-fit-fill m-auto align-items-center d-block" src="${avatar_url}" style="background:transparent url(./asset/loading.gif) center center no-repeat; " />
             </div>
             <div class="col-md-9 col-xm-12">
               <div class="user-info__badges">
@@ -183,6 +183,9 @@ class UIManager {
 
     static async renderUserInfoAsync(userName) {
         try {
+            const loadingHTML = UIManager.getLoadingHTML();
+            UIManager.userInfo.innerHTML = loadingHTML;
+
             const res = await GitHubManager.getUserInfoResponse(userName);
             const json = await res.json();
 
@@ -199,6 +202,7 @@ class UIManager {
             );
         } catch (error) {
             console.log(error);
+            UIManager.clearUserInfo();
             UIManager.renderToast(
                 "User Data를 가져오는데 실패했습니다.",
                 "red",
@@ -210,6 +214,9 @@ class UIManager {
 
     static async renderRepoInfoAsync(userName) {
         try {
+            const loadingHTML = UIManager.getLoadingHTML();
+            UIManager.repoInfo.innerHTML = loadingHTML;
+
             const res = await GitHubManager.getRepoInfoResponse(userName);
             const jsonArray = await res.json();
 
@@ -223,6 +230,7 @@ class UIManager {
             );
         } catch (error) {
             console.log(error);
+            UIManager.clearRepoInfo();
             UIManager.renderToast(
                 "Repo Data를 가져오는데 실패했습니다.",
                 "red",
@@ -271,6 +279,10 @@ class UIManager {
             UIManager.historyBox.innerHTML += `<button class="btn btn-primary btn-sm m-1">${name}</button>`;
         });
         UIManager._setHistoryListInLocalStorage();
+    }
+
+    static getLoadingHTML() {
+        return `<img class="p-3 mx-auto" src="./asset/loading.gif" alt="loading-spinner" style="width: 100px" />`;
     }
 }
 
