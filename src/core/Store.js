@@ -1,11 +1,15 @@
 export default class Store {
   constructor(initialState) {
-    this.state = initialState;
+    this._state = initialState;
     this.subsrcibers = [];
   }
 
+  get state() {
+    return this._state;
+  }
+
   setState(state) {
-    this.state = state;
+    this._state = state;
     this._notify();
   }
 
