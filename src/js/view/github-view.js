@@ -1,7 +1,7 @@
-import View from '../abstract/view';
-import Github from '../model/github';
-import typeCheck from '../util/type-check';
-import GithubViewModel from '../viewmodel/github-view-model';
+import View from '@abstract/view';
+import Github from '@model/github';
+import typeCheck from '@util/type-check';
+import GithubViewModel from '@viewmodel/github-view-model';
 
 export default class GithubView extends View {
   #githubViewModel;

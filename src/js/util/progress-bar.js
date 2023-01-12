@@ -1,5 +1,5 @@
-import { PROGRESS_MAX_TO_ZERO_DELAY } from '../constant/progress';
-import typeCheck from './type-check';
+import { PROGRESS_MAX_TO_ZERO_DELAY } from '@constant/progress';
+import typeCheck from '@util/type-check';
 
 export default class ProgressBar {
   static #progressBar = document.querySelector('.header__search-progress-bar');

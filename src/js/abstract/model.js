@@ -1,7 +1,7 @@
 import {
   AbstractMethodNotImplementedError,
   DirectlyConstructedAbstractError,
-} from '../error/abstract-error';
+} from '@error/abstract-error';
 
 export default class Model {
   constructor() {

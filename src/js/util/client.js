@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { FetchError } from '../error/fetch-error';
+import { FetchError } from '@error/fetch-error';
 
 class _Client {
   #baseUrl;

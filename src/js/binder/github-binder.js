@@ -1,5 +1,5 @@
-import GithubView from '../view/github-view';
-import GithubViewModel from '../viewmodel/github-view-model';
+import GithubView from '@view/github-view';
+import GithubViewModel from '@viewmodel/github-view-model';
 
 export default class GithubBinder {
   bindEvents() {

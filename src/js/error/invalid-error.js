@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { INVALID_TYPE, INVALID_VIEW_MODEL } from '../constant/message';
+import { INVALID_TYPE, INVALID_VIEW_MODEL } from '@constant/message';
 
 export class InvalidError extends Error {
   constructor(message) {

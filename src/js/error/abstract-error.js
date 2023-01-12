@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { CANNOT_CONSTRUCT_ABSTRACT_CLASS, CANNOT_USE_ABSTRACT_METHOD } from '../constant/message';
+import { CANNOT_CONSTRUCT_ABSTRACT_CLASS, CANNOT_USE_ABSTRACT_METHOD } from '@constant/message';
 
 export class AbstractError extends Error {
   constructor(message) {

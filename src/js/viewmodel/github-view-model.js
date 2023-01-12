@@ -1,9 +1,9 @@
-import { NO_SUCH_USER, UNKNOWN_ERROR } from '../constant/alert';
-import { INIT_FINISHED_PROGRESS } from '../constant/progress';
-import { FetchError } from '../error/fetch-error';
-import GithubRepository from '../repository/github-repository';
-import Alert from '../util/alert';
-import ProgressBar from '../util/progress-bar';
+import { NO_SUCH_USER, UNKNOWN_ERROR } from '@constant/alert';
+import { INIT_FINISHED_PROGRESS } from '@constant/progress';
+import { FetchError } from '@error/fetch-error';
+import GithubRepository from '@repository/github-repository';
+import Alert from '@util/alert';
+import ProgressBar from '@util/progress-bar';
 
 export default class GithubViewModel {
   #github;

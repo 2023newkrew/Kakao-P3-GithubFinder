@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { FAILED_TO_FETCH } from '../constant/message';
+import { FAILED_TO_FETCH } from '@constant/message';
 
 export class NetworkError extends Error {
   constructor(message) {

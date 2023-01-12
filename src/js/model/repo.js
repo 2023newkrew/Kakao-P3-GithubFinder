@@ -1,4 +1,4 @@
-import Model from '../abstract/model';
+import Model from '@abstract/model';
 
 export default class Repo extends Model {
   #title;
