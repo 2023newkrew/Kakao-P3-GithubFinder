@@ -1,5 +1,6 @@
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = (env) => ({
@@ -65,6 +66,9 @@ module.exports = (env) => ({
     ],
   },
   plugins: [
+    new Dotenv({
+      path: env.IS_DEV ? './.env.dev' : './.env.prod',
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/views/index.html',
@@ -79,6 +83,15 @@ module.exports = (env) => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@abstract': path.resolve(__dirname, 'src/js/abstract'),
+      '@binder': path.resolve(__dirname, 'src/js/binder'),
+      '@constant': path.resolve(__dirname, 'src/js/constant'),
+      '@error': path.resolve(__dirname, 'src/js/error'),
+      '@model': path.resolve(__dirname, 'src/js/model'),
+      '@repository': path.resolve(__dirname, 'src/js/repository'),
+      '@util': path.resolve(__dirname, 'src/js/util'),
+      '@view': path.resolve(__dirname, 'src/js/view'),
+      '@viewmodel': path.resolve(__dirname, 'src/js/viewmodel'),
     },
   },
 });
