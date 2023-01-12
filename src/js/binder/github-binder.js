@@ -1,4 +1,4 @@
-import GithubView from '../view/\bgithub-view';
+import GithubView from '../view/github-view';
 import GithubViewModel from '../viewmodel/github-view-model';
 
 export default class GithubBinder {
