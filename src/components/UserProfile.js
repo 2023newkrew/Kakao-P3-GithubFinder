@@ -55,7 +55,7 @@ export default class UserProfile extends Component {
               Location: ${location || "-"}
             </li>
             <li class="profile__member-since list-group-item">
-              Member Since: ${created_at}
+              Member Since: ${created_at ? new Date(created_at).toDateString() : "-"}
             </li>
           </ul>
         </div>
