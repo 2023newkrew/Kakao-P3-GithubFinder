@@ -60,34 +60,28 @@ class GitHubManager {
     }
 }
 class UIManager {
-    static instance = null;
+    /* 정적 변수 */
+    static searchFrom = document.body.querySelector(".search-form");
+    static userInfo = document.body.querySelector(".user-info");
+    static repoInfo = document.body.querySelector(".repo-info");
+    static toastBox = document.body.querySelector(".toast-box");
+    static historyBox = document.body.querySelector(".history-box");
     static toastTime = 2000;
-    static historyList = [];
+    static historyList = UIManager._getHistoryListInLocalStorage();
     static historyMaxCount = 5;
 
-    constructor() {
-        if (UIManager.instance !== null) return UIManager.instance;
-        this.searchFrom = document.body.querySelector(".search-form");
-        this.userInfo = document.body.querySelector(".user-info");
-        this.repoInfo = document.body.querySelector(".repo-info");
-        this.toastBox = document.body.querySelector(".toast-box");
-        this.historyBox = document.body.querySelector(".history-box");
-        UIManager.historyList = this._getHistoryListInLocalStorage();
-        UIManager.instance = this;
-    }
-
-    _getHistoryListInLocalStorage() {
+    static _getHistoryListInLocalStorage() {
         return JSON.parse(localStorage.getItem("historyList")) || [];
     }
 
-    _setHistoryListInLocalStorage() {
+    static _setHistoryListInLocalStorage() {
         localStorage.setItem(
             "historyList",
             JSON.stringify(UIManager.historyList)
         );
     }
 
-    _addHistory(name) {
+    static _addHistory(name) {
         const historyList = UIManager.historyList;
         for (let i = historyList.length - 1; i >= 0; i--) {
             if (historyList[i] === name) {
@@ -100,7 +94,7 @@ class UIManager {
         historyList.push(name);
     }
 
-    _getUserInfoHTML({
+    static _getUserInfoHTML({
         avatar_url,
         public_repos,
         public_gists,
@@ -142,7 +136,7 @@ class UIManager {
         `;
     }
 
-    _getLatestReposHTML({
+    static _getLatestReposHTML({
         name,
         stargazers_count,
         watchers_count,
@@ -167,78 +161,78 @@ class UIManager {
         `;
     }
 
-    renderUserInfo(json) {
-        const userInfoHTML = this._getUserInfoHTML(json);
-        this.userInfo.innerHTML = userInfoHTML;
+    static renderUserInfo(json) {
+        const userInfoHTML = UIManager._getUserInfoHTML(json);
+        UIManager.userInfo.innerHTML = userInfoHTML;
     }
 
-    renderRepoInfo(jsonArray) {
+    static renderRepoInfo(jsonArray) {
         jsonArray.forEach((json) => {
             const latestReposHTML = this._getLatestReposHTML(json);
-            this.repoInfo.innerHTML += latestReposHTML;
+            UIManager.repoInfo.innerHTML += latestReposHTML;
         });
     }
 
-    clearUserInfo() {
-        this.userInfo.innerHTML = "";
+    static clearUserInfo() {
+        UIManager.userInfo.innerHTML = "";
     }
 
-    clearRepoInfo() {
-        this.repoInfo.innerHTML = "";
+    static clearRepoInfo() {
+        UIManager.repoInfo.innerHTML = "";
     }
 
-    async renderUserInfoAsync(userName) {
+    static async renderUserInfoAsync(userName) {
         try {
             const res = await GitHubManager.getUserInfoResponse(userName);
             const json = await res.json();
 
-            this.clearUserInfo();
-            this.renderUserInfo(json);
+            UIManager.clearUserInfo();
+            UIManager.renderUserInfo(json);
 
-            this._addHistory(userName);
-            this.renderHistory();
+            UIManager._addHistory(userName);
+            UIManager.renderHistory();
 
-            this.renderToast(
+            UIManager.renderToast(
                 "User Data를 가져오는데 성공했습니다.",
                 "green",
                 "white"
             );
         } catch (error) {
             console.log(error);
-            this.renderToast(
+            UIManager.renderToast(
                 "User Data를 가져오는데 실패했습니다.",
                 "red",
                 "white"
             );
-            this.clearUserInfo();
+            UIManager.clearUserInfo();
         }
     }
 
-    async renderRepoInfoAsync(userName) {
+    static async renderRepoInfoAsync(userName) {
         try {
             const res = await GitHubManager.getRepoInfoResponse(userName);
             const jsonArray = await res.json();
 
-            this.clearRepoInfo();
-            this.renderRepoInfo(jsonArray);
+            UIManager.clearRepoInfo();
+            UIManager.renderRepoInfo(jsonArray);
 
-            this.renderToast(
+            UIManager.renderToast(
                 "Repo Data를 가져오는데 성공했습니다.",
                 "green",
                 "white"
             );
         } catch (error) {
             console.log(error);
-            this.renderToast(
+            UIManager.renderToast(
                 "Repo Data를 가져오는데 실패했습니다.",
                 "red",
                 "white"
             );
-            this.clearRepoInfo();
+            UIManager.clearRepoInfo();
         }
     }
 
-    getToastElement(message) {
+    static getToastElement(message) {
         const $toast = Dom.createDivWithClassName(["toast"]);
         $toast.setAttribute("role", "alert");
         $toast.setAttribute("aria-live", "assertive");
@@ -257,13 +251,13 @@ class UIManager {
         return $toast;
     }
 
-    renderToast(message, backgroundColor, textColor) {
-        const $toast = this.getToastElement(message);
+    static renderToast(message, backgroundColor, textColor) {
+        const $toast = UIManager.getToastElement(message);
 
         $toast.style.backgroundColor = backgroundColor;
         $toast.style.color = textColor;
 
-        this.toastBox.insertAdjacentElement("afterbegin", $toast);
+        UIManager.toastBox.insertAdjacentElement("afterbegin", $toast);
 
         $($toast).toast("show");
         setTimeout(() => {
@@ -271,12 +265,12 @@ class UIManager {
         }, UIManager.toastTime);
     }
 
-    renderHistory() {
-        this.historyBox.innerHTML = "";
+    static renderHistory() {
+        UIManager.historyBox.innerHTML = "";
         UIManager.historyList.forEach((name) => {
-            this.historyBox.innerHTML += `<button class="btn btn-primary btn-sm m-1">${name}</button>`;
+            UIManager.historyBox.innerHTML += `<button class="btn btn-primary btn-sm m-1">${name}</button>`;
         });
-        this._setHistoryListInLocalStorage();
+        UIManager._setHistoryListInLocalStorage();
     }
 }
 
@@ -284,28 +278,24 @@ const handleKeyDownSearchForm = (event) => {
     if (event.key === "Enter") {
         if (event.target.value === "") return;
 
-        const uiManager = new UIManager();
         const userName = event.target.value.trim();
-        uiManager.renderUserInfoAsync(userName);
-        uiManager.renderRepoInfoAsync(userName);
+        UIManager.renderUserInfoAsync(userName);
+        UIManager.renderRepoInfoAsync(userName);
     }
 };
 
 const handleClickSearchForm = (event) => {
     if (event.target.tagName === "BUTTON") {
-        const uiManager = new UIManager();
         const userName = event.target.innerText;
-        uiManager.searchFrom.querySelector("input").value = userName;
+        UIManager.searchFrom.querySelector("input").value = userName;
 
-        uiManager.renderUserInfoAsync(userName);
-        uiManager.renderRepoInfoAsync(userName);
+        UIManager.renderUserInfoAsync(userName);
+        UIManager.renderRepoInfoAsync(userName);
     }
 };
 function main() {
-    const uiManager = new UIManager();
-
-    uiManager.searchFrom.addEventListener("keydown", handleKeyDownSearchForm);
-    uiManager.searchFrom.addEventListener("click", handleClickSearchForm);
-    uiManager.renderHistory();
+    UIManager.searchFrom.addEventListener("keydown", handleKeyDownSearchForm);
+    UIManager.searchFrom.addEventListener("click", handleClickSearchForm);
+    UIManager.renderHistory();
 }
 main();
