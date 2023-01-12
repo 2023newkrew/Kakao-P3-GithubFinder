@@ -5,12 +5,11 @@ export default class UserInfoController {
     #gitChartElement;
     constructor() {
         if (UserInfoController.#instance) return UserInfoController.#instance;
+        UserInfoController.#instance = this;
         
         this.#userInfoElement = document.querySelector('.user-info');
         this.#userReposElement = document.querySelector('.user-repos');
         this.#gitChartElement = document.querySelector('.git-chart');
-
-        UserInfoController.#instance = this;
     }
     drawUserInfo(data) {
         // manage parameters

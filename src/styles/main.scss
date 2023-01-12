@@ -60,6 +60,7 @@ main {
     .git-chart {
         & > img {
             width: 100%;
+            max-width: 1200px;
         }   
     }
     .user-repos {
@@ -75,6 +76,18 @@ main {
                     font-size: 24px;
                 }
             }
+        }
+    }
+    .favorites {
+        ul {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        li {
+            border: 1px solid c.$gray-light;
+            color: c.$blue;
+            padding: 16px;
         }
     }
 }
