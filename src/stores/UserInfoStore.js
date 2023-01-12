@@ -8,7 +8,7 @@ class UserInfoStore extends Store {
     this.setState({ ...this.state, isLoading });
   }
 
-  async fetchUserInfo(username) {
+  async fetchUserInfo(username, onError) {
     try {
       const userProfile = await get(`/users/${username}`);
       const repositories = await get(`/users/${username}/repos`, {
@@ -28,7 +28,7 @@ class UserInfoStore extends Store {
         isLoading: false,
       });
 
-      throw error;
+      onError(error);
     }
   }
 }
