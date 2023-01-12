@@ -11,7 +11,7 @@ class _Client {
   async get(path, init = null) {
     const response = await fetch(`${this.#baseUrl}${path}`, init);
 
-    if (response.status !== 200) throw new FetchError(response);
+    if (!response.status.ok) throw new FetchError(response);
 
     return response.json();
   }

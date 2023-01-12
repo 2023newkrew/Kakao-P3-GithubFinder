@@ -1,7 +1,8 @@
 import GithubView from '@view/github-view';
 import GithubViewModel from '@viewmodel/github-view-model';
+import Binder from '@abstract/binder';
 
-export default class GithubBinder {
+export default class GithubBinder extends Binder {
   bindEvents() {
     const githubViewModel = new GithubViewModel();
     const githubView = new GithubView(githubViewModel);
