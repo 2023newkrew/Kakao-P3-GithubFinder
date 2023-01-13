@@ -4,11 +4,9 @@ import { filterExistingKeys } from "@utils/object";
 import NoAvatar from "@assets/no-avatar.svg";
 
 class UserInfoStore extends Store {
-  setIsLoading(isLoading) {
-    this.setState({ ...this.state, isLoading });
-  }
-
   async fetchUserInfo(username, onError) {
+    this.setState({ ...this.state, isLoading: true });
+
     try {
       const userProfile = await get(`/users/${username}`);
       const repositories = await get(`/users/${username}/repos`, {

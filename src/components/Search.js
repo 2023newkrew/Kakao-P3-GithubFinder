@@ -16,10 +16,9 @@ export default class Search extends Component {
   }
 
   onMount() {
-    const handleSearch = debounce((username) => {
-      UserInfoStore.setIsLoading(true);
-      UserInfoStore.fetchUserInfo(username, ({ message }) => this.showInvalidMessage(message));
-    });
+    const handleSearch = debounce((username) =>
+      UserInfoStore.fetchUserInfo(username, ({ message }) => this.showInvalidMessage(message))
+    );
 
     this.targetEl.addEventListener("input", (event) => {
       const username = event.target.value;
