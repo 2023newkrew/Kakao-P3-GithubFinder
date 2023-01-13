@@ -1,29 +1,32 @@
 export default class Modal {
   constructor() {
-    this.modalElement = document.querySelector(".modal");
-    this.titleElement = document.querySelector(".modal__title");
-    this.contentElement = document.querySelector(".modal__content");
-    this.modalCloseButtonElement = document.querySelector(".modal .closeButton");
+    this.modalElement = document.getElementById("modal");
+    this.titleElement = document.getElementById("modal__title");
+    this.contentElement = document.getElementById("modal__content");
+    this.modalCloseButtonElement = document.getElementById("modal__closeButton");
 
     this.listenCloseEvent();
   }
 
-  onModal() {
+  showModal() {
     this.modalElement.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
   }
 
-  offModal() {
+  hideModal() {
     this.modalElement.classList.add("hidden");
+    document.body.style.overflow = "auto";
   }
 
   renderModal(title, content) {
     this.titleElement.innerHTML = title;
     this.contentElement.innerHTML = content;
+    this.showModal();
   }
 
   listenCloseEvent() {
     this.modalCloseButtonElement.addEventListener("click", () => {
-      this.offModal();
+      this.hideModal();
     });
 
     this.modalCloseButtonElement.addEventListener("mouseover", (e) => {

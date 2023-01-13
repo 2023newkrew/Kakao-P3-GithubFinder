@@ -5,7 +5,7 @@ class sweetAlert {
     let timerInterval;
     Swal.fire({
       title: `${title}`,
-      html: "I will close in <b></b> milliseconds.",
+      html: "<div>I will close in <b></b> milliseconds.</div>",
       timer: timer,
       timerProgressBar: true,
       didOpen: () => {

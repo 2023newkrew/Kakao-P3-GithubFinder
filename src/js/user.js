@@ -2,6 +2,10 @@ import sweetAlert from "../lib/sweetAlert";
 
 import env from "../../env.json";
 
+const header = {
+  Authorization: env.API_TOKEN,
+};
+
 export default class User {
   constructor() {
     this.userData = null;
@@ -12,9 +16,7 @@ export default class User {
   async fetchUserData(username) {
     this.userData = await (
       await fetch(`https://${env.API_SERVER}/${username}`, {
-        headers: {
-          Authorization: `${env.API_TOKEN}`,
-        },
+        headers: header,
       })
     ).json();
 
@@ -25,9 +27,7 @@ export default class User {
 
     this.userRepository = await (
       await fetch(`https://${env.API_SERVER}/${username}/repos`, {
-        headers: {
-          Authorization: `${env.API_TOKEN}`,
-        },
+        headers: header,
       })
     ).json();
 
@@ -44,24 +44,40 @@ export default class User {
   }
 
   async getFollowList() {
-    const followList = await (await fetch(`${this.userData.followers_url}`)).json();
+    const followList = await (
+      await fetch(`${this.userData.followers_url}`, {
+        headers: header,
+      })
+    ).json();
     return followList;
   }
 
   async getPublicReposList() {
-    const publicReposList = await (await fetch(`${this.userData.repos_url}`)).json();
+    const publicReposList = await (
+      await fetch(`${this.userData.repos_url}`, {
+        headers: header,
+      })
+    ).json();
     return publicReposList;
   }
 
   async getFollowingList() {
     const following_url = this.userData.following_url.replace("{/other_user}", "");
-    const followingList = await (await fetch(following_url)).json();
+    const followingList = await (
+      await fetch(following_url, {
+        headers: header,
+      })
+    ).json();
     return followingList;
   }
 
   async getPublicGistsList() {
     const gists_url = this.userData.gists_url.replace("{/gist_id}", "");
-    const gistList = await (await fetch(gists_url)).json();
+    const gistList = await (
+      await fetch(gists_url, {
+        headers: header,
+      })
+    ).json();
     return gistList;
   }
 

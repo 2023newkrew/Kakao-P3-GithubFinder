@@ -24,7 +24,7 @@ export default class UserInfoProfile {
     `;
 
     this.tagElement.innerHTML = elementString;
-    this.listenUserTag();
+    this.listenUserTagEvent();
   }
 
   renderUserInfo() {
@@ -67,7 +67,6 @@ export default class UserInfoProfile {
       publicReposName += "</ul>";
 
       this.modal.renderModal("Repository", publicReposName);
-      this.modal.onModal();
     };
 
     publicGistsElement.onclick = () => {
@@ -78,7 +77,6 @@ export default class UserInfoProfile {
       publicGistsName += "</ul>";
 
       this.modal.renderModal("Gists", publicGistsName);
-      this.modal.onModal();
     };
 
     followersElement.onclick = () => {
@@ -89,7 +87,6 @@ export default class UserInfoProfile {
       followName += "</ul>";
 
       this.modal.renderModal("Followers", followName);
-      this.modal.onModal();
     };
 
     followingElement.onclick = () => {
@@ -100,7 +97,6 @@ export default class UserInfoProfile {
       followingName += "</ul>";
 
       this.modal.renderModal("Followings", followingName);
-      this.modal.onModal();
     };
   }
 }

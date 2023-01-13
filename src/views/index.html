@@ -19,8 +19,8 @@
   <main>
     <section class="userInfo">
       <div class="view">
-        <img src="" alt="user Avatar image" id="userInfo-image" />
-        <button id="view-button" onclick="">View Profile</button>
+        <div class="view-image"><img src="" alt="user Avatar image" id="userInfo-image" /></div>
+        <div class="view-button"><button id="view-button" onclick="">View Profile</button></div>
       </div>
       <div class="profile">
         <ul class="tag" id="profile-tag"></ul>
@@ -36,13 +36,13 @@
   </main>
   <footer>GitHub Finder ©</footer>
 
-    <div class="modal hidden">
+    <div id="modal" class="modal hidden">
       <div class="modal__background"></div>
       <div class="modal__wrapper">
-        <h1 class="modal__title">--Modal--</h1>
-        <div class="modal__content"></div>
+        <h1 id="modal__title" class="modal__title">--Modal--</h1>
+        <div id ="modal__content" class="modal__content"></div>
         <div class="button__wrapper">
-          <button class="closeButton">Close</button>
+          <button id="modal__closeButton" class="closeButton">Close</button>
         </div>
       </div>
     </div>
