@@ -23,14 +23,19 @@ export default class Search extends Component {
 
     this.targetEl.addEventListener("input", (event) => {
       const username = event.target.value;
+      const inputEl = this.targetEl.querySelector(".search__input");
 
-      if (!username) return;
+      if (!username) {
+        inputEl.classList.remove("is-invalid");
+        return;
+      }
 
       if (!isValidUsername(username)) {
         this.showInvalidMessage("Invalid Username");
         return;
       }
 
+      inputEl.classList.remove("is-invalid");
       handleSearch(username);
     });
   }
@@ -41,8 +46,5 @@ export default class Search extends Component {
 
     inputEl.classList.add("is-invalid");
     errorEl.innerText = message;
-    inputEl.addEventListener("input", (event) => event.target.classList.remove("is-invalid"), {
-      once: true,
-    });
   }
 }
