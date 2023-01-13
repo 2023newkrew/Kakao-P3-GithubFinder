@@ -1,5 +1,6 @@
 import Repo from "@models/Repo";
 import { getDateDiff } from "@utils/dateUtils";
+
 export default class User {
   constructor({
     id,
@@ -28,20 +29,20 @@ export default class User {
     this.following = following;
     this.loginId = login;
     this.email = email;
-    this.public_repos = public_repos;
-    this.public_gists = public_gists;
-    this.created_at = created_at;
-    this.html_url = html_url;
+    this.publicRepos = public_repos;
+    this.publicGists = public_gists;
+    this.createdAt = created_at;
+    this.htmlUrl = html_url;
     this.organizations_url = organizations_url;
-    this.starred_url = starred_url;
+    this.starredUrl = starred_url;
     this.subscriptions_url = subscriptions_url;
-    this.repos_url = repos_url;
-    this.updated_at = updated_at;
+    this.reposUrl = repos_url;
+    this.updatedAt = updated_at;
     this.repos = [];
   }
   _getCreatedDateInfo() {
     const today = new Date();
-    const createdDate = new Date(this.created_at);
+    const createdDate = new Date(this.createdAt);
     const monthDiff = getDateDiff(today, createdDate, "month");
 
     if (monthDiff === 0) {
@@ -60,6 +61,9 @@ export default class User {
 
     return `${year}년 ${month}개월 전`;
   }
+  handleActivityChartError(event) {
+    console.log("차트 에러", event.target);
+  }
   render() {
     return `
     <div class="w-100 flex-lg-row flex-column d-flex align-items-center justify-content-center">
@@ -73,7 +77,7 @@ export default class User {
       </div>
       <div class="w-100 d-flex flex-column align-items-lg-start align-items-center">
         <div class="px-4 text-lg-left text-center">
-          <a class="text-primary" href="${this.html_url}" target="_blank">
+          <a class="text-primary" href="${this.htmlUrl}" target="_blank">
             <h5 class="card-title">${this.loginId} </h5>
           </a>
           <div class="d-flex align-items-end">
@@ -99,23 +103,24 @@ export default class User {
             href="https://github.com/dmstmdrbs?tab=repositories"
             target="_blank"
             class="card-link badge bg-info text-white ml-2"
-            >Repos ${this.public_repos}개
+            >Repos ${this.publicRepos}개
           </a>
           <span class="badge bg-secondary text-white ml-2">
-            Gists ${this.public_gists}개
+            Gists ${this.publicGists}개
           </span>
         </div>
         <div class="w-100">
           <img
+            id="activity-chart"
             class="w-100"
             style="max-width: 663px;"
             src="https://ghchart.rshah.org/${this.loginId}"
-            alt="깃허브 잔디"
+            alt="깃허브 활동 차트"
+            onerror="this.style.display='none';"
           />
         </div>
       </div>
     </div>
-
   `;
   }
   setRepos(repos) {

@@ -19,17 +19,17 @@ export default class Repo {
   }) {
     this.id = id;
     this.name = name;
-    this.full_name = full_name;
+    this.fullName = full_name;
     this.owner = owner;
-    this.html_url = html_url;
+    this.htmlUrl = html_url;
     this.description = description;
-    this.stargazers_count = stargazers_count;
-    this.watchers_count = watchers_count;
-    this.forks_count = forks_count;
+    this.stargazersCount = stargazers_count;
+    this.watchersCount = watchers_count;
+    this.forksCount = forks_count;
     this.forks = forks;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-    this.clone_url = clone_url;
+    this.createdAt = created_at;
+    this.updatedAt = updated_at;
+    this.cloneUrl = clone_url;
     this.language = language;
     this.watchers = watchers;
     this.visibility = visibility;
@@ -41,7 +41,7 @@ export default class Repo {
           <div class="card-body d-flex flex-column justify-content-between">
             <div class="d-flex align-items-center flex-wrap" >
               <a class="text-info d-flex align-items-center flex-wrap mb-2 mr-2" href="${
-                this.html_url
+                this.htmlUrl
               }" target="_blank">
                 <h5>
                   ${this.name}
@@ -52,9 +52,9 @@ export default class Repo {
               </span>
               <span class="mb-2 d-flex align-items-center">
                 <img alt="레포지토리 스타 아이콘" src="${
-                  this.stargazers_count > 0 ? "star_filled.svg" : "star.svg"
+                  this.stargazersCount > 0 ? "star_filled.svg" : "star.svg"
                 }" height="16"/>
-                ${this.stargazers_count}
+                ${this.stargazersCount}
               </span>
             </div>
             <p class="card-text">${this.description ?? ""}</p>
@@ -68,7 +68,7 @@ export default class Repo {
               </span>
               <span class="text-secondary">
                 <img src="watch.svg" alt="워치 아이콘" height="18"/>
-                ${this.watchers_count}
+                ${this.watchersCount}
               </span>
             </div>
           </div>

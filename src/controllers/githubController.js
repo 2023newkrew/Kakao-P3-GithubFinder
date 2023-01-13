@@ -20,6 +20,6 @@ export default class GithubApiController {
     );
   }
   getRepos(user) {
-    return this.fetchData(user.repos_url);
+    return this.fetchData(user.reposUrl);
   }
 }
