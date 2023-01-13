@@ -28,7 +28,7 @@ export default class SearchController {
     this.submitEl.addEventListener("click", () => {
       this.search(this.inputEl.value);
     });
-    console.log(this.historyController.historyContainer);
+
     this.historyController.historyContainer.addEventListener(
       "click",
       (event) => {
