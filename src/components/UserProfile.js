@@ -71,16 +71,12 @@ export default class UserProfile extends Component {
 
   onMount() {
     UserInfoStore.subscribe(() => {
-      if (UserInfoStore.state.isLoading) return;
-
-      this.render();
-    });
-
-    UserInfoStore.subscribe(() => {
-      if (!UserInfoStore.state.isLoading) return;
+      if (!UserInfoStore.state.isLoading) {
+        this.render();
+        return;
+      }
 
       const overlayEl = this.targetEl.querySelector(".card-img-overlay");
-
       overlayEl.classList.remove("d-none");
     });
   }

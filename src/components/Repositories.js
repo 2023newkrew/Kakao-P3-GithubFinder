@@ -17,13 +17,10 @@ export default class Repositories extends Component {
   onMount() {
     UserInfoStore.subscribe(() => {
       this.render();
-    });
 
-    UserInfoStore.subscribe(() => {
       const { isLoading, repositories } = UserInfoStore.state;
 
-      if (isLoading) return;
-      if (!repositories.length) return;
+      if (isLoading || !repositories.length) return;
 
       this.appendChildComponents(
         this.targetEl.querySelector(".repositories__repository-list"),
