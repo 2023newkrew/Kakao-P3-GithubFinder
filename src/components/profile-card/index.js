@@ -7,6 +7,17 @@ class ProfileCard extends Component {
   constructor() {
     super();
 
+    this.profileImageElement = this.element.querySelector('.profile-image');
+    this.profileNameElement = this.element.querySelector('.profile-name');
+    this.publicReposElement = this.element.querySelector('.public-repos');
+    this.publicGistsElement = this.element.querySelector('.public-gists');
+    this.follwersElement = this.element.querySelector('.follwers');
+    this.followingElement = this.element.querySelector('.following');
+    this.blogElement = this.element.querySelector('.blog');
+    this.companyElement = this.element.querySelector('.company');
+    this.locationElement = this.element.querySelector('.location');
+    this.sinceElement = this.element.querySelector('.since');
+
     this.render = this.render.bind(this);
   }
 
@@ -66,33 +77,16 @@ class ProfileCard extends Component {
   }}) {
     const transformFalsyContent = (content) => content || '-';
 
-    this.element.querySelector('.profile-image').src = avatarUrl;
-
-    this.element.querySelector('.profile-name').innerHTML = name;
-
-    this.element.querySelector('.public-repos').innerHTML =
-        `Public Repos: ${publicRepos}`;
-
-    this.element.querySelector('.public-gists').innerHTML =
-        `Public Gists: ${publicGists}`;
-
-    this.element.querySelector('.follwers').innerHTML =
-        `Followers: ${followers}`;
-
-    this.element.querySelector('.following').innerHTML =
-        `Following: ${following}`;
-
-    this.element.querySelector('.blog').innerHTML =
-        transformFalsyContent(blog);
-
-    this.element.querySelector('.company').innerHTML =
-        transformFalsyContent(company);
-
-    this.element.querySelector('.location').innerHTML =
-        transformFalsyContent(location);
-
-    this.element.querySelector('.since').innerHTML =
-        new Date(createdAt).toLocaleString();
+    this.profileImageElement.src = avatarUrl;
+    this.profileNameElement.innerHTML = name;
+    this.publicReposElement.innerHTML = `Public Repos: ${publicRepos}`;
+    this.publicGistsElement.innerHTML = `Public Gists: ${publicGists}`;
+    this.follwersElement.innerHTML = `Followers: ${followers}`;
+    this.followingElement.innerHTML = `Following: ${following}`;
+    this.blogElement.innerHTML = transformFalsyContent(blog);
+    this.companyElement.innerHTML = transformFalsyContent(company);
+    this.locationElement.innerHTML = transformFalsyContent(location);
+    this.sinceElement.innerHTML = new Date(createdAt).toLocaleString();
   }
 }
 
