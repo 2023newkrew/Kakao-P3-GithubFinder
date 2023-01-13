@@ -61,10 +61,19 @@ export default class User {
 
     return `${year}년 ${month}개월 전`;
   }
-  handleActivityChartError(event) {
-    console.log("차트 에러", event.target);
+  setEvent() {
+    const activityChart = document.body.querySelector("#activity-chart");
+    activityChart.onerror = (event) => {
+      console.log(event.target.parentElement);
+      event.target.style.setProperty("display", "none");
+      event.target.parentElement.insertAdjacentHTML(
+        "beforeend",
+        '<div class="activity-error ml-4">No Activity Chart</div>'
+      );
+      event.target.nextElementSibling.classList.add("fade-in");
+    };
   }
-  render() {
+  template() {
     return `
     <div class="w-100 flex-lg-row flex-column d-flex align-items-center justify-content-center">
       <div class="d-flex align-items-center justify-content-center">
@@ -116,12 +125,15 @@ export default class User {
             style="max-width: 663px;"
             src="https://ghchart.rshah.org/${this.loginId}"
             alt="깃허브 활동 차트"
-            onerror="this.style.display='none';"
           />
         </div>
       </div>
     </div>
   `;
+  }
+  render(container) {
+    container.innerHTML = this.template();
+    this.setEvent();
   }
   setRepos(repos) {
     this.repos = repos

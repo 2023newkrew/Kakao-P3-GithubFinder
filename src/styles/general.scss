@@ -25,3 +25,33 @@
 .border-none {
   border: none;
 }
+
+#activity-chart {
+  min-height: 80px;
+}
+.activity-error {
+  width: 664px;
+  height: 80px;
+  background: #a9a9a9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 1.125rem;
+  border-radius: 8px;
+  opacity: 1;
+  animation: fadeIn 0.3s;
+  -webkit-animation: fadeIn 0.3s;
+  -moz-animation: fadeIn 0.3s;
+  -o-animation: fadeIn 0.3s;
+  -ms-animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

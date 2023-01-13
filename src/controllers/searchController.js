@@ -47,7 +47,7 @@ export default class SearchController {
     const renderUser = (user) => {
       const userResult = searchResultContainer.querySelector("#user-result");
       userResult.id = user.id;
-      userResult.innerHTML = user.render();
+      user.render(userResult);
     };
     const renderNoUserInfo = () => {
       const userResult = searchResultContainer.querySelector("#user-result");
