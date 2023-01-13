@@ -28,6 +28,8 @@ class sweetAlert {
       text: "",
       footer: "",
     });
+
+    return false;
   }
 }
 

@@ -1,6 +1,7 @@
 import sweetAlert from "../lib/sweetAlert";
 
 import env from "../../env.json";
+const axios = require("axios");
 
 const header = {
   Authorization: env.API_TOKEN,
@@ -14,28 +15,32 @@ export default class User {
   }
 
   async fetchUserData(username) {
-    this.userData = await (
-      await fetch(`https://${env.API_SERVER}/${username}`, {
-        headers: header,
-      })
-    ).json();
-
-    // ! 유저의 정보가 확인되지 않았을 경우
-    if (this.userData.message === "Not Found") return false;
-
-    this.username = username;
-
-    this.userRepository = await (
-      await fetch(`https://${env.API_SERVER}/${username}/repos`, {
-        headers: header,
-      })
-    ).json();
-
-    // 최근 업데이트 순 정렬
-    this.userRepository.sort((elementA, elementB) => {
-      return new Date(elementB.updated_at).getTime() - new Date(elementA.updated_at).getTime();
+    const response = await axios(`https://${env.API_SERVER}/${username}`, {
+      headers: header,
+    }).catch((error) => {
+      if (error.response.status == 404) {
+        return false;
+      }
     });
 
+    if (response === false) return false;
+
+    this.userData = response.data;
+    this.username = this.userData.login;
+
+    return true;
+  }
+
+  async fetchUserRepos(username) {
+    const response = await axios(`https://${env.API_SERVER}/${username}/repos`, {
+      headers: header,
+    }).catch((error) => {
+      if (error.response.status == 404) return false;
+    });
+
+    if (response === false) return false;
+
+    this.userRepository = response.data;
     return true;
   }
 
@@ -43,42 +48,60 @@ export default class User {
     return this.username;
   }
 
-  async getFollowList() {
-    const followList = await (
-      await fetch(`${this.userData.followers_url}`, {
-        headers: header,
-      })
-    ).json();
-    return followList;
-  }
-
   async getPublicReposList() {
-    const publicReposList = await (
-      await fetch(`${this.userData.repos_url}`, {
-        headers: header,
-      })
-    ).json();
-    return publicReposList;
-  }
+    const response = await axios(`${this.userData.repos_url}`, {
+      headers: header,
+    }).catch((error) => {
+      if (error.response.status == 404) return false;
+    });
 
-  async getFollowingList() {
-    const following_url = this.userData.following_url.replace("{/other_user}", "");
-    const followingList = await (
-      await fetch(following_url, {
-        headers: header,
-      })
-    ).json();
-    return followingList;
+    if (response === false) return false;
+
+    const publicReposList = response.data;
+    return publicReposList;
   }
 
   async getPublicGistsList() {
     const gists_url = this.userData.gists_url.replace("{/gist_id}", "");
-    const gistList = await (
-      await fetch(gists_url, {
-        headers: header,
-      })
-    ).json();
+
+    const response = await axios(`${gists_url}`, {
+      headers: header,
+    }).catch((error) => {
+      if (error.response.status == 404) return false;
+    });
+
+    if (response === false) return false;
+
+    const gistList = response.data;
     return gistList;
+  }
+
+  async getFollowList() {
+    const response = await axios(`${this.userData.followers_url}`, {
+      headers: header,
+    }).catch((error) => {
+      if (error.response.status == 404) return false;
+    });
+
+    if (response === false) return false;
+
+    const followList = response.data;
+    return followList;
+  }
+
+  async getFollowingList() {
+    const following_url = this.userData.following_url.replace("{/other_user}", "");
+
+    const response = await axios(`${following_url}`, {
+      headers: header,
+    }).catch((error) => {
+      if (error.response.status == 404) return false;
+    });
+
+    if (response === false) return false;
+
+    const followingList = response.data;
+    return followingList;
   }
 
   getProfileAvatarURL() {

@@ -6,6 +6,10 @@ export default class UserLatestRepos {
   renderUserLatestRepos(number) {
     const latestRepos = this.user.getLatestRepos(number);
 
+    latestRepos.sort((elementA, elementB) => {
+      return new Date(elementB.updated_at).getTime() - new Date(elementA.updated_at).getTime();
+    });
+
     const elementString = this.makeLatestRepoListElement(latestRepos);
     this.latestReposListElement.innerHTML = elementString;
   }

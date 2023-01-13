@@ -1,4 +1,5 @@
 export default class Modal {
+  #animationTime = 600;
   constructor() {
     this.modalElement = document.getElementById("modal");
     this.titleElement = document.getElementById("modal__title");
@@ -35,7 +36,7 @@ export default class Modal {
 
       setTimeout(() => {
         this.modalCloseButtonElement.classList.remove("animate");
-      }, 600); // 1s = 1000ms
+      }, this.#animationTime); // 1s = 1000ms
     });
   }
 }

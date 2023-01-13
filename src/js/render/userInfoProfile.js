@@ -54,12 +54,15 @@ export default class UserInfoProfile {
     const followersElement = document.body.querySelector(".followers");
     const followingElement = document.body.querySelector(".following");
 
-    const publicReposList = await this.user.getPublicReposList();
-    const publicGistsList = await this.user.getPublicGistsList();
-    const followList = await this.user.getFollowList();
-    const followingList = await this.user.getFollowingList();
+    const response = await Promise.all([this.user.getPublicReposList(), this.user.getPublicGistsList(), this.user.getFollowList(), this.user.getFollowingList()]);
+
+    const publicReposList = response[0] || "정보를 불러올 수 없습니다";
+    const publicGistsList = response[1] || "정보를 불러올 수 없습니다";
+    const followList = response[2] || "정보를 불러올 수 없습니다";
+    const followingList = response[3] || "정보를 불러올 수 없습니다";
 
     publicReposElement.onclick = () => {
+      if (typeof publicReposList === String) return false;
       let publicReposName = `<ul>`;
       for (let index = 0; index < publicReposList.length; index++) {
         publicReposName += `<li><a href="${publicReposList[index].html_url}" target="_blank">${publicReposList[index].name}</a></li>`;
@@ -70,6 +73,7 @@ export default class UserInfoProfile {
     };
 
     publicGistsElement.onclick = () => {
+      if (typeof publicGistsList === String) return false;
       let publicGistsName = `<ul>`;
       for (let index = 0; index < publicGistsList.length; index++) {
         publicGistsName += `<li>${publicGistsList[index].name}</li>`;
@@ -80,6 +84,7 @@ export default class UserInfoProfile {
     };
 
     followersElement.onclick = () => {
+      if (typeof followList === String) return false;
       let followName = `<ul>`;
       for (let index = 0; index < followList.length; index++) {
         followName += `<li><a href="${followList[index].html_url}" target="_blank">${followList[index].login}</a></li>`;
@@ -90,6 +95,7 @@ export default class UserInfoProfile {
     };
 
     followingElement.onclick = () => {
+      if (typeof followingList === String) return false;
       let followingName = `<ul>`;
       for (let index = 0; index < followingList.length; index++) {
         followingName += `<li><a href="${followingList[index].html_url}" target="_blank">${followingList[index].login}</a></li>`;

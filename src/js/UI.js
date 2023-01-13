@@ -23,7 +23,7 @@ export default class UI {
     sweetAlert.showTimerAlert("유저의 정보를 가져오는 중입니다.", 1000);
   }
 
-  showOnUserInfo() {
+  showUserInfo() {
     this.render();
     this.mainElement.style.opacity = 0.99;
   }
@@ -43,13 +43,17 @@ export default class UI {
     this.inputElement.addEventListener("keydown", async (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
+
         this.showAlert();
 
-        if (await this.user.fetchUserData(this.inputElement.value)) {
-          this.showOnUserInfo();
-        } else {
-          sweetAlert.showErrorAlert("해당 유저를 찾을 수 없습니다 !");
+        if ((await this.user.fetchUserData(this.inputElement.value)) !== true) {
+          return sweetAlert.showErrorAlert("해당 유저를 찾을 수 없습니다 !");
         }
+        if ((await this.user.fetchUserRepos(this.inputElement.value)) !== true) {
+          return sweetAlert.showErrorAlert("해당 유저의 레포지토리를 불러올 수 없습니다 !");
+        }
+
+        this.showUserInfo();
       }
     });
   }
