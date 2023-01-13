@@ -176,6 +176,17 @@ class UIManager {
         `;
     }
 
+    static getGitHubChartElement(userName) {
+        const $img = Dom.createElementWithClassName("img", ["m-3"]);
+        $img.src = "./asset/loading.gif";
+        $img.classList.add("mx-auto");
+
+        $img.addEventListener("load", function (event) {
+            event.target.src = `https://ghchart.rshah.org/${userName}`;
+        });
+        return $img;
+    }
+
     static renderUserInfo(json) {
         const userInfoHTML = UIManager._getUserInfoHTML(json);
         UIManager.userInfo.innerHTML = userInfoHTML;
@@ -196,7 +207,7 @@ class UIManager {
         UIManager.repoInfo.innerHTML = "";
     }
 
-    static async renderUserInfoAsync(userName) {
+    static async renderUserInfoCardAsync(userName) {
         try {
             const loadingHTML = UIManager.getLoadingHTML(100);
             UIManager.userInfo.innerHTML = loadingHTML;
@@ -209,6 +220,9 @@ class UIManager {
 
             UIManager._addHistory(userName);
             UIManager.renderHistory();
+
+            const $githubChart = UIManager.getGitHubChartElement(userName);
+            UIManager.userInfo.appendChild($githubChart);
 
             UIManager.renderToast(
                 "User Data를 가져오는데 성공했습니다.",
@@ -227,7 +241,7 @@ class UIManager {
         }
     }
 
-    static async renderRepoInfoAsync(userName) {
+    static async renderRepoInfoCardAsync(userName) {
         try {
             const loadingHTML = UIManager.getLoadingHTML(100);
             UIManager.repoInfo.innerHTML = loadingHTML;
@@ -313,8 +327,8 @@ const handleKeyDownSearchForm = (event) => {
         if (event.target.value === "") return;
 
         const userName = event.target.value.trim();
-        UIManager.renderUserInfoAsync(userName);
-        UIManager.renderRepoInfoAsync(userName);
+        UIManager.renderUserInfoCardAsync(userName);
+        UIManager.renderRepoInfoCardAsync(userName);
     }
 };
 
@@ -323,8 +337,8 @@ const handleClickSearchForm = (event) => {
         const userName = event.target.innerText;
         UIManager.searchFrom.querySelector("input").value = userName;
 
-        UIManager.renderUserInfoAsync(userName);
-        UIManager.renderRepoInfoAsync(userName);
+        UIManager.renderUserInfoCardAsync(userName);
+        UIManager.renderRepoInfoCardAsync(userName);
     }
 };
 const handleShowModal = async (event) => {
