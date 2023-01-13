@@ -23,7 +23,7 @@ export default class UserInfoProfile {
     <li class="following">Following : ${followingCount}</li>
     `;
 
-    this.tagElement.insertAdjacentHTML("afterbegin", elementString);
+    this.tagElement.innerHTML = elementString;
     this.listenUserTag();
   }
 
@@ -40,7 +40,7 @@ export default class UserInfoProfile {
     <li>Member Since : ${memberSince}</li>
     `;
 
-    this.infoElement.insertAdjacentHTML("afterbegin", elementString);
+    this.infoElement.innerHTML = elementString;
   }
 
   renderUserGitHubChart() {
@@ -48,7 +48,7 @@ export default class UserInfoProfile {
     this.GHChartImageElement.src = `https://ghchart.rshah.org/${username}`;
   }
 
-  async listenUserTag() {
+  async listenUserTagEvent() {
     const publicReposElement = document.body.querySelector(".publicRepos");
     const publicGistsElement = document.body.querySelector(".publicGists");
     const followersElement = document.body.querySelector(".followers");

@@ -7,7 +7,7 @@ export default class UserLatestRepos {
     const latestRepos = this.user.getLatestRepos(number);
 
     const elementString = this.makeLatestRepoListElement(latestRepos);
-    this.latestReposListElement.insertAdjacentHTML("afterbegin", elementString);
+    this.latestReposListElement.innerHTML = elementString;
   }
 
   makeLatestRepoListElement(latestRepos) {

@@ -19,11 +19,11 @@ export default class UI {
     this.listenInputEvent();
   }
 
-  displayAlert() {
+  showAlert() {
     sweetAlert.showTimerAlert("유저의 정보를 가져오는 중입니다.", 1000);
   }
 
-  displayOnUserInfo() {
+  showOnUserInfo() {
     this.render();
     this.mainElement.style.opacity = 0.99;
   }
@@ -43,10 +43,10 @@ export default class UI {
     this.inputElement.addEventListener("keydown", async (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
-        this.displayAlert();
+        this.showAlert();
 
         if (await this.user.fetchUserData(this.inputElement.value)) {
-          this.displayOnUserInfo();
+          this.showOnUserInfo();
         } else {
           sweetAlert.showErrorAlert("해당 유저를 찾을 수 없습니다 !");
         }
