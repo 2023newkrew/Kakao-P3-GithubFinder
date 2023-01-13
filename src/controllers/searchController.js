@@ -53,25 +53,25 @@ export default class SearchController {
       const userResult = searchResultContainer.querySelector("#user-result");
       userResult.innerHTML = NO_SEARCH_RESULT_TEMPLATE;
     };
-    const getRepoResultContainerEl = () => {
+    const createRepoResultContainerEl = () => {
       const repoResult = document.createElement("div");
       repoResult.id = "repo-result";
       repoResult.className = "bs-component";
       return repoResult;
     };
     const renderRepos = (repos, numberOfRepos) => {
-      const repoResult = getRepoResultContainerEl();
+      const repoResult = createRepoResultContainerEl();
       repoResult.innerHTML = getReposTemplate(repos, numberOfRepos);
 
       searchResultContainer.appendChild(repoResult);
     };
     const renderNoRepos = () => {
-      const repoResult = getRepoResultContainerEl();
+      const repoResult = createRepoResultContainerEl();
       repoResult.innerHTML = NO_REPOS_TEMPLATE;
 
       searchResultContainer.appendChild(repoResult);
     };
-    const getLoadingElement = () => {
+    const createLoadingElement = () => {
       const element = document.createElement("div");
       element.className = "card-body d-flex align-items-center";
       element.innerHTML = SPINNER_TEMPLATE;
@@ -95,7 +95,7 @@ export default class SearchController {
     const user = new User(userInfo);
     renderUser(user);
 
-    const loadingEl = getLoadingElement();
+    const loadingEl = createLoadingElement();
 
     searchResultContainer.appendChild(loadingEl);
     const repos = await this.fetcher.getRepos(user);
