@@ -11,7 +11,9 @@
       "@repository/*": ["./src/js/repository/*"],
       "@util/*": ["./src/js/util/*"],
       "@view/*": ["./src/js/view/*"],
-      "@viewmodel/*": ["./src/js/viewmodel/*"]
+      "@viewmodel/*": ["./src/js/viewmodel/*"],
+      "@config/*": ["./src/js/config/*"],
+      "@ui/*": ["./src/js/ui/*"]
     }
   }
 }

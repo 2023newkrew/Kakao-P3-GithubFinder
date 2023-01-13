@@ -92,6 +92,8 @@ module.exports = (env) => ({
       '@util': path.resolve(__dirname, 'src/js/util'),
       '@view': path.resolve(__dirname, 'src/js/view'),
       '@viewmodel': path.resolve(__dirname, 'src/js/viewmodel'),
+      '@config': path.resolve(__dirname, 'src/js/config'),
+      '@ui': path.resolve(__dirname, 'src/js/ui'),
     },
   },
 });
