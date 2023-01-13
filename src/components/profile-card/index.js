@@ -32,24 +32,24 @@ class ProfileCard extends Component {
       <div class="chip secondary follwers">Followers: 1101</div>
       <div class="chip tertiary following">Following: 0</div>
     </div>
-    <div class="profile-details">
+    <dl class="profile-details">
       <div class="profile-detail">
-        <div class="key">Company</div>
-        <div class="value company">kakao</div>
+        <dt class="key">Company</div>
+        <dd class="value company">kakao</div>
       </div>
       <div class="profile-detail">
-        <div class="key">Blog</div>
-        <div class="value blog">https://www.naver.com</div>
+        <dt class="key">Blog</div>
+        <dd class="value blog">https://www.naver.com</div>
       </div>
       <div class="profile-detail">
-        <div class="key">Location</div>
-        <div class="value location">Korea Bundang-gu</div>
+        <dt class="key">Location</div>
+        <dd class="value location">Korea Bundang-gu</div>
       </div>
       <div class="profile-detail">
-        <div class="key">Member Since</div>
-        <div class="value since">2018-04-26</div>
+        <dt class="key">Member Since</div>
+        <dd class="value since">2018-04-26</div>
       </div>
-    </div>
+    </dl>
   </div>
 </div>`);
   }
