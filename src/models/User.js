@@ -95,19 +95,19 @@ export default class User {
         </div>
         <div class="card-body py-1 ml-1 mb-2">
           <a
-            href="https://github.com/dmstmdrbs?tab=followers"
+            href="https://github.com/${this.loginId}?tab=followers"
             target="_blank"
             class="card-link badge bg-success text-white"
             >Followers ${this.followers}명</a
           >
           <a
-            href="https://github.com/dmstmdrbs?tab=following"
+            href="https://github.com/${this.loginId}?tab=following"
             target="_blank"
             class="card-link badge bg-success text-white ml-2"
             >Following ${this.following}명</a
           >
           <a
-            href="https://github.com/dmstmdrbs?tab=repositories"
+            href="https://github.com/${this.loginId}?tab=repositories"
             target="_blank"
             class="card-link badge bg-info text-white ml-2"
             >Repos ${this.publicRepos}개
