@@ -18,7 +18,7 @@ export default class Search extends Component {
   onMount() {
     const handleSearch = debounce((username) => {
       UserInfoStore.setIsLoading(true);
-      UserInfoStore.fetchUserInfo(username, ({ message }) => this.showInvalidFeedback(message));
+      UserInfoStore.fetchUserInfo(username, ({ message }) => this.showInvalidMessage(message));
     });
 
     this.targetEl.addEventListener("input", (event) => {
@@ -27,7 +27,7 @@ export default class Search extends Component {
       if (!username) return;
 
       if (!testUsername(username)) {
-        this.showInvalidFeedback("Invalid Username");
+        this.showInvalidMessage("Invalid Username");
         return;
       }
 
@@ -35,7 +35,7 @@ export default class Search extends Component {
     });
   }
 
-  showInvalidFeedback(message) {
+  showInvalidMessage(message) {
     const inputEl = this.targetEl.querySelector(".search__input");
     const errorEl = this.targetEl.querySelector(".search__error");
 
