@@ -64,13 +64,11 @@ export default class User {
   setEvent() {
     const activityChart = document.body.querySelector("#activity-chart");
     activityChart.onerror = (event) => {
-      console.log(event.target.parentElement);
       event.target.style.setProperty("display", "none");
       event.target.parentElement.insertAdjacentHTML(
         "beforeend",
         '<div class="activity-error ml-4">No Activity Chart</div>'
       );
-      event.target.nextElementSibling.classList.add("fade-in");
     };
   }
   template() {
