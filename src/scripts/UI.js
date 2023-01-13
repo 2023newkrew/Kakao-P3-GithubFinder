@@ -22,8 +22,9 @@ export default class UI {
     <div class="profile-view__wrapper">
       ${this.makeImageEl(userInfo.avatar_url, "profile image", defaultProfileImage)}
       <div class="profile-view__button-wrapper">
-        <a class="profile-view__button" href="${userInfo.html_url}">View Profile</a>
-        <button class="profile-view__button">Follow</button>
+        <a class="profile-view__button profile-button" href="${userInfo.html_url}">View Profile</a>
+        <button id="follow-button" class="profile-view__button">Follow</button>
+        <button id="unfollow-button" class="profile-view__button hidden">Unfollow</button>
       </div>
     </div>
     <div class="profile-info__wrapper">
@@ -41,6 +42,8 @@ export default class UI {
       )}
     </div>
     `;
+
+    this.drawFollowButton();
   }
 
   drawUserRepository() {
@@ -68,6 +71,37 @@ export default class UI {
       </ul>
     </div>
     `;
+  }
+
+  drawFollowingUser() {
+    const followingEl = document.getElementById("following");
+    const followingUsers = JSON.parse(localStorage.getItem("following_users"));
+
+    followingEl.innerHTML = `
+    <h1 class="following__title">Following</h1>
+    <ul class="following-users">
+      ${followingUsers
+        .map((username) => {
+          return `<li>${username}</li>`;
+        })
+        .join("")}
+    </ul>
+    `;
+  }
+
+  drawFollowButton() {
+    const userName = this.dataModel.getData("target_user_info").username;
+    const followButtonEl = document.getElementById("follow-button");
+    const unfollowButtonEl = document.getElementById("unfollow-button");
+    const followingUsers = JSON.parse(localStorage.getItem("following_users"));
+
+    if (followingUsers.includes(userName)) {
+      followButtonEl.classList.add("hidden");
+      unfollowButtonEl.classList.remove("hidden");
+    } else {
+      followButtonEl.classList.remove("hidden");
+      unfollowButtonEl.classList.add("hidden");
+    }
   }
 
   alertError(message) {

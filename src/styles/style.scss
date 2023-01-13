@@ -15,6 +15,7 @@ body {
 }
 
 .header,
+.following,
 .profile,
 .repository,
 .footer {
@@ -43,6 +44,19 @@ body {
 
 .main {
   min-height: 68vh;
+}
+
+.following {
+  &-users {
+    @include default-border;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 20px;
+  }
+  ul > li {
+    cursor: pointer;
+  }
 }
 
 .profile {
@@ -85,6 +99,10 @@ body {
     background-color: $color--blue;
     color: $color--white;
     font-size: 14px;
+
+    &#unfollow-button {
+      background-color: $color--gray;
+    }
   }
 }
 

@@ -19,24 +19,38 @@ export default class SearchController {
     document.getElementById("search__input").addEventListener("keydown", (e) => {
       this.handleOnKeyDown(e);
     });
+
+    document.getElementById("following").addEventListener("click", (e) => {
+      this.handleOnClick(e);
+    });
   }
 
   async handleOnKeyDown({ code, target }) {
     if (code === "Enter") {
-      const userInfo = await this.getUserInfo(target.value);
-      if (userInfo) {
-        this.addTargetUserInfoToModel(userInfo);
-        this.ui.drawUserInfo();
-      } else return;
-
-      const userRepos = await this.getUserRepository(target.value);
-      if (userRepos) {
-        this.addTargetUserRepositoriesToModel(userRepos);
-        this.ui.drawUserRepository();
-      } else return;
+      this.searchUser(target.value);
 
       target.value = "";
     }
+  }
+
+  handleOnClick({ target }) {
+    if (target.localName === "li") {
+      this.searchUser(target.innerHTML);
+    }
+  }
+
+  async searchUser(username) {
+    const userInfo = await this.getUserInfo(username);
+    if (userInfo) {
+      this.addTargetUserInfoToModel(userInfo);
+      this.ui.drawUserInfo();
+    } else return;
+
+    const userRepos = await this.getUserRepository(username);
+    if (userRepos) {
+      this.addTargetUserRepositoriesToModel(userRepos);
+      this.ui.drawUserRepository();
+    } else return;
   }
 
   async getUserInfo(username) {
