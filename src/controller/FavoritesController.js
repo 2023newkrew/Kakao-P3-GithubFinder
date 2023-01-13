@@ -17,20 +17,18 @@ export default class FavoritiesController {
         
         this.registEventListner();
         this.getFavority();
-        this.drawFavorites();
+        this.drawFavorityUsers();
     }
-    onFavorityView(userID) {
-        this.#searchController.onSearchID(userID);
-    }
+    
     onFavorityAdd(userID) {
         this.#favorites.push(userID)
         this.saveFavorities();
-        this.drawFavorites();
+        this.drawFavorityUsers();
     }
     onFavorityRemove(userID) {
         this.#favorites = this.#favorites.filter((favority) => favority !== userID)
         this.saveFavorities();
-        this.drawFavorites();
+        this.drawFavorityUsers();
     }
     registEventListner() {
         const [ favorityAddButtonElement, favorityRemoveButtonElement ] = this.#favoriteElement.querySelectorAll('button');
@@ -41,7 +39,7 @@ export default class FavoritiesController {
                 return;
             }
             this.onFavorityAdd(userID);
-            this.drawFavority(userID);
+            this.drawFavorityButton(userID);
         })
         favorityRemoveButtonElement.addEventListener('click', () => {
             const userID = this.#searchController.getLastUserID();
@@ -50,7 +48,7 @@ export default class FavoritiesController {
                 return;
             }
             this.onFavorityRemove(userID);
-            this.drawFavority(userID);
+            this.drawFavorityButton(userID);
         })
     }
     getFavority() {
@@ -59,7 +57,7 @@ export default class FavoritiesController {
     saveFavorities() {
         localStorage.setItem('favorities', JSON.stringify(this.#favorites));
     }
-    drawFavority(userID) {
+    drawFavorityButton(userID) {
         const isFavority = this.#favorites.find(favority => favority === userID) ? true : false;
         if (isFavority) {
             this.#favoriteElement.classList.add('favority');
@@ -67,7 +65,7 @@ export default class FavoritiesController {
             this.#favoriteElement.classList.remove('favority');
         }
     }
-    drawFavorites() {
+    drawFavorityUsers() {
         const favoritiesWrapperElement = document.createElement('ul');
         favoritiesWrapperElement.addEventListener('click', (event) => {
             this.#searchController.searchID(event.target.textContent);

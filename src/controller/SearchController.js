@@ -1,13 +1,13 @@
-import { fetchUserInfo, fetchUserRepos } from "../services/github";
-import FavoritiesController from "./FavoritesController";
-import UserInfoController from "./UserInfoController";
+import { fetchUserInfo, fetchUserRepos } from "@services/github";
+import FavoritiesController from "@controller/FavoritesController";
+import UserInfoController from "@controller/UserInfoController";
+import { HTTP_STATUS } from '@constant/httpStatus';
 
 export default class SearchController {
     static #instance; // 싱글톤패턴
     #userInfoController;
     #favoritesController;
     #inputElement; // input element
-    #favorityButton;
     #lastUserID;
     constructor() {
         if (SearchController.#instance) return SearchController.#instance;
@@ -27,8 +27,7 @@ export default class SearchController {
                 await this.searchID(userID);
             }
         } catch(error) {
-            console.log(error);
-            if (error.response.status === 404) {
+            if (error.response.status === HTTP_STATUS.NOT_FOUND ) {
                 alert('해당 유저가 존재하지 않습니다.')
             } else {
                 alert(error.message);

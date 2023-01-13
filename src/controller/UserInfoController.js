@@ -94,7 +94,7 @@ export default class UserInfoController {
             }
         })
         
-        console.log(repos);
+        
         // draw element
         this.#userReposElement.replaceChildren();
         this.#userReposElement.appendChild(newUserReposFragmentElement);
