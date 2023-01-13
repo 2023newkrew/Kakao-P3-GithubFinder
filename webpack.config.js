@@ -45,7 +45,10 @@ module.exports = (_, argv) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({ template: "./index.html" }), //
+      new HtmlWebpackPlugin({
+        filename: "index.html",
+        template: "index.html",
+      }), //
       new MiniCssExtractPlugin(),
       new webpack.DefinePlugin({
         "process.env": JSON.stringify(process.env),
@@ -66,6 +69,8 @@ module.exports = (_, argv) => {
         "@constants": path.resolve(__dirname, "src/constants/"),
         "@models": path.resolve(__dirname, "src/models/"),
         "@utils": path.resolve(__dirname, "src/utils/"),
+        "@templates": path.resolve(__dirname, "src/templates/"),
+        "@styles": path.resolve(__dirname, "src/styles"),
       },
     },
   };
