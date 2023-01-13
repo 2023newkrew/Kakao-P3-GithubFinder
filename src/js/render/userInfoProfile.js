@@ -17,10 +17,10 @@ export default class UserInfoProfile {
     const followingCount = this.user.getFollowingCount();
 
     const elementString = `
-    <li class="publicRepos">Public Repos : ${publicReposCount}</li>
-    <li class="publicGists">Public Gists : ${publicGistsCount}</li>
-    <li class="followers">Followers : ${followerCount}</li>
-    <li class="following">Following : ${followingCount}</li>
+    <li class="publicRepos" data-element="Repository">Public Repos : ${publicReposCount}</li>
+    <li class="publicGists" data-element="Gists">Public Gists : ${publicGistsCount}</li>
+    <li class="followers" data-element="followers">Followers : ${followerCount}</li>
+    <li class="following" data-element="following">Following : ${followingCount}</li>
     `;
 
     this.tagElement.innerHTML = elementString;
@@ -49,11 +49,6 @@ export default class UserInfoProfile {
   }
 
   async listenUserTagEvent() {
-    const publicReposElement = document.body.querySelector(".publicRepos");
-    const publicGistsElement = document.body.querySelector(".publicGists");
-    const followersElement = document.body.querySelector(".followers");
-    const followingElement = document.body.querySelector(".following");
-
     const response = await Promise.all([this.user.getPublicReposList(), this.user.getPublicGistsList(), this.user.getFollowList(), this.user.getFollowingList()]);
 
     const publicReposList = response[0] || "정보를 불러올 수 없습니다";
@@ -61,48 +56,29 @@ export default class UserInfoProfile {
     const followList = response[2] || "정보를 불러올 수 없습니다";
     const followingList = response[3] || "정보를 불러올 수 없습니다";
 
-    publicReposElement.onclick = () => {
-      if (typeof publicReposList === String) return false;
-      let publicReposName = `<ul>`;
-      for (let index = 0; index < publicReposList.length; index++) {
-        publicReposName += `<li><a href="${publicReposList[index].html_url}" target="_blank">${publicReposList[index].name}</a></li>`;
-      }
-      publicReposName += "</ul>";
-
-      this.modal.renderModal("Repository", publicReposName);
+    this.tagElement.onclick = (event) => {
+      const modalTitle = event.target.dataset.element;
+      if (event.target.dataset.element === "Repository") this.renderTagModal(modalTitle, publicReposList);
+      if (event.target.dataset.element === "Gists") this.renderTagModal(modalTitle, publicGistsList);
+      if (event.target.dataset.element === "followers") this.renderTagModal(modalTitle, followList);
+      if (event.target.dataset.element === "following") this.renderTagModal(modalTitle, followingList);
     };
+  }
 
-    publicGistsElement.onclick = () => {
-      if (typeof publicGistsList === String) return false;
-      let publicGistsName = `<ul>`;
-      for (let index = 0; index < publicGistsList.length; index++) {
-        publicGistsName += `<li>${publicGistsList[index].name}</li>`;
-      }
-      publicGistsName += "</ul>";
+  renderTagModal(title, element) {
+    let elementString = `<ul>`;
 
-      this.modal.renderModal("Gists", publicGistsName);
-    };
+    // ! 지금 작성된 코드에서는 name 또는 login 값으로 들어오기에 단축 평가를 활용해 작성
+    for (let index = 0; index < element.length; index++) {
+      elementString += `
+      <li>
+        <a href="${element[index].html_url}" target="_blank">
+          ${element[index].name || element[index].login}    
+        </a>
+      </li>
+      `;
+    }
 
-    followersElement.onclick = () => {
-      if (typeof followList === String) return false;
-      let followName = `<ul>`;
-      for (let index = 0; index < followList.length; index++) {
-        followName += `<li><a href="${followList[index].html_url}" target="_blank">${followList[index].login}</a></li>`;
-      }
-      followName += "</ul>";
-
-      this.modal.renderModal("Followers", followName);
-    };
-
-    followingElement.onclick = () => {
-      if (typeof followingList === String) return false;
-      let followingName = `<ul>`;
-      for (let index = 0; index < followingList.length; index++) {
-        followingName += `<li><a href="${followingList[index].html_url}" target="_blank">${followingList[index].login}</a></li>`;
-      }
-      followingName += "</ul>";
-
-      this.modal.renderModal("Followings", followingName);
-    };
+    this.modal.renderModal(title, elementString);
   }
 }
