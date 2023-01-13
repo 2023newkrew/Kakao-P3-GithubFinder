@@ -1,7 +1,7 @@
 import Component from "@core/Component";
 import UserInfoStore from "@stores/UserInfoStore";
 import debounce from "@utils/debounce";
-import { testUsername } from "@utils/github";
+import { isValidUsername } from "@utils/github";
 
 export default class Search extends Component {
   template() {
@@ -26,7 +26,7 @@ export default class Search extends Component {
 
       if (!username) return;
 
-      if (!testUsername(username)) {
+      if (!isValidUsername(username)) {
         this.showInvalidMessage("Invalid Username");
         return;
       }
