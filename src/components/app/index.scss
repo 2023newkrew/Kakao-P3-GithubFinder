@@ -31,19 +31,19 @@
     color: white;
     font-size: 0.5rem;
 
-    &.primary {
+    &.chip--primary {
       background-color: var(--primary);
     }
 
-    &.secondary {
+    &.chip--secondary {
       background-color: var(--secondary);
     }
 
-    &.tertiary {
+    &.chip--tertiary {
       background-color: var(--tertiary);
     }
 
-    &.quaternary {
+    &.chip--quaternary {
       background-color: var(--text-light);
     }
   }

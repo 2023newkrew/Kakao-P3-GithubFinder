@@ -38,9 +38,9 @@ class RepositoryList extends Component {
   <div class="repository">
     <div class="repository-name">${name}</div>
     <div class="repostiory-chips">
-      <div class="chip primary">Stars: ${stars}</div>
-      <div class="chip quaternary">Watchers: ${watchers}</div>
-      <div class="chip secondary">Forks: ${forks}</div>
+      <div class="chip chip--primary">Stars: ${stars}</div>
+      <div class="chip chip--quaternary">Watchers: ${watchers}</div>
+      <div class="chip chip--secondary">Forks: ${forks}</div>
     </div>
   </div>
 </div>`).join('\n');

@@ -27,27 +27,27 @@ class ProfileCard extends Component {
   <div class="profile-content">
     <h3 class="profile-name">리처드 파인만</h3>
     <div class="profile-chips">
-      <div class="chip primary public-repos">Public Repos: 51</div>
-      <div class="chip quaternary public-gists">Public Gists: 0</div>
-      <div class="chip secondary follwers">Followers: 1101</div>
-      <div class="chip tertiary following">Following: 0</div>
+      <div class="chip chip--primary public-repos">Public Repos: 51</div>
+      <div class="chip chip--quaternary public-gists">Public Gists: 0</div>
+      <div class="chip chip--secondary follwers">Followers: 1101</div>
+      <div class="chip chip--tertiary following">Following: 0</div>
     </div>
     <dl class="profile-details">
       <div class="profile-detail">
-        <dt class="key">Company</div>
-        <dd class="value company">kakao</div>
+        <dt class="profile-detail__key">Company</div>
+        <dd class="profile-detail__value company">kakao</div>
       </div>
       <div class="profile-detail">
-        <dt class="key">Blog</div>
-        <dd class="value blog">https://www.naver.com</div>
+        <dt class="profile-detail__key">Blog</div>
+        <dd class="profile-detail__value blog">https://www.naver.com</div>
       </div>
       <div class="profile-detail">
-        <dt class="key">Location</div>
-        <dd class="value location">Korea Bundang-gu</div>
+        <dt class="profile-detail__key">Location</div>
+        <dd class="profile-detail__value location">Korea Bundang-gu</div>
       </div>
       <div class="profile-detail">
-        <dt class="key">Member Since</div>
-        <dd class="value since">2018-04-26</div>
+        <dt class="profile-detail__key">Member Since</div>
+        <dd class="profile-detail__value since">2018-04-26</div>
       </div>
     </dl>
   </div>
