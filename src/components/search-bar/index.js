@@ -35,20 +35,23 @@ class SearchBar extends Component {
     this.userInfoStore = useContext(this.element, 'user-info-store');
   }
 
-  handleKeydown(event) {
+  async handleKeydown(event) {
     this.clearSearchError();
 
     if (event.code !== KeyCode.ENTER) return;
     this.searchInputElement.disabled = true;
 
-    requestUserInfo(this.searchInputElement.value)
-        .then(([user, repositories]) => {
-          this.userInfoStore.publish({user, repositories});
-        }, this.setSearchError.bind(this))
-        .then(() => {
-          this.searchInputElement.disabled = false;
-          this.searchInputElement.focus();
-        });
+    try {
+      const [user, repositories] =
+          await requestUserInfo(this.searchInputElement.value);
+
+      this.userInfoStore.publish({user, repositories});
+    } catch (error) {
+      this.setSearchError(error);
+    }
+
+    this.searchInputElement.disabled = false;
+    this.searchInputElement.focus();
   }
 
   clearSearchError() {

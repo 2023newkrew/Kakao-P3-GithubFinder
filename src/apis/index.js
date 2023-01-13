@@ -10,8 +10,7 @@ const requestUserInfo = (username) => {
   const repositoriesPromise = fetchUserRepositories(username);
 
   return Promise.all([userPromise, repositoriesPromise])
-      .then((results) => Promise.all(results.map((res) => res.ok ? Promise.resolve(res) : Promise.reject(new Error('HTTP 응답 상태가 성공적이지 않습니다.')))))
-      .then((results) => Promise.all(results.map((res) => res.json())));
+      .then((results) => Promise.all(results.map((res) => res.ok ? res.json() : Promise.reject(new Error('HTTP 응답 상태가 성공적이지 않습니다.')))));
 };
 
 export {requestUserInfo};
