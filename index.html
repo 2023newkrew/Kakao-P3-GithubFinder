@@ -1,13 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
-  <title>GitHub Finder</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css" />
+    <title>GitHub Finder</title>
+  </head>
+  <body>
+    <div class="toast-box position-fixed" style="z-index: 10; right: 0"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">GitHub Finder</a>
+        <button type="button" class="btn btn-light" id="bored-button" data-toggle="modal" data-target="#activityModal">I'm bored</button>
+      </div>
+    </nav>
+    <main>
+      <div class="search-form card border-secondary m-3">
+        <div class="row">
+          <div class="col-7">
+            <div class="card-body">
+              <h4 class="card-title">Search GitHub Users</h4>
+              <p class="card-text text-secondary">Enter a username to fetch pfofile and repos</p>
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="ml-1 mt-1 font-weight-bold">history</div>
+            <div class="history-box"></div>
+          </div>
+        </div>
+        <input type="text" class="form-control" placeholder="Username" />
+      </div>
+      <div class="user-info card border-secondary m-3">
+        <!-- <img class="p-3 mx-auto" src="./asset/loading.gif" alt="loading-spinner" style="width: 100px" /> -->
+        <!-- <div class="card-body text-light">
+          <div class="row">
+            <div class="col-md-3 col-xm-12">
+              <img class="w-100 h-100 object-fit-fill m-auto align-items-center d-block" src="https://via.placeholder.com/150" />
+            </div>
+            <div class="col-md-9 col-xm-12">
+              <div class="user-info__badges">
+                <span class="badge bg-primary">Public Repos : 1</span>
+                <span class="badge bg-secondary">Public Gists : 2</span>
+                <span class="badge bg-success">Followers : 3</span>
+                <span class="badge bg-danger">Following : 4</span>
+              </div>
+              <div class="user-info__profile-list text-dark">
+                <ul class="list-group mt-3">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">Cras justo odio</li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">Dapibus ac facilisis in</li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">Morbi leo risus</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <span class="badge rounded-pill bg-primary col-3 mt-3">View Profile</span>
+          </div>
+        </div>
+        <img class="m-3" src="https://ghchart.rshah.org/charon0530" /> -->
+      </div>
+      <h4 class="m-3">Latest Repos</h4>
+      <div class="repo-info card m-3 border-secondary">
+        <!-- <img class="p-3 mx-auto" src="./asset/loading.gif" alt="loading-spinner" style="width: 100px" /> -->
+        <!-- <div class="card border-secondary m-3">
+          <div class="row p-3">
+            <div class="col-6">
+              <a href="#">mockup link</a>
+            </div>
+            <div class="col-6">
+              <div class="repo-info__badges text-light">
+                <span class="badge bg-primary">Stars : 0</span>
+                <span class="badge bg-secondary">Watchers : 0</span>
+                <span class="badge bg-success">Forks : undefined</span>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </main>
+    <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+      <div class="toast-header">
+        <strong class="mr-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">Hello, world! This is a toast message.</div>
+    </div> -->
+    <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="activityModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Recommended activity</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
 </html>
