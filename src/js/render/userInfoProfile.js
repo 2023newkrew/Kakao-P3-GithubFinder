@@ -9,6 +9,7 @@ export default class UserInfoProfile {
     this.user = user;
     this.modal = new Modal();
   }
+
   renderUserTag() {
     const publicReposCount = this.user.getPublicRepoCount();
     const publicGistsCount = this.user.getPublicGistCount();
@@ -22,8 +23,29 @@ export default class UserInfoProfile {
     <li class="following">Following : ${followingCount}</li>
     `;
 
-    this.tagElement.innerHTML = elementString;
+    this.tagElement.insertAdjacentHTML("afterbegin", elementString);
     this.listenUserTag();
+  }
+
+  renderUserInfo() {
+    const company = this.user.getCompany();
+    const website = this.user.getEmail();
+    const location = this.user.getLocation();
+    const memberSince = this.user.getMemberSince();
+
+    const elementString = `
+    <li>Company : ${company}</li>
+    <li>Website / Blog : ${website}</li>
+    <li>Location : ${location}</li>
+    <li>Member Since : ${memberSince}</li>
+    `;
+
+    this.infoElement.insertAdjacentHTML("afterbegin", elementString);
+  }
+
+  renderUserGitHubChart() {
+    const username = this.user.getUserName();
+    this.GHChartImageElement.src = `https://ghchart.rshah.org/${username}`;
   }
 
   async listenUserTag() {
@@ -80,26 +102,5 @@ export default class UserInfoProfile {
       this.modal.renderModal("Followings", followingName);
       this.modal.onModal();
     };
-  }
-
-  renderUserInfo() {
-    const company = this.user.getCompany();
-    const website = this.user.getEmail();
-    const location = this.user.getLocation();
-    const memberSince = this.user.getMemberSince();
-
-    const elementString = `
-    <li>Company : ${company}</li>
-    <li>Website / Blog : ${website}</li>
-    <li>Location : ${location}</li>
-    <li>Member Since : ${memberSince}</li>
-    `;
-
-    this.infoElement.innerHTML = elementString;
-  }
-
-  renderUserGitHubChart() {
-    const username = this.user.getUserName();
-    this.GHChartImageElement.src = `https://ghchart.rshah.org/${username}`;
   }
 }

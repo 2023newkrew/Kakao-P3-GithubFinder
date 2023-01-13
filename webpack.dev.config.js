@@ -8,7 +8,7 @@ module.exports = merge(baseConfig, {
     static: {
       directory: path.join(__dirname, "dist/views"),
     },
-    watchFiles: ["src/**"],
+    watchFiles: ["src/*"],
     compress: true,
     port: 3000,
     hot: true,
