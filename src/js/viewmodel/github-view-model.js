@@ -7,8 +7,8 @@ import {
 import { INIT_FINISHED_PROGRESS } from '@constant/progress';
 import { FetchError } from '@error/fetch-error';
 import GithubRepository from '@repository/github-repository';
-import Alert from '@util/alert';
-import ProgressBar from '@util/progress-bar';
+import Alert from '@/js/ui/alert';
+import ProgressBar from '@/js/ui/progress-bar';
 import HttpStatus from '../constant/http-status';
 
 export default class GithubViewModel {

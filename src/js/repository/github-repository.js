@@ -12,7 +12,7 @@ import {
 import Github from '@model/github';
 import Repo from '@model/repo';
 import Client from '@util/client';
-import ProgressBar from '@util/progress-bar';
+import ProgressBar from '@/js/ui/progress-bar';
 import { githubApiHeaders } from '@config/github';
 
 export default class GithubRepository {
