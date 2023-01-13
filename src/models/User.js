@@ -110,7 +110,7 @@ export default class User {
             class="w-100"
             style="max-width: 663px;"
             src="https://ghchart.rshah.org/${this.loginId}"
-            alt="깃허브잔디"
+            alt="깃허브 잔디"
           />
         </div>
       </div>

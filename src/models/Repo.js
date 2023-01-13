@@ -51,7 +51,7 @@ export default class Repo {
                 ${this.visibility}
               </span>
               <span class="mb-2 d-flex align-items-center">
-                <img alt="repo_stars" src="${
+                <img alt="레포지토리 스타 아이콘" src="${
                   this.stargazers_count > 0 ? "star_filled.svg" : "star.svg"
                 }" height="16"/>
                 ${this.stargazers_count}
@@ -63,11 +63,11 @@ export default class Repo {
                 ${this.language ?? ""}
               </span>
               <span class="text-secondary mr-2">
-                <img src="fork.svg" alt="fork icon" height="18"/>
+                <img src="fork.svg" alt="포크 아이콘" height="18"/>
                 ${this.forks}
               </span>
               <span class="text-secondary">
-                <img src="watch.svg" alt="watch icon" height="18"/>
+                <img src="watch.svg" alt="워치 아이콘" height="18"/>
                 ${this.watchers_count}
               </span>
             </div>
