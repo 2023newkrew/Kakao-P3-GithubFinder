@@ -3,5 +3,7 @@ import '@styles/header.scss';
 import '@styles/main.scss';
 
 import SearchController from "@controller/searchController";
+import FavoritesController from './controller/FavoritesController';
 
-const searchController = new SearchController()
+new SearchController();
+new FavoritesController();

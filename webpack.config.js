@@ -54,6 +54,7 @@ module.exports = (env, options) => {
         resolve: {
             alias: {
                 "@": path.resolve(__dirname, "./src/"),
+                "@constant": path.resolve(__dirname, "./src/constant/"),
                 "@controller": path.resolve(__dirname, "./src/controller/"),
                 "@services": path.resolve(__dirname, "./src/services/"),
                 "@styles": path.resolve(__dirname, "./src/styles/")
