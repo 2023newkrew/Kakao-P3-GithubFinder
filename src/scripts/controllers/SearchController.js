@@ -1,12 +1,13 @@
 import API from "@/scripts/common/API";
 import UI from "@/scripts/UI";
 import DataModel from "@/scripts/DataModel";
+import { httpStatusCodes } from "@/scripts/common/constants";
 
 export default class SearchController {
   constructor() {
     this.githubAPI = new API("https://api.github.com", {
-      403: "API 호출 횟수가 너무 많아요:( 잠시만 기다려주세요!",
-      404: "유저 정보를 찾을 수 없어요!",
+      [httpStatusCodes.FORBIDDEN]: "API 호출 횟수가 너무 많아요:( 잠시만 기다려주세요!",
+      [httpStatusCodes.NOT_FOUND]: "유저 정보를 찾을 수 없어요!",
     });
 
     this.ui = new UI();
@@ -40,8 +41,7 @@ export default class SearchController {
 
   async getUserInfo(username) {
     const { status, data } = await this.githubAPI.get(`/users/${username}`);
-    // 상수 처리하기!
-    if (status === 200) {
+    if (status === httpStatusCodes.OK) {
       return data;
     }
   }
@@ -51,7 +51,7 @@ export default class SearchController {
       sort: "created",
       per_page: 5,
     });
-    if (status === 200) {
+    if (status === httpStatusCodes.OK) {
       return data;
     }
   }
