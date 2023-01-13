@@ -1,4 +1,5 @@
 export const HTTP_STATUS = {
-    BAD_REQUEST: 401,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
     NOT_FOUND: 404
 }
