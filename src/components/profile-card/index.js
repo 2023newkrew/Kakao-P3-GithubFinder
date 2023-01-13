@@ -64,7 +64,7 @@ class ProfileCard extends Component {
     public_repos: publicRepos,
     public_gists: publicGists,
   }}) {
-    const getNotFalsyOrElseHyphen = (value) => !!value ? value : '-';
+    const transformFalsyContent = (content) => content || '-';
 
     this.element.querySelector('.profile-image').src = avatarUrl;
 
@@ -83,13 +83,13 @@ class ProfileCard extends Component {
         `Following: ${following}`;
 
     this.element.querySelector('.blog').innerHTML =
-        getNotFalsyOrElseHyphen(blog);
+        transformFalsyContent(blog);
 
     this.element.querySelector('.company').innerHTML =
-        getNotFalsyOrElseHyphen(company);
+        transformFalsyContent(company);
 
     this.element.querySelector('.location').innerHTML =
-        getNotFalsyOrElseHyphen(location);
+        transformFalsyContent(location);
 
     this.element.querySelector('.since').innerHTML =
         new Date(createdAt).toLocaleString();
