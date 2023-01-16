@@ -41,14 +41,10 @@ class SearchBar extends Component {
     if (event.code !== KeyCode.ENTER) return;
     this.searchInputElement.disabled = true;
 
-    try {
-      const [user, repositories] =
-          await requestUserInfo(this.searchInputElement.value);
-
-      this.userInfoStore.publish({user, repositories});
-    } catch (error) {
-      this.setSearchError(error);
-    }
+    await requestUserInfo(this.searchInputElement.value)
+        .then(([user, repositories]) => {
+          this.userInfoStore.publish({user, repositories});
+        }, this.setSearchError.bind(this));
 
     this.searchInputElement.disabled = false;
     this.searchInputElement.focus();

@@ -14,9 +14,13 @@ class ProfileCard extends Component {
     this.follwersElement = this.element.querySelector('.follwers');
     this.followingElement = this.element.querySelector('.following');
     this.blogElement = this.element.querySelector('.blog');
+    console.log(this.blogElement);
     this.companyElement = this.element.querySelector('.company');
+    console.log(this.companyElement);
     this.locationElement = this.element.querySelector('.location');
+    console.log(this.locationElement);
     this.sinceElement = this.element.querySelector('.since');
+    console.log(this.sinceElement);
 
     this.render = this.render.bind(this);
   }
@@ -34,20 +38,20 @@ class ProfileCard extends Component {
     </div>
     <dl class="profile-details">
       <div class="profile-detail">
-        <dt class="profile-detail__key">Company</div>
-        <dd class="profile-detail__value company">kakao</div>
+        <dt class="profile-detail__key">Company</dt>
+        <dd class="profile-detail__value company">kakao</dd>
       </div>
       <div class="profile-detail">
-        <dt class="profile-detail__key">Blog</div>
-        <dd class="profile-detail__value blog">https://www.naver.com</div>
+        <dt class="profile-detail__key">Blog</dt>
+        <dd class="profile-detail__value blog">https://www.naver.com</dd>
       </div>
       <div class="profile-detail">
-        <dt class="profile-detail__key">Location</div>
-        <dd class="profile-detail__value location">Korea Bundang-gu</div>
+        <dt class="profile-detail__key">Location</dt>
+        <dd class="profile-detail__value location">Korea Bundang-gu</dd>
       </div>
       <div class="profile-detail">
-        <dt class="profile-detail__key">Member Since</div>
-        <dd class="profile-detail__value since">2018-04-26</div>
+        <dt class="profile-detail__key">Member Since</dt>
+        <dd class="profile-detail__value since">2018-04-26</dd>
       </div>
     </dl>
   </div>
