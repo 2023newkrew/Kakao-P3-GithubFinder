@@ -14,13 +14,9 @@ class ProfileCard extends Component {
     this.follwersElement = this.element.querySelector('.follwers');
     this.followingElement = this.element.querySelector('.following');
     this.blogElement = this.element.querySelector('.blog');
-    console.log(this.blogElement);
     this.companyElement = this.element.querySelector('.company');
-    console.log(this.companyElement);
     this.locationElement = this.element.querySelector('.location');
-    console.log(this.locationElement);
     this.sinceElement = this.element.querySelector('.since');
-    console.log(this.sinceElement);
 
     this.render = this.render.bind(this);
   }
