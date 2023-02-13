@@ -3,6 +3,9 @@ export async function get(path, query) {
     `${process.env.HOST}${path}?${new URLSearchParams(query).toString()}`,
     { headers: { Authorization: `token ${process.env.TOKEN}` } }
   );
+  const json = await response.json();
 
-  return await response.json();
+  if (!response.ok) throw new Error(json.message);
+
+  return json;
 }

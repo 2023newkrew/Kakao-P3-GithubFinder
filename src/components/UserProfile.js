@@ -1,24 +1,28 @@
 import Component from "@core/Component";
 import UserInfoStore from "@stores/UserInfoStore";
-import NoAvatar from "@assets/no-avatar.svg";
 
 export default class UserProfile extends Component {
   template() {
     const {
-      avatar_url = NoAvatar,
-      html_url = "",
-      public_repos = "-",
-      public_gists = "-",
-      followers = "-",
-      following = "-",
-      company = "-",
-      blog = "-",
-      location = "-",
-      created_at = "-",
-    } = UserInfoStore.state;
+      avatar_url,
+      name,
+      login,
+      html_url,
+      public_repos,
+      public_gists,
+      followers,
+      following,
+      company,
+      blog,
+      location,
+      created_at,
+    } = UserInfoStore.state.userProfile;
 
     return `
       <div class="card-body row">
+        <div class="card-img-overlay d-flex justify-content-center align-items-center bg-dark bg-opacity-10 z-1 d-none">
+          <div class="spinner-border"></div>
+        </div>
         <div class="col-3">
           <img class="user-profile__avatar d-block w-100" src="${avatar_url}" alt="avatar" />
           <a class="user-profile__view-profile btn btn-primary w-100 mt-2 ${
@@ -27,8 +31,12 @@ export default class UserProfile extends Component {
             View Profile
           </a>
         </div>
-        <div class="col-9">
-          <div class="user-profile__stats">
+        <div class="pt-3 col-9">
+          <div class="d-flex align-items-end gap-2">
+            ${name ? `<div class="fs-3 lh-1">${name}</div>` : ""}
+            <div class="fs-5 lh-1">${login}</div>
+          </div>
+          <div class="user-profile__stats mt-3">
             <span class="stats__public-repos badge text-bg-primary fs-6 fw-normal">
               Public Repos: ${public_repos}
             </span>
@@ -42,7 +50,7 @@ export default class UserProfile extends Component {
               Following: ${following}
             </span>
           </div>
-          <ul class="user-profile__profile list-group mt-4">
+          <ul class="user-profile__profile list-group mt-3">
             <li class="profile__company list-group-item">
               Company: ${company || "-"}
             </li>
@@ -53,7 +61,7 @@ export default class UserProfile extends Component {
               Location: ${location || "-"}
             </li>
             <li class="profile__member-since list-group-item">
-              Member Since: ${created_at}
+              Member Since: ${created_at ? new Date(created_at).toDateString() : "-"}
             </li>
           </ul>
         </div>
@@ -63,7 +71,13 @@ export default class UserProfile extends Component {
 
   onMount() {
     UserInfoStore.subscribe(() => {
-      this.render();
+      if (!UserInfoStore.state.isLoading) {
+        this.render();
+        return;
+      }
+
+      const overlayEl = this.targetEl.querySelector(".card-img-overlay");
+      overlayEl.classList.remove("d-none");
     });
   }
 }
