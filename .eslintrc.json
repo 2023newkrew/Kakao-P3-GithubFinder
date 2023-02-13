@@ -1,0 +1,45 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "./src"],
+          ["@abstract", "./src/js/abstract"],
+          ["@binder", "./src/js/binder"],
+          ["@constant", "./src/js/constant"],
+          ["@error", "./src/js/error"],
+          ["@model", "./src/js/model"],
+          ["@repository", "./src/js/repository"],
+          ["@util", "./src/js/util"],
+          ["@view", "./src/js/view"],
+          ["@viewmodel", "./src/js/viewmodel"],
+          ["@config", "./src/js/config"],
+          ["@ui", "./src/js/ui"]
+        ]
+      }
+    }
+  },
+  "rules": {
+    "no-underscore-dangle": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "class-methods-use-this": "off"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@abstract/*": ["./src/js/abstract/*"],
+      "@binder/*": ["./src/js/binder/*"],
+      "@constant/*": ["./src/js/constant/*"],
+      "@error/*": ["./src/js/error/*"],
+      "@model/*": ["./src/js/model/*"],
+      "@repository/*": ["./src/js/repository/*"],
+      "@util/*": ["./src/js/util/*"],
+      "@view/*": ["./src/js/view/*"],
+      "@viewmodel/*": ["./src/js/viewmodel/*"],
+      "@config/*": ["./src/js/config/*"],
+      "@ui/*": ["./src/js/ui/*"]
+    }
+  }
+}
